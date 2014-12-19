@@ -1,0 +1,62 @@
+﻿@model CabDataContext
+@{
+    Layout = null;
+
+    int skip = ViewBag.Skip;
+    int take = ViewBag.Take;
+
+    var client = LoginHelper.Client;
+    var clientJobs = Model.Jobs.Where(j => j.ClientToken == client.Token);
+    var bookings = clientJobs.OrderByDescending(o => o.JobNumber).Skip(skip).Take(take);
+}
+
+@if (!bookings.Any())
+{ <h2 style="font-size: 15px;">Welcome Sir. You've not posted a single job in our site. Are you feeling trouble?<br />→ <a href="/contact-us.html">We Love to help you</a><br />→ <a href="/book">Book your first job with us!</a></h2>  }
+else
+{
+    <h2>You booked us @clientJobs.Count() times!</h2>
+}
+
+<script>jobsCount = @Model.Jobs.Count();</script>
+<table class="jobs-list">
+    <thead>
+        <th>No.</th>
+        <th>Name</th>
+        <th>From</th>
+        <th>To</th>
+        <th>Date</th>
+        <th>Fare</th>
+        <th>Driver</th>
+        <th>Status</th>
+    </thead>
+    @foreach (var booking in bookings)
+    {
+        <tr id="@booking.Token">
+            <td>@booking.JobNumber</td>
+            <td>@booking.Name</td>
+            <td>@booking.PickFrom</td>
+            <td>@booking.DropTo</td>
+            <td>
+                <abbr title="@booking.PickupTime.ToAgo() at @booking.PickupTime.ToShortTimeString()">@booking.PickupTime.ToShortDateString()</abbr>
+            </td> 
+            <td>@booking.Fare</td>
+            @if(booking.DriverToken != null)
+            {
+                var driver = Model.Drivers.FirstOrDefault(d => d.Token == booking.DriverToken);
+                if(driver != null)
+                {
+                    <td>@driver.CallSignAbbr@driver.CallSignNumber</td>
+                }
+            }
+            <td>@booking.Status</td>
+        </tr>
+    }
+</table>
+
+@if (skip == 0 && clientJobs.Count() > skip + take)
+{
+    <div id="show-more" class="make-a-booking show-more">
+        <span class="make-a-booking-arrow"></span>
+        <span>Show more</span>
+    </div>
+}

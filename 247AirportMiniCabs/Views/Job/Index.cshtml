@@ -1,0 +1,154 @@
+﻿@model Job
+
+@{
+	//ViewBag.Title = Model.Name;
+	//ViewBag.Description = "An advance taxicab management system => Designed by Muaz Khan!";
+
+	//var IsClient = LoginHelper.Client != null;
+	//var client = LoginHelper.Client;
+
+	Layout = null;
+}
+@*
+@if (IsClient)
+{
+	<div class="client-menu">
+		<img src="@Url.Content("~/content/images/user.png")" alt="@client.Name" width=45>
+		<div>@client.Name.Truncate(8)</div>
+	</div>
+	<div class="menu-options">
+		<div id="logout">Logout</div>
+	</div>
+}
+*@
+
+<style>
+.latest-job label
+{
+	position: absolute;
+}
+.latest-job span
+{
+	border-bottom: 1px solid #E5E5E5;
+	padding: 5px 20px;
+	font-weight: normal;
+	margin-left: 200px;
+	display: block;
+	border-left: 1px solid #E5E5E5;
+}
+.latest-job span, .latest-job label
+{
+	padding: 10px 20px;
+}
+.latest-job span, .latest-job div:last-child
+{
+	border-bottom:0;
+}
+
+.latest-job {
+	border-left: 1px solid #E5E5E5;
+	width: 530px;
+	position: absolute;
+	margin-left: 369px;
+}
+.latest-job div {
+	border-bottom: 1px solid #E5E5E5;
+}
+.preview-image {
+		width: 180px;
+		height: 100px;
+		margin: 0px 0 -4px 0;
+		border-radius: 3px;
+		box-shadow: 0 0 5px gray;
+	}
+	.preview-image-container {
+		text-align: center;
+		display: inline-block;
+		border-left: 1px solid #E5E5E5;
+		margin-left: 200px;
+		width: 200px;
+		padding: 10px 4px;
+	}
+</style>
+
+<div class="latest-job" style="margin:0;width:auto;border-left:0;position: static;">
+	<h2>
+		Mr. @Model.Name ----- @Model.JourneyType journey
+		@if (!string.IsNullOrWhiteSpace(Model.Stops))
+        { <span style="margin-left: 0;display: inline;border: 0;">---- 1 middle stop!</span>}
+	</h2>
+	<div>
+		<label>Pick from</label>
+		<span>@Model.PickFrom</span>
+	</div>
+
+	@if(!string.IsNullOrWhiteSpace(Model.Stops))
+	{
+		<div>
+			<label>Stops</label>
+			<span>@Model.Stops</span>
+		</div>
+	}
+	
+	<div>
+		<label>Drop to</label>
+		<span>@Model.DropTo</span>
+	</div>
+
+    <div>
+        <label>When</label>
+        <span>@Model.PickupTime.ToLongDateString() - @Model.PickupTime.ToLongTimeString()</span>
+    </div>
+    
+    @if (Model.JourneyType == "Return")
+    {
+        <div>
+        <label>Return time</label>
+        <span>@Model.ReturnTime.ToLongDateString() - @Model.ReturnTime.ToLongTimeString()</span>
+    </div>
+    }
+
+    <div>
+		<label>Seats</label>
+		<span>@Model.BabySeats babies....@Model.ChildSeats child</span>
+	</div>
+
+	<div>
+		<label>Total</label>
+		<span>@Model.NumberOfPassengers passengers....@Model.Luggage suitcases.....@Model.HandLag hand luggages</span>
+	</div>
+
+	<div>
+		<label>Phone Number</label>
+		<span>Mobile: @Model.CellNumber.....LandLine: @Model.LandLine</span>
+	</div>
+	@{
+        var vehicle = Model.VehicleToken.GetVehicle();
+	}
+	<div>
+		<label>Vehicle</label>
+		<span>@vehicle.Name</span>
+	</div>
+
+	<div>
+		<label>Fare</label>
+		<span>£@Model.Fare</span>
+	</div>
+
+	 <div>
+		<label>Paying Method</label>
+		<span>@Model.PaidAs</span>
+	</div>
+
+	<div>
+		<label>Email</label>
+		<span>@Model.Email</span>
+	</div>
+	@if (!string.IsNullOrWhiteSpace(Model.AdditionalInfo))
+ {
+		<div>
+			<label>Additional Information</label>
+			<span>@Model.AdditionalInfo</span>
+		</div>
+	}
+</div>

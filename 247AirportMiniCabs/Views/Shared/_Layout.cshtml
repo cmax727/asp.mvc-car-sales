@@ -1,0 +1,157 @@
+﻿@{
+    
+    bool isLoggedIn = LoginHelper.Client != null;
+    var site = new CabDataContext().Site();
+}
+<!DOCTYPE html>
+<html lang="en" itemscope itemtype="http://schema.org/WebPage">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+
+    <title>@ViewBag.Title</title>
+	<meta name="description" content="@ViewBag.Description">
+
+    <meta name="author" content="Muaz Khan - https://www.elance.com/s/muazkh/">
+	<meta name="copyright" content="© Alin Turi, @UKTime.Now.Year">
+    <link href="@Url.Content("~/Content/common.css")" rel="stylesheet"> 
+    @RenderSection("CSS", false)
+    <script src="@Url.Content("~/Scripts/jquery.min.js")"></script>
+    <script src="@Url.Content("~/Scripts/common.js")"></script>
+    <link href='http://fonts.googleapis.com/css?family=Droid+Sans' rel='stylesheet' type='text/css'>
+    <link href='http://fonts.googleapis.com/css?family=Andada' rel='stylesheet' type='text/css'>
+</head>
+<!-- BODY -->
+<body>
+   <div class="header-container">
+         <div class="header">
+            <div class="first-section"></div>
+            <div class="top-menus">
+                <a href="/">Home</a>
+                <a href="/Home/ContactUs">Contact Us</a>
+                @if (LoginHelper.Client == null) { <a href="#" class="signup">Open an Account</a>}
+                else {<a href="/Client/">Manage Account</a>}
+            </div>
+            @if (!isLoggedIn) { <div class="login-master-button login"><span class="login-small-icon"></span><span>Login</span></div>}
+            else{<div class="login-master-button logout"><span class="login-small-icon"></span><span>Logout</span></div>}
+
+            <div style="position: absolute;top: 0;width: 287px;margin-top: 36px;margin-left: 600px;z-index: 10;"><input type="search" results="10" class="main-search-box"></div>
+
+            <div class="quick-menu">
+                @if(isLoggedIn){<h2>@LoginHelper.Client.Name.Truncate(10)</h2>}
+                else {<h2>Please Login</h2>}
+                <div class="user-links">
+                    
+                    @if (isLoggedIn) 
+                    { 
+                        <div><a href="/Client/">Account Settings</a></div>
+                        <div class="logout">Logout</div> 
+                   }
+                    else {<div class="login">Login</div>}
+                </div>
+                <div class="user-image"></div>
+            </div>
+
+        </div>
+   </div>
+   @if (isLoggedIn)
+   {
+       <div id="logout-anti-forgery">@Html.AntiForgeryToken()</div>
+   }
+
+        <div class="menu-container">
+            <div class="menu-section">
+            <a href="/" id="home-menu" style="margin-left:-1px;border-left: 1px solid #444;">@site.Name</a>
+            <a href="#" id="our-team-menu">Our team</a>
+            <a href="#" id="services-menu">Services</a>
+
+            <a href="/client/" id="account-menu">Account</a>
+            <a href="#" id="careers-menu">Careers</a>
+            <a href="#" id="news-menu">News</a>
+        </div>
+
+        <div class="sub-menu" id="home-menu">
+            <div>
+                <h2>Company</h2>
+                <a href="/Home/AboutUs">About Us</a>
+            </div>
+            <div>
+                <h2>Technology</h2>
+                <a href="#">Online</a>
+                <a href="#">Mobile</a>
+                <a href="#">Telephone</a>
+            </div>
+            <div>
+                <h2>Accreditation</h2>
+                <a href="#">TFL</a>
+            </div>
+            <div>
+                <h2>Policies</h2>
+                <a href="/Home/TermsAndConditions">Terms & Conditions</a>
+                <a href="/Home/CancellationRefundPolicy">Cancellation & Refound</a>
+                <a href="/Home/SafetyPolicy">Safety Policies</a>
+                <a href="#">Customer Feedback</a>
+                <a href="/Home/DriverJob">Driver Job</a>
+                <a href="#">Forum</a>
+            </div>
+        </div>
+
+        <div class="sub-menu" id="services-menu">
+            <div style="margin-left: 221px;">
+                <a href="/AirportTransfers/" id="airport-transfers" class="expand-menu">Airport Transfers</a>
+                <a href="#">Corporate Executive Hire</a>
+                <a href="#">As Direct Journey</a>
+                <a href="#">Chauffeur Service</a>
+                <a href="#">Events Transportation</a>
+            </div>
+            <div id="airport-transfers-sub" style="display:none;">
+                <a href="/AirportTransfers/Heathrow">Heathrow Airport</a>
+                <a href="/AirportTransfers/City">City Airport</a>
+                <a href="/AirportTransfers/Gatwick">Gatwick Airport</a>
+                <a href="/AirportTransfers/Stansted">Stansted Airport</a>
+                <a href="/AirportTransfers/Luton">Luton Airport</a>
+            </div>
+        </div>
+
+        <div class="sub-menu" id="account-menu">
+            <div style="margin-left: 315px;">
+                <a href="#">Personal Account</a>
+                <a href="#">Business</a>
+            </div>
+        </div>
+    </div>
+    <div class="cover-full-screen"></div>
+    <script>onQuickLoad();</script>
+
+    <div id="login-section-container"></div>
+    
+    <h1>@ViewBag.Title</h1>
+
+    <div class="main-content">
+        @RenderBody()
+    </div>
+
+    @RenderSection("OutOfMainCotent", false)
+    
+    <div class="hidden-fields spinner"></div>
+
+    <div class="footer-container">        
+        <div class="footer">
+            <div class="web-designer">Web Designed by <a href="https://www.elance.com/s/muazkh/">Muaz Khan</a> - Web Developer from Pakistan!</div>
+            <div class="links">
+                <a href="/book">Book a journey with @site.Name!</a>
+                <a href="/client/">Clients</a>
+                <a href="/Home/ContactUs">Contact Us</a>
+                <a href="/Home/TermsAndConditions">Terms</a>
+                <a href="#" class="signup">Sign Up</a>
+                <a href="#" class="login">Login</a>
+            </div>
+            <div class="copyright">© @UKTime.Now.Year <a href="@site.URL">@site.Name</a>. All rights reserved.</div>            
+        </div>
+    </div>
+    @RenderSection("JavaScript", false)
+
+    <span id="cdSiteSeal2"><script type="text/javascript" src="//tracedseals.starfieldtech.com/siteseal/get?scriptId=cdSiteSeal2&amp;cdSealType=Seal2&amp;sealId=55e4ye7y7mb73668eee5edb9806012100y7mb7355e4ye73445d9d91dabe80c27"></script></span>
+</body>
+</html>

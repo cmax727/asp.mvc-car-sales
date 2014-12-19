@@ -1,0 +1,412 @@
+﻿.container {
+    width: auto;
+    margin: 0 2em;
+}
+.content-box {
+    float: none!important;
+}
+
+.about-content {
+    width: 65%!important;
+}
+
+.qoute-box > .content-menu > ul.nav > li:hover a, .content-menu > ul.nav > li.active a
+{
+    background-color: #5C5151;
+}
+.top-menu {
+    padding: 20px 0;
+    text-align:right;
+}
+.top-menu div {
+    padding: 10px 20px;
+    display: inline-block;
+    background: rgba(68, 65, 65, 0.69);
+    margin-left:-4px;
+    cursor: pointer;
+}
+
+.top-menu span.selected
+{
+    background-repeat: no-repeat;
+    background-position: center center;
+    width: 37px;
+    height: 20px;
+    position: absolute;
+    background-image: url(/content/img/dracula/down-arrow.png);
+    margin-left: -10px;
+    display: block;
+}
+.top-menu div.selected, .top-menu div:hover
+{
+    background: black;
+    color: white;
+}
+
+.account-info label, .latest-job label { position: absolute; }
+
+.account-info span, .latest-job span
+{
+    border-bottom: 1px solid #9A9DA0;
+    padding: 5px 20px;
+    font-weight: normal;
+    margin-left: 200px;
+    display: block;
+    border-left: 1px solid #9A9DA0;
+    min-height: 16px;
+}
+
+.account-info label, .account-info span, .latest-job label, .latest-job span{ padding: 10px 20px; }
+
+.account-info span:hover, .latest-job span:hover
+{
+    background: rgba(230, 0, 0, 0.25);
+}
+
+.edit-button
+{
+    position: absolute;
+    background: #F3C5BD;
+    background: -moz-linear-gradient(top, #F3C5BD 0%, #E86C57 50%, #EA2803 51%, #F60 75%, #C72200 100%);
+    background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,#F3C5BD), color-stop(50%,#E86C57), color-stop(51%,#EA2803), color-stop(75%,#F60), color-stop(100%,#C72200));
+    background: -webkit-linear-gradient(top, #F3C5BD 0%,#E86C57 50%,#EA2803 51%,#F60 75%,#C72200 100%);
+    background: -o-linear-gradient(top, #F3C5BD 0%,#E86C57 50%,#EA2803 51%,#F60 75%,#C72200 100%);
+    background: -ms-linear-gradient(top, #F3C5BD 0%,#E86C57 50%,#EA2803 51%,#F60 75%,#C72200 100%);
+    background: linear-gradient(to bottom, #F3C5BD 0%,#E86C57 50%,#EA2803 51%,#F60 75%,#C72200 100%);
+    filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#f3c5bd', endColorstr='#c72200',GradientType=0 );
+    color: #610202;
+    border:1px solid #910505;
+    border-radius: 2px;
+    font-weight: bold;
+    padding: 5px 29px 5px 8px;
+    display:none;
+    overflow: hidden;
+    cursor: pointer;
+}
+.edit-button:hover
+{
+    padding: 5px 28px 5px 7px;
+}
+
+.edit-button:active
+{
+    padding: 5px 27px 5px 6px;
+}
+
+.edit-small-icon {
+    background-repeat: no-repeat;
+    background-position: center center;
+    width: 20px;
+    height: 26px;
+    position: absolute;
+    background-image: url(/content/img/dracula/edit-small-icon.png);
+    margin-left: 35px;
+    margin-top: -5px;
+    border-left: 1px solid #910505;
+    display: block;
+}
+
+.jobs-info {display:none;}
+
+.make-a-booking
+{
+    padding: 4px 7px;
+    font-size: 20px;
+    margin-left: 0;
+    border: 1px solid #910505;
+    border-radius: 2px;
+    
+    background: #f85032; /* Old browsers */
+    background: -moz-linear-gradient(top, #f85032 0%, #f16f5c 50%, #f6290c 51%, #f02f17 71%, #e73827 100%); /* FF3.6+ */
+    background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,#f85032), color-stop(50%,#f16f5c), color-stop(51%,#f6290c), color-stop(71%,#f02f17), color-stop(100%,#e73827)); /* Chrome,Safari4+ */
+    background: -webkit-linear-gradient(top, #f85032 0%,#f16f5c 50%,#f6290c 51%,#f02f17 71%,#e73827 100%); /* Chrome10+,Safari5.1+ */
+    background: -o-linear-gradient(top, #f85032 0%,#f16f5c 50%,#f6290c 51%,#f02f17 71%,#e73827 100%); /* Opera 11.10+ */
+    background: -ms-linear-gradient(top, #f85032 0%,#f16f5c 50%,#f6290c 51%,#f02f17 71%,#e73827 100%); /* IE10+ */
+    background: linear-gradient(to bottom, #f85032 0%,#f16f5c 50%,#f6290c 51%,#f02f17 71%,#e73827 100%); /* W3C */
+    filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#f85032', endColorstr='#e73827',GradientType=0 ); /* IE6-9 */
+    
+    padding-right: 40px;
+    
+    position: absolute;
+    margin-top:0;
+    overflow: hidden;
+}
+.make-a-booking:hover
+{
+    padding: 4px 39px 4px 6px;
+    margin-left: 1px;
+}
+
+.make-a-booking:active
+{
+    padding: 4px 38px 4px 5px;
+    margin-left: 2px;
+}
+
+.make-a-booking-arrow
+{
+    background-repeat: no-repeat;
+    background-position: center center;
+    width: 30px;
+    height: 33px;
+    position: absolute;
+    background-image: url(/content/img/dracula/arrow-external-link.png);
+    margin-left: 149px;
+    margin-top: -4px;
+    border-left: 1px solid #910505;
+}
+
+.job-div
+{
+    border: 1px solid #BEBABA;
+    margin: 7px 0;
+    border-radius: 3px;
+    background: #E2E2E2;
+}
+
+.job-div div
+{
+    border-bottom: 1px solid #BEBABA;
+}
+
+.job-div .last
+{
+    border-bottom:0;
+}
+
+.job-div span
+{
+    padding:10px;
+    display:inline-block;
+    color: black;
+}
+
+.option
+{
+    background: #DDD;
+    color: #969494!important;
+}
+
+.fare-and-time
+{
+    margin-bottom: -15px;
+    padding: 10px;
+}
+
+.time
+{
+    float: right;
+    color: #969494;
+    font-size: 13px;
+}
+
+.client-page {
+}
+
+.notifications-content 
+{
+    padding-left:20px;
+}
+
+.send-direct-message .make-a-booking-arrow {
+    margin-left: 194px;
+}
+.send-direct-message
+{
+    margin-left: 5px -1px!important;
+}
+
+.your-notification {
+    border: 1px solid #520202;
+    margin-bottom: 20px;
+    border-radius: 4px;
+}
+
+.your-notification div {
+    padding: 30px 20px 10px 20px;
+    line-height: 1.8;
+}
+
+.your-notification div .roshan
+{
+    padding: 5px 10px;
+}
+
+.your-notification div .roshan *
+{
+    color:yellow;
+}
+
+.your-notification .latest-job div
+{
+    padding:0;
+}
+
+.your-notification .time {
+    padding: 5px;
+    font-size: 11px;
+}
+
+.your-notification h2 {
+    padding: 5px 10px;
+    font-size: 20px;
+    border-bottom: 1px solid #520202;
+    font-weight: normal;
+    background: rgba(71, 12, 12, 0.54);
+}
+
+.show-more {
+    position: static;
+    margin: 10px 300px!important;
+    width:104px;
+}
+
+.show-more .make-a-booking-arrow
+{
+    background-image: url(/content/img/dracula/arrow-downward.png);
+    margin-left: 115px;
+}
+
+.job-edit-panel {
+    position: absolute;
+    background: rgba(216, 213, 213, 0.63);
+    width: 900px;
+    display:none;
+}
+
+.manage-notification
+{
+    display:none;
+}
+
+.manage-notification-arrow
+{
+    margin-left: 82px;
+    background-image: url(/content/img/dracula/arrow-downward.png);
+}
+
+.notification-management-options
+{
+    display:none;
+    position:absolute;
+    border: 1px solid #910505;
+    border-bottom: 0;
+    border-radius: 3px;
+}
+.notification-management-options div
+{
+    background-color: #383838;
+    padding: 10px 20px;
+    border-bottom: 1px solid #910505;
+    padding-left:30px;
+    background-repeat:no-repeat;
+    background-position: 6px;
+    cursor: pointer;
+}
+
+.notification-management-options div:active
+{
+    background-color: black;
+}
+
+.notification-management-options div#mark-as-read
+{
+    background-image:url(/content/images/uncheck.png);
+}
+
+.notification-management-options div#mark-as-unread
+{
+    background-image:url(/content/images/checkbox-32.png);
+}
+
+.top-notification {
+    margin-left: 8px;
+    padding: 10px 20px;
+    background: rgba(213, 33, 26, 0.58);
+    border: 1px solid #551010;
+    outline: 1px solid #851111;
+    display: none;
+}
+
+.roshan {
+    background: #CF6503;
+    color: #FFFF03;
+    border: 2px solid #BE5706;
+    box-shadow: inset 0 0 2px #361902;
+}
+
+table
+{
+    width:100%;
+    border:1px solid #504B4B;
+    border-radius:3px;
+}
+th, td
+{
+    border: 1px solid #410909;
+    padding: 1px 2px;
+    cursor:pointer;
+}
+
+thead
+{
+    background: #6F0404;
+}
+
+.jobs-list tbody tr:hover
+{
+    background-color: #2C0505;
+}
+
+.jobs-list tbody tr:active
+{
+    background-color: #050505;
+}
+
+.bookings-div
+{
+    border: 1px solid #9A9DA0;
+    margin:10px;
+    padding:10px;
+    box-shadow: 0 1px 1px rgba(0, 0, 0, 0.25), 0 8px 0 -4px whiteSmoke, 0 8px 1px -3px rgba(0, 0, 0, 0.25), 0 16px 0 -8px whiteSmoke, 0 16px 0 -7px rgba(0, 0, 0, 0.25);
+    margin-top: -2px;
+}
+
+.back, .edit-job, .delete-button
+{
+    background-repeat:no-repeat;
+    background-position: 3px center;
+    background-image: url(/content/img/dracula/back.png);
+    
+    padding:5px 10px;
+    background-color: #005CFF;
+    display: inline-block;
+    margin: 10px;
+    padding-left: 30px;
+    border-radius: 2px;
+    color: white;
+    cursor: pointer;
+}
+
+.edit-job, .delete-button
+{
+    margin-left: -12px;
+    background-image: url(/content/img/dracula/edit.png);
+}
+.delete-button {
+    background-image: url(/content/img/dracula/close.png);
+    background-color: #AC1717!important;
+    padding-left: 22px;
+    color: #ECECEC;
+    border: 1px solid #471313;
+    box-shadow: inset 0 0 1px white;
+}
+
+.back:hover, .edit-job:hover, .delete-button:hover
+{
+    background-color: #0A55DA;
+}
+.back:active, .edit-job:active, .delete-button:active
+{
+    background-color: #0B285A;
+}

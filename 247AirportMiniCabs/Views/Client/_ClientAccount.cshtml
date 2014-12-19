@@ -1,0 +1,104 @@
+﻿@{
+    Client you = LoginHelper.Client;
+}
+
+<div class="account-info">
+    @if (!you.IsConfirmed)
+    {
+        <div style="margin-top: 10px;
+width: 532px;
+border: 1px solid #070000;
+border-radius: 5px;
+margin-left: 36px;
+background: #A20000;
+padding: 5px 10px;">
+            <h2 style="margin-bottom:15px;color: #6B0404;">Please confirm your account</h2>
+            <div style="padding:10px;"><em id="resend-confirmation" class="roshan" style="cursor: pointer;padding: 5px 10px">Click here</em> to resend confirmation code at your email: <a href="mailto:@you.Email">@you.Email</a>.</div>
+        </div>
+        <script>
+            $('#resend-confirmation').click(function () {
+                loadSpinner($(this).parent().parent());
+                $.post('/Client/ResendConfirmationCode', { email: '@you.Email' }, function (response) {
+                    if (response == true || response.isEmailError) {
+                        $('#resend-confirmation').parent().parent().fadeOut();
+                        alertBox('We\'ve sent you a confirmation code again. Please check your email and confirm your account as soon as possible.');
+                    }
+                    else alertBox(response.error);
+                });
+            });
+        </script>
+    }
+    
+    <a href="/Client/_ChangePassword" rel="nofollow" class="edit-job" style="float: right;color:white!important;text-decoration: none;">Change Password?</a>
+    <h2>Account Information</h2>
+
+    <div accesskey="name">
+        <label>Your name</label>
+        <span>@you.Name</span>
+    </div>
+
+    <div accesskey="email">
+        <label>Your email</label>
+        <span>@you.Email</span>
+    </div>
+    
+    <div accesskey="address">
+        <label>Address</label>
+        <span>@you.Address</span>
+    </div>
+
+    <div accesskey="postcode">
+        <label>Postcode</label>
+        <span>@you.PostalCode</span>
+    </div>
+
+    <div accesskey="city">
+        <label>City</label>
+        <span>@you.City</span>
+    </div>
+
+    <div accesskey="state">
+        <label>State</label>
+        <span>@you.State</span>
+    </div>
+
+    <div accesskey="country">
+        <label>Country</label>
+        <span>@you.Country</span>
+    </div>
+
+    <div accesskey="mobile">
+        <label>Mobile number</label>
+        <span>@you.MobilePhone</span>
+    </div>
+
+    <div accesskey="landline">
+        <label>Landline number</label>
+        <span>@you.HomePhone</span>
+    </div>
+
+    <div accesskey="company">
+        <label>Company</label>
+        <span>@you.Company</span>
+    </div>
+
+    <div style="float:right;">
+        <label style="position:static;float:left;width:162px;cursor:pointer;padding: 5px;" for="newsletter">Subscribe Newsletter?</label>
+        <input type="checkbox" id="newsletter" @(you.SubscribeNewsletter ? "checked" : "")>
+    </div>
+
+    <script>
+        $('#newsletter').change(function () {
+            loadSpinner(this);
+            $.post('/Client/UpdateAccount?field=newsletter&value=' + ($(this).attr('checked') ? 1 : 0), function (response) {
+                $('.spinner').fadeOut();
+            });
+        });
+    </script>
+    
+    <div>
+        <label style="position:static;float:left;width:162px;">Account created at:</label>
+            <em style="font-size: 15px;font-style: normal;display: inline-block;margin-top: 12px;" title="@you.RegistrationDate.ToLongDateString() - @you.RegistrationDate.ToLongTimeString()">@you.RegistrationDate.ToShortDateString()</em>
+        
+    </div>
+</div>

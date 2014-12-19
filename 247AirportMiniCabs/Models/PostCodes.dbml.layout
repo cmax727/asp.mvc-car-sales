@@ -1,0 +1,12 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<ordesignerObjectsDiagram dslVersion="1.0.0.0" absoluteBounds="0, 0, 11, 8.5" name="PostCodes">
+  <DataContextMoniker Name="/PostCodesDataContext" />
+  <nestedChildShapes>
+    <classShape Id="8c8820e1-0c56-480a-82c5-8af7ea51978e" absoluteBounds="1.625, 2.375, 2, 5.8092268880208326">
+      <DataClassMoniker Name="/PostCodesDataContext/UKAddress" />
+      <nestedChildShapes>
+        <elementListCompartment Id="fd2d4747-bf80-446a-bcf7-436d16fc3778" absoluteBounds="1.6400000000000001, 2.835, 1.9700000000000002, 5.249226888020833" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
+      </nestedChildShapes>
+    </classShape>
+  </nestedChildShapes>
+</ordesignerObjectsDiagram>

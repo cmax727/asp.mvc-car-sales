@@ -1,0 +1,151 @@
+﻿<style>
+.left-menu
+{
+    float: left;
+    width: 178px;
+    position: absolute;
+    
+    background-color: lightGrey;
+    border: 5px solid #B3B1B1;
+    box-shadow: inset 0 0 2px black;
+    border-radius: 6px;
+}
+
+.left-menu div
+{
+    border-top: 1px solid #9A9DA0;
+    overflow:hidden;
+}
+
+.left-menu span, .left-menu a
+{
+    padding: 10px 20px;
+    margin-bottom: -5px;
+}
+
+.left-menu span
+{
+    background-repeat: no-repeat;
+    background-position: 8px center;
+    padding-left: 25px;
+    display:block;
+    
+}
+.left-menu span.collapsed
+{
+    background-image: url(/content/img/dracula/collapsed.png);
+}
+.left-menu span.expanded
+{
+    background-image: url(/content/img/dracula/expanded.png);
+}
+
+.left-menu a
+{
+    display:block;
+    margin-top:5px;
+    border-top:1px solid #9A9DA0;
+    margin-left: 27px;
+    border-left: 1px solid #9A9DA0;
+}
+.left-menu a.selected
+{
+    background: black!important;
+    color: white;
+}
+.left-menu a:hover, .left-menu div.collapsed:hover
+{
+    background-color:#DBD7D7;
+}
+.left-menu a:active, .left-menu a:focus, .left-menu div.collapsed:active
+{
+    background-color:#C7C3C3;
+}
+
+div.collapsed a
+{
+    display:none;
+}
+
+.right-arrow
+{
+    display: block;
+    position: absolute;
+    background-repeat: no-repeat;
+    background-position: 8px center;
+    background-image: url(/content/img/dracula/expect-more.png);
+    margin-top: -2px;
+    margin-left: 113px;
+    height: 2px;
+}
+
+.client-page {
+    margin-left: 216px;
+    border: 6px solid #C7C7C7;
+    border-radius: 30px;
+    overflow: hidden;
+    background-color: #DFDFDF;
+    box-shadow: inset 0 0 3px black;
+}
+</style>
+
+<div class="left-menu">
+    <div class="collapsed">
+        <span class="collapsed">Company</span>
+        <a id="about-us" href="/Home/AboutUs">About Us</a>
+        <a id="contact-us" href="/Home/ContactUs">Contact Us</a>
+    </div>
+
+    <div class="collapsed">
+        <span class="collapsed">Technology</span>
+        <a id="online" href="/Technology/Online">Online</a>
+        <a id="mobile" href="/Technology/Mobile">Mobile</a>
+        <a href="#">Telephone</a>
+    </div>
+
+    <div class="collapsed">
+        <span class="collapsed">Accreditation</span>
+        <a href="#">TFL</a>
+    </div>
+
+    <div class="collapsed">
+        <span class="collapsed">Policies</span>
+        <a id="terms" href="/Home/TermsAndConditions">Temrs & Conditions</a>
+        <a id="cancellation" href="/Home/CancellationRefundPolicy">Cancellation & Refund</a>
+        <a id="safety-policies" href="/Home/SafetyPolicy">Safety Policies</a>
+        <a href="#">Customer Feedback</a>
+        <a id="driver-job" href="/Home/DriverJob">Driver Job</a>
+        <a href="#">Forum</a>
+    </div>
+
+    <div class="collapsed">
+        <span class="collapsed">Airport Transfers</span>
+        <a id="heathrow" href="/AirportTransfers/Heathrow">Heathrow</a>
+        <a id="city" href="/AirportTransfers/City">City</a>
+        <a id="gatwick" href="/AirportTransfers/Gatwick">Gatwick</a>
+        <a id="stansted" href="/AirportTransfers/Stansted">Stansted</a>
+        <a id="luton" href="/AirportTransfers/Luton">Luton</a>
+    </div>
+
+    <div class="collapsed">
+        <span class="collapsed">Services</span>
+        <a id="testimonials" href="/Home/Testimonials">Testimonials</a>
+        <a id="our-cars" href="/Home/ChauffeurCars">Chauffeur Cars</a>
+        <a href="#">Personal Account</a>
+        <a href="#">Business</a>
+    </div>
+</div>
+
+<script>
+    $('.left-menu div').click(function () {
+        var element = this;
+        if ($(element).is('.collapsed')) {
+            $(element).removeClass('collapsed').addClass('expanded').find('.collapsed').removeClass('collapsed').addClass('expanded');
+        }
+        else {
+            $(element).removeClass('expanded').addClass('collapsed').find('.expanded').removeClass('expanded').addClass('collapsed');
+        }
+    });
+
+    sticky('.left-menu', 30, 'auto');
+</script>

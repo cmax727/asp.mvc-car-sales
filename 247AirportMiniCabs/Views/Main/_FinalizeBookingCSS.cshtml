@@ -1,0 +1,214 @@
+﻿<style>
+    input[type="text"], textarea, select {
+        width: 150px;
+    }
+    .about-content
+    {
+        padding:0;
+        width:900px!important;
+    }
+    .page-3 .finalize-booking {
+        margin: 0 322px;
+        text-align: center;
+        margin-bottom: 20px;
+        background-color: rgba(228, 42, 42, 0.35);
+        background-repeat: no-repeat;
+        background-position: 10px center;
+        background-image: url(/content/images/checkbox.png);
+        padding-left: 46px;
+        border: 1px solid #1B0E0E;
+        border-radius: 3px;
+        margin-top: 15px;
+        cursor:pointer;
+    }
+
+    .page-3 .finalize-booking:hover { background-color: rgba(228, 42, 42, 0.55); }
+
+    .page-3 .finalize-booking:active {
+        background-color: rgba(228, 42, 42, 0.85);
+    }
+
+    .page-3 .finalize-booking h2 {
+        border-bottom: 1px solid #080A0C;
+        color: black;
+    }
+
+
+   .page-3 .additional-info { padding: 10px; }
+
+    .page-3 .methods {
+        text-align: center;
+        border: 0;
+        margin-left: 20px;
+    }
+
+    .page-3 .methods div {
+        padding: 6px 12px;
+        font-size: 22px;
+        margin-left: -5px;
+        border: 1px solid #2E609B;
+        width: 74px;
+        text-align: center;
+    }
+
+
+    .page-3 .methods div.selected {
+        background: #777;
+        color: white;
+    }
+
+
+    .page-3 .cash-method {
+        margin-top: -25px;
+        margin: 5px;
+        margin-left: 114px;
+        position: absolute;
+        padding: 10px 25px;
+        width: 676px;
+    }
+
+    .page-3 .cash-method div:not(:last-child) { margin-bottom: 10px; }
+
+   .page-3  .additional-info-container label {
+        vertical-align: top;
+        margin-top: 20px;
+        display: block!important;
+    }
+
+   .page-3  textarea {
+        width: 270px;
+        height: 90px;
+        margin: 0px;
+        resize: none;
+    }
+
+
+    .page-3 .signup-section {
+        margin: 0;
+        width: auto;
+        position: relative;
+        margin-top: -26px;
+    }
+
+    .page-3 .signup-button { margin-top: 14px!important; }
+
+    .page-3 .edit-panel {
+        border-radius: 0;
+        border-bottom: 1px solid rgba(255, 203, 69, 0.28);
+    }
+
+    .page-3 .edit-panel h2 {
+border-bottom: 1px solid rgba(255, 203, 69, 0.28);
+padding: 0 17px;
+font-weight: normal;
+color: rgba(214, 130, 39, 0.66);
+}
+   .page-3  .from-location {
+        width: 400px;
+        margin-right: 50px;
+    }
+
+    .page-3 .from-location div,.page-3  .to-location div, .page-3 .additional div { padding: 10px 20px; }
+   .page-3  #required-info-table div{padding: 10px;}
+   .page-3  .to-location {padding:0!important;}
+
+    .page-3 .select-container hr { background: none; }
+
+   .page-3  .hours-minutes { width: 43px; }
+
+   .page-3  .blue-button { padding: 5px 10px!important; }
+
+   .page-3  .select-container select {
+        width: 55px;
+        display: block;
+        margin-top: 3px;
+        z-index: 100;
+    }
+
+    .page-3 .select-container img {
+        margin-left: 6px;
+        height: 30px;
+    }
+
+    .page-3 .select-container div {
+        float: left;
+        width: 80px;
+        margin-left: -14px;
+        padding: 0;
+    }
+
+   .page-3  #minutes, .page-3 #hours-list {
+        width: 244px!important;
+        background-color: #FBFBFB;
+        border-radius: 3px;
+        border-top-left-radius: 0;
+    }
+
+   .page-3  #hours-list { width: 324px!important; }
+
+   .page-3  #minutes div,.page-3  #hours-list div {
+        display: inline-block;
+        border-left: 1px solid #020202;
+    }
+
+   .page-3  td { vertical-align: top; }
+
+   .page-3  table, tr, td, th, tbody, thead { border: 0; }    
+    
+   .page-3  .are-you-passenger span {
+        display: inline-block;
+        padding: 5px 10px;
+        cursor:pointer;
+    }
+    
+   .page-3  #yes-passenger {
+        background-color: #2BCE2B;
+    }
+   .page-3  #yes-passenger:hover {
+        background-color: #24BE24;
+    }
+   .page-3  #yes-passenger:active {
+        background-color: #189E18;
+    }
+    
+   .page-3  #no-passenger {
+        background-color: #F77E7E;
+        margin-left: -4px;
+    }
+   .page-3  #no-passenger:hover {
+        background-color: #F35E5E;
+    }
+    #no-passenger:active {
+        background-color: #E05151;
+    }
+   .page-3  .are-you-passenger .selected, .page-3 .required, .page-3 .newspaper,.page-3  .bottle-of-water,.page-3  .drink
+    {
+        background-repeat: no-repeat;
+    }
+   .page-3  .are-you-passenger .selected
+    {
+        padding-left: 21px;
+        background-position: 2px center;
+        background-image: url(/content/images/checkbox-32.png);
+    }
+   .page-3  .required
+    {
+        background-position:right center;
+        background-image: url(/content/images/required.png);
+    }
+   .page-3  #customer-cell-number-dialing-code,.page-3  #passenger-cell-number-dialing-code,.page-3  #customer-landline-dialing-code
+    {
+        width: 100px;
+    }
+   .page-3  input[readonly], .page-3 input[disabled], .page-3 textarea[readonly],.page-3  textarea[disabled]
+    {
+        background: #3C3939!important;
+color: #F8F8F8!important;
+    }
+    
+    .ui-state-highlight, .ui-widget-content .ui-state-highlight, .ui-widget-header .ui-state-highlight
+   {
+   background: red!important;
+color: white!important;
+    }
+ </style>

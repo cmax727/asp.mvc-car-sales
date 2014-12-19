@@ -1,0 +1,125 @@
+﻿    <style>
+        .bonus-offer {
+            display: block;
+            position: absolute;
+            top: 138px;
+            width: 898px;
+            background: rgba(0, 0, 0, 0.77);
+        }
+
+        .bonus-offer div { padding: 10px 20px; }
+
+        .response-to-offer {
+            padding: 0;
+            text-align: center;
+        }
+
+        .response-to-offer #ok {
+            background: #3BE93B;
+            display: inline-block;
+        }
+
+        .response-to-offer #ok:hover { background: #3EDA3E; }
+        .response-to-offer #ok:active { background: #2BBE2B; }
+
+        .response-to-offer #no {
+            background: #F89494;
+            display: inline-block;
+            margin-left: -4px;
+        }
+
+        .response-to-offer #no:hover { background: #E97D7D; }
+        .response-to-offer #no:active { background: #CC6F6F; }
+
+        #registered-user {
+            text-align: center;
+            border: 0;
+            border-top: 1px solid #2E609B;
+            font-size: 20px!important;
+        }
+
+        #registered-user:hover { background: #5B8DC9; }
+
+        #registered-user:active { background: #4F7DB4; }
+    </style>
+
+    <div class="bonus-offer">
+        <div class="smart-panel" id="offer-words" style="padding: 0; background: white;border: 1px solid white;border-radius: 5px;overflow: hidden;">
+            <h2 class="threeD-background">Bonus offer!</h2>
+            <div>Do you want to create an account with us to get our bonus offers?</div>
+            <div class="response-to-offer">
+                <div id="ok">Yes</div>
+                <div id="no">No</div>
+  
+            </div>
+
+            <h2 id="registered-user" class="threeD-background">I'm a registered user!</h2>
+        </div>
+        <div id="signup-container" style="padding:0;"></div>
+    </div>
+
+    <script>
+        var mainContent = $('.main-content')[0];
+        $('.bonus-offer').slideDown().css('height', mainContent.clientHeight);
+
+        $('#no').click(function () {
+            $('.bonus-offer').fadeOut();
+            $('#hidden-page').slideDown();
+            bookButtonClick(true);
+        });
+
+        $('#ok').click(function () {
+            loadSpinner('.bonus-offer');
+            $.get('/Account/NewClientAccount', function (html) {
+                $('#signup-container').html(html);
+
+                $('#offer-words').fadeOut();
+                $('.signup-section').slideDown().find('#signup-email').focus();
+                $('.spinner').fadeOut();
+
+                signupCallback = function (account) {
+                    if (account.isverified == true) { }
+
+                    var response = signupResponse;
+                    if (response !== false) {
+                        $('.bonus-offer').fadeOut();
+                        $('#hidden-page').slideDown();
+
+                        goTowardJob(response);
+                    } else $('#signup-email').focus();
+                };
+            });
+
+        });
+
+        $('#registered-user').click(function () {
+            $('#signup-section').fadeOut();
+            loadLoginHTML(function () {
+                loadSpinner('html');
+                $('#login-section').slideDown().find('#login-email').focus();
+
+                $('#offer-words, .bonus-offer').fadeOut();
+
+                setTimeout(function () {
+                    $('#login-section').find('#login-as').parent().fadeOut();
+                }, 1000);
+
+                loginCallback = function () {
+                    $('.bonus-offer').fadeOut();
+                    $('#hidden-page').slideDown();
+
+                    goTowardJob(loginResponse);
+                };
+            });
+        });
+
+        $('.bonus-offer').mouseenter(function () {
+            var mainContent = $('.main-content')[0];
+            $(this).animate({
+                top: mainContent.offsetTop,
+                'min-height': mainContent.clientHeight
+            });
+        });
+
+        sticky('#offer-words', 0, 'auto');
+    </script>

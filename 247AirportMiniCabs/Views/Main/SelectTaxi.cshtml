@@ -1,0 +1,256 @@
+﻿@model CabDataContext
+@{
+    Layout = null;
+    string journeyType = ViewBag.JourneyType;
+    var db = new CabDataContext();
+
+    string invalidBonus = ViewBag.InValidBonus;
+
+    Fare fare = ViewBag.Predefined;
+
+    var predefinedVehicles = new[] { "" };
+
+    var predefinedCardFares = new[] { "" };
+    var predefinedCashFares = new[] { "" };
+
+    if (fare != null)
+    {
+        predefinedVehicles = fare.Vehicles.Replace(",", "===").Replace("----", ",").Split(',');
+        predefinedCardFares = fare.CardFares.Replace(",", "===").Replace("----", ",").Split(',');
+        predefinedCashFares = fare.CashFares.Replace(",", "===").Replace("----", ",").Split(',');
+    }
+
+    var siteToken = db.Site().Token;
+    var vehicles = db.Vehicles.Where(v => v.SiteToken == siteToken).OrderBy(o => o.Order);
+
+    string airportCharges = "";
+
+    string selected = ViewBag.Selected;
+    var pickFromType = selected.Replace(",", "===").Replace("----", ",").Split(',')[0].Replace("===", ",");
+    var dropToType = selected.Replace(",", "===").Replace("----", ",").Split(',')[1].Replace("===", ",");
+
+    var site = Model.Site();
+
+    string dropTo = ViewBag.DropTo;
+
+    var splitted = selected.Replace(",", "_____").Replace("----", ",").Split(',');
+    if (splitted[1].Replace("_____", ",") == "Airport")
+    {
+        var airportName = dropTo.Split(' ')[0];
+        if (site.AirportNames.Contains(airportName))
+        {
+            var airportNames = site.AirportNames.Replace(",", "===").Replace("----", ",").Split(',');
+            var allAirportCharges = site.AirportCharges.Replace(",", "===").Replace("----", ",").Split(',');
+            var index = 0;
+            foreach (var name in airportNames)
+            {
+                if (name.Replace("===", ",") == airportName)
+                {
+                    airportCharges = allAirportCharges[index];
+                    continue;
+                }
+                index++;
+            }
+        }
+    }
+}
+
+@Html.Partial("_SelectTaxiCSS")
+
+<br />
+<h2 id="distance-preview" style="display: none;"></h2>
+
+<h2 id="distance-preview" style="display: none;"></h2>
+<label>Pick From:</label>@ViewBag.PickFrom <hr />
+@{
+    string stops = ViewBag.Stops;
+}
+@if (!stops.IsEmpty())
+{
+    stops = stops.Replace(",", "=====").Replace("-----", ",");
+    var splittedStops = stops.Split(',');
+    var index = 0;
+        
+        <div>
+            <label style="float: left;">Stops</label>
+            <span style="display: block;margin-left: 219px;">
+                @foreach (var t in splittedStops)
+                {
+                    index++;
+                    @:@index: @t.Replace("=====", ",")<br/>
+                }
+            </span>
+        </div>
+        <hr />
+}
+ 
+<label>Drop To:</label>@ViewBag.DropTo <hr />
+@if (!invalidBonus.IsEmpty())
+{
+    <h2 style="color: white;background: #F51919;border: 1px solid black;border-radius: 3px;box-shadow: inset 0 0 2px white, inset 0 0 2px white, inset 0 0 2px white;">@invalidBonus</h2>
+}
+
+@foreach (var vehicle in vehicles)
+{
+    <div class="smart-panel vehicle @vehicle.Name" id="@vehicle.Token" accesskey="@vehicle.Name">
+        <h2 class="@vehicle.Name-color">@vehicle.Name</h2>
+
+        <div class="vehicle-img-parent">
+            <img src="@vehicle.Image" alt="@vehicle.Name">
+        </div>
+        
+        <div class="maximum">
+            <div>
+                <span><img src="/content/img/passengers.png"></span>
+                <span>x</span>
+                <span class="max-passengers">@vehicle.MaxPassengers</span>
+            </div>
+
+            <div>
+                <span><img src="/content/img/luggages.png"></span>
+                <span>x</span>
+                <span class="max-luggages">@vehicle.MaxLuggages</span>
+            </div>
+
+            <div>
+                <span><img src="/content/img/HandLag.png"></span>
+                <span>x</span>
+                <span class="max-hand-lag">@vehicle.MaxHandLag</span>
+            </div>
+        </div>
+        @{
+    var vehicleIndex = predefinedVehicles.GetIndex(vehicle.Name);
+    var cashFare = predefinedCashFares[vehicleIndex];
+
+    double addFares = 0.0;
+    double subtractFares = 0.0;
+        }
+        <div class="cash-fares">
+            <div class="cash-heading">
+                Cash Fares
+            </div>
+            
+            <div class="inner-line" style="display:none;">
+                <span class="one-way" style="float: right;">£0</span>
+                <span>One Way</span>
+            </div>
+        
+            @if (journeyType == "Return")
+            {
+                <div class="inner-line" style="display:none;">
+                    <span class="return" style="float: right;">£0</span>
+                    <span>Return</span>
+                </div>
+            }
+
+            @if (journeyType == "Return")
+            {
+                subtractFares += vehicle.ReturnDiscount.ToDouble();
+
+                <div class="inner-line">
+                    <span class="return-discount" style="float: right;">£@vehicle.ReturnDiscount</span>
+                    <span>Return Discount</span>
+                </div>
+            }
+            
+            @if (cashFare != null)
+            {
+                <input type="hidden" id="preset-fare" value="@cashFare" />
+            }
+
+            @if (!site.CashOff.IsEmpty())
+            {
+                <input type="hidden" id="off" value="@site.CashOff" />
+            }
+                
+            <div class="inner-line" style="background: #FDDB2A;">
+                <span class="total-to-pay" style="float: right;">£0</span> <span>Total to Pay</span>
+            </div>
+            
+            <input type="hidden" id="subtract-fare" value="@subtractFares">
+            <input type="hidden" id="add-fare" value="@addFares">
+            
+            <div class="blue-button book-now">Book</div>
+        </div>
+        
+        @{
+            var cardFare = predefinedCardFares[vehicleIndex];
+
+            addFares = 0.0;
+            subtractFares = 0.0;
+        }
+        <div class="card-fares">
+            
+            <div class="card-heading">
+                Card Fares
+            </div>
+            
+            <div class="inner-line" style="display:none;">
+                <span class="one-way" style="float: right;">£0</span>
+                <span>One Way</span>
+            </div>
+        
+            @if (journeyType == "Return")
+            {
+                <div class="inner-line" style="display:none;">
+                    <span class="return" style="float: right;">£0</span>
+                    <span>Return</span>
+                </div>
+            }
+
+            @if (journeyType == "Return")
+            {
+                subtractFares += vehicle.ReturnDiscount.ToDouble();
+
+                <div class="inner-line">
+                    <span class="return-discount" style="float: right;">£@vehicle.ReturnDiscount</span>
+                    <span>Return Discount</span>
+                </div>
+            }
+            
+            @if (!airportCharges.IsEmpty())
+            {
+                addFares += airportCharges.ToDouble();
+            }
+            
+            @if (pickFromType == "Airport" || (dropToType == "Airport" && journeyType == "Return"))
+            {
+                addFares += vehicle.MeetAndGreet.ToDouble();
+                
+                <div class="inner-line" style="display:none;">
+                    <span style="float: right;" class="meet-greet">£@vehicle.MeetAndGreet</span>
+                    <span>Meet & Greet</span>
+                </div>
+            }
+            
+            @if (cardFare != null)
+            {
+                <input type="hidden" id="preset-fare" value="@cardFare" />
+            }
+
+            @if (!site.CardOff.IsEmpty())
+            {
+                <input type="hidden" id="off" value="@site.CardOff" />
+            }
+            
+            <div class="inner-line" style="background: #FDDB2A;">
+                <span class="total-to-pay" style="float: right;">£0</span> <span>Total to Pay</span>
+            </div>
+            
+            <input type="hidden" id="subtract-fare" value="@subtractFares">
+            <input type="hidden" id="add-fare" value="@addFares">
+            
+            <div class="blue-button book-now">Book</div>
+        </div>
+
+        
+        <input type="hidden" id="price-per-mile" value="@vehicle.PricePerMile"/>
+        <input type="hidden" id="PriceForLocalViaStop" value="@vehicle.PriceForLocalViaStop" />
+        <input type="hidden" id="PriceForOneMinuteWait" value="@vehicle.PriceForOneMinuteWait" />
+        <input type="hidden" id="MilesIncluded" value="@vehicle.MilesIncluded" />
+        <input type="hidden" id="FareForMilesIncluded" value="@vehicle.FareForMilesIncluded" />
+        <input type="hidden" id="MinimumPrice" value="@vehicle.MinimumPrice" />
+    </div>
+}
+<input type="hidden" id="airport-charges" value="@airportCharges"/>
+@Html.Partial("_SelectTaxiJS")

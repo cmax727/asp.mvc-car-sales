@@ -1,0 +1,18 @@
+﻿@model CabDataContext
+@{
+    Layout = null;
+
+    var feedbacks = Model.Feedbacks.Where(f => f.ClientToken == LoginHelper.Client.Token).OrderByDescending(o => o.ID);
+}
+
+@if (feedbacks.Count() <= 0) { <h2>You've not added any feedback!</h2> }
+
+@foreach (var feedback in feedbacks)
+{
+    var client = Model.Clients.FirstOrDefault(c => c.Token == feedback.ClientToken);
+    <div class="your-notification">
+        <h2>@(client != null ? client.Name : "Anonymous") written:</h2>
+        <div class="time">@feedback.At.ToAgo() (@feedback.At.ToLongDateString() - @feedback.At.ToLongTimeString())</div>
+        <div>@Html.Raw(feedback.Message)</div>
+    </div>
+}

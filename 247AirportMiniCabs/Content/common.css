@@ -1,0 +1,634 @@
+﻿/* Scroll Bars
+-----------------------------------------------------------*/
+::-webkit-scrollbar {
+	width: 17px;
+	height: 17px;
+	background-color: #F0F0F0;
+}
+
+::-webkit-scrollbar-thumb {
+	background-color: #CDCDCD;
+}
+::-webkit-scrollbar-thumb:hover
+{
+	background-color: #8F8F8F;
+}
+::-webkit-scrollbar, ::-webkit-scrollbar-thumb
+{
+	border-left: 1px solid #BFBFBF;
+	border-right:0;
+	border-bottom:0;
+}
+
+::-webkit-scrollbar-button {
+	width:0;
+	height:0;
+}
+
+::-webkit-scrollbar-corner {
+	background-color: #F0F0F0;
+}
+
+
+/* Starting Styling!
+-----------------------------------------------------------*/
+* {
+	padding: 0;
+	margin: 0;
+	
+	-webkit-user-select:none;
+	-o-user-select:none;
+	-moz-user-select:none;
+	-ms-user-select:none;
+	user-select:none;
+	
+	font-family: 'Droid Sans', Verdana, arial, helvetica, sans-serif;
+}
+
+.text-shadow{text-shadow: 0 0 2px black;}
+
+select, input, textarea {text-shadow: none;}
+
+.allow-user-select, input, textarea
+{
+	-webkit-user-select:initial;
+	-o-user-select:initial;
+	-moz-user-select:initial;
+	-ms-user-select:initial;
+	user-select:initial;
+}
+		
+html, .login-section, .smart-panel
+{
+    background: #E9E7E7;
+}
+
+html 
+{
+	font-size: 14px;
+	height:100%;
+	cursor: default;
+	color:black;
+	overflow-x:hidden;
+}
+
+body
+{
+	
+	border-right:1px solid black;
+	border-left:1px solid black;
+	box-shadow: 0 0 19px #A7A7A7, 0 0 19px #464646, 0 0 19px white, 0 0 19px #C7C7C7;
+}
+
+/* Main Content of the page!
+-----------------------------------------------------------*/
+
+.main-content, .header, .footer, .menu-section, .sub-menu, #login-section-container
+{
+    width: 900px;
+	margin: 0 auto;	
+}
+
+.main-content
+{
+	min-height: 1000px;
+	margin-top:38px;
+}
+
+img
+{
+	-webkit-user-drag: none;
+}
+
+/* Header ---- the Menus Container!
+-----------------------------------------------------------*/
+.header
+{
+	padding-bottom: 10px;
+    overflow: hidden;
+    height: 90px;
+    color:#D6D6D6;
+}
+
+.first-section
+{
+    background-repeat: no-repeat;
+    position: absolute;
+    background-position: center center;
+    background-image: url(/content/img/dracula/main-logo.png);
+    width: 400px;
+    height: 114px;
+    margin: -8px;
+}
+
+.main-search-box
+{
+    float: right;
+    margin-top: 68px;
+    width: 114px;
+    -webkit-transition:width .3s ease; 
+    -moz-transition:width .3s ease; 
+    -o-transition:width .3s ease; 
+    -ms-transition:width .3s ease; 
+    transition:width .3s ease; 
+}
+.main-search-box:focus
+{
+    width:200px;
+}
+
+.menu-container, .footer-container, .header-container
+{
+    background: #1A1A1A;
+}
+
+.menu-container
+{
+    width:100%;
+    z-index: 8;
+    position:absolute;
+}
+
+.menu-section, .sub-menu
+{
+    padding: 1px 0;
+    padding-left: 5px;
+}
+
+.menu-section a
+{
+    border-right: 1px solid #444;
+}
+
+.sub-menu
+{
+    display:none;
+    margin-top: -3px;
+}
+
+
+.menu-section a, .sub-menu a
+{
+    color:#8F8B8B;
+    padding: 10px 20px;
+    display: inline-block;
+    
+    margin-left: -4px;
+}
+
+.sub-menu h2
+{
+    color: #8F8B8B;
+    font-size: 16px;
+    border-bottom:1px solid #3C3C3C;
+    background-color: #252525;
+}
+.sub-menu div
+{
+    float:left;
+    width:200px;
+    border: 1px solid #444;
+    margin-left:-1px;
+}
+
+.sub-menu a
+{
+    display:block;
+    margin-left:1px;
+}
+
+.menu-section a:hover, .sub-menu a:hover
+{
+    color:White;
+    background-color: #252525;
+}
+
+.menu-section a:active, .sub-menu a:active
+{
+    background-color:black;
+}
+.sub-menu
+{
+    display:none;
+}
+
+.expand-menu
+{
+    background-repeat: no-repeat;
+    background-position: right center;
+    background-image: url(/content/img/dracula/arrow-external-link.png);
+}
+
+.login-section h2, .threeD-background, .blue-button, .dropdown div:hover, .ac_results li:hover
+{    
+    color: black;
+	background: #6da5d0;
+	background-position: center center;
+	background-image: url(/content/images/h1-back.png);
+}
+
+h1
+{
+	font-size: 40px;
+	font-weight: normal;
+	padding-left: 135px;
+    color: #104710;
+    margin-top: 9px;
+    display:none;
+}
+.footer-container
+{
+    height: 72px;
+}
+.footer
+{
+	padding: 5px 0;
+    color: white;
+}
+.copyright, .web-designer {color:#AAA2A2;}
+.footer-container a { color: white;}
+
+.footer .links {
+    margin-left: -20px;
+}
+
+.footer .links a
+{
+    padding: 10px 20px;
+}
+
+.footer .copyright
+{
+    margin-top: 32px;
+}
+
+.web-designer
+{
+    position: absolute;
+    margin-left: 545px;
+    margin-top: 48px;
+}
+
+.web-designer, .copyright
+{
+    font-size:12px;
+}
+/* Anchor/Hyper Links
+-----------------------------------------------------------*/
+a {
+	color: #A70F5E;
+	text-decoration: none;	
+}
+
+a:hover {
+	color: #8B034A;
+}
+a img 
+{
+    border:0;
+	outline:0;
+}
+
+.background-image
+{
+	background-position: right center;
+	background-repeat:no-repeat;
+}
+.right-arrow
+{
+	background-image: url('images/right-arrow.png');
+}
+
+/* Input ----- typ=text,password,etc.
+-----------------------------------------------------------*/
+input, textarea, select
+{
+	padding: 5px;
+	border-radius: 1px;
+	
+	border: 1px solid #2E609B;
+}
+input:focus, textarea:focus, select:focus
+{
+	outline: 1px solid #579EF1;
+}
+label
+{
+	width: 150px;
+	display:inline-block;
+}
+select
+{
+	width: 160px;
+}
+textarea{width: 148px;resize: vertical;}
+
+/* Blue-Button ---- the buttons main class!
+-----------------------------------------------------------*/
+.blue-button
+{
+	padding: 5px 10px;
+	cursor: pointer;
+	display:inline-block;
+	color: #FDFDFD;
+	
+	margin: 10px 1px;
+	margin-top: 22px;
+	
+	font-size: 20px;
+	color: black;
+	border: 1px solid #2E609B;
+	border-radius: 2px;
+}
+.blue-button:hover
+{
+	background: #5B8DC9;
+}
+.blue-button:active
+{
+    background: #4F7DB4;
+}
+
+/* hide ----- reusable class for hidden elements
+-----------------------------------------------------------*/
+.hide { display:none;}
+
+/* H2 -------- Title for any Section
+-----------------------------------------------------------*/
+h2
+{
+	border-bottom: 1px solid #9A9DA0;
+	padding: 5px 20px;
+	font-weight: normal;
+	font-size: 25px;
+	font-family: Andada;
+}
+
+/* Spinner ----- the progress indicator
+-----------------------------------------------------------*/
+.spinner
+{
+	background-color: rgba(0, 0, 0, .8);
+	background-image: url('images/spinner.gif');
+	background-repeat: no-repeat;
+	background-position: 50%;
+	position:absolute;
+	z-index: 100;
+}
+
+.cover-full-screen
+{
+    background:rgba(0, 0, 0, .4);
+    position:absolute;
+    z-index:6;
+    left:0;
+    right:0;
+    display:none;
+}
+
+/* Highlight ----- input fields highlighter!
+-----------------------------------------------------------*/
+.highlight { background:#DF8E8E; }
+
+/* Drop Down ---- for iput fields
+-----------------------------------------------------------*/
+.dropdown, .ac_results
+{
+	position: absolute;
+	border: 1px solid #57D7FF;
+	display:none;
+	max-height: 200px;
+	overflow: auto;
+	overflow-x:hidden;
+	z-index: 20;
+	box-shadow: 2px 3px 5px #2E609B;
+	color:Black;
+}
+
+.dropdown span
+{
+    display:block;
+    font-size:11px;
+    margin-top: 6px;
+    text-align: right;
+}
+.dropdown div, .ac_results li
+{
+	padding: 5px;
+	background-color: rgba(255, 255, 255, .9);
+	border-bottom: 1px solid #05B2F5;
+}
+
+.dropdown div:active, .ac_results li:active
+{
+	background: #4F7DB4;
+}
+
+/* Menu Button ----- the top-right button
+-----------------------------------------------------------*/
+.menu-button
+{
+	position: absolute;
+	top: 0;
+	margin-left: 798px;
+	text-align: center;
+	padding: 4px 6px;
+	border-left: 1px solid #2E609B;
+}
+.menu-button:hover
+{
+	background: #83B6F3;
+    border-right: 1px solid #2E609B;
+}
+
+/* ---------------------- Extras
+-----------------------------------------------------------*/
+hr {
+	border: 0;
+	height: 1px;
+	background: -webkit-gradient(linear, 0% 50%, 100% 50%, color-stop(0%, transparent), color-stop(50%, rgba(243, 237, 237, 0.5)), color-stop(100%, transparent));
+	background: -webkit-linear-gradient(left, transparent,rgba(243, 237, 237, 0.5),transparent);
+	background: -moz-linear-gradient(left, transparent,rgba(243, 237, 237, 0.5),transparent);
+	background: -o-linear-gradient(left, transparent,rgba(243, 237, 237, 0.5),transparent);
+	background: linear-gradient(left, transparent,rgba(243, 237, 237, 0.5),transparent);
+	margin: 7px 0 6px 0;
+}
+
+.login-section, .smart-panel {
+	margin: 14px 254px 24px 254px;
+	display:none;
+	margin-top:80px;
+}
+
+.login-section div {
+	padding: 10px 30px 1px 30px;
+}
+
+.login-section .blue-button
+{
+	margin: 0 186px 10px;
+	padding:5px 10px;
+}
+
+.smart-panel
+{
+	display:block;
+}
+
+ul, ol {margin-left: 30px;}
+ul, p, ol {line-height: 1.7; padding: 5px 10px;}
+
+.call-us
+{
+    background: #F13434;
+    position: absolute;
+    padding: 3px 7px;
+    margin-top: 82px;
+    margin-left: 450px;
+    text-align: center;
+    background-repeat: no-repeat;
+    background-position: center left;
+    background-image: url(/content/img/dracula/call-us.png);
+    padding-left: 60px;
+    border: 2px solid #940909;
+    border-radius: 5px;
+    color: black;
+}
+.call-us span
+{
+    display:block;
+}
+
+.call-us-header
+{
+    font-size: 32px;
+    font-variant: small-caps;
+}
+
+
+.login-master-button
+{
+    position: absolute;
+    margin-left: 793px;
+    background: #F3C5BD;
+    background: -moz-linear-gradient(top, #F3C5BD 0%, #E86C57 50%, #EA2803 51%, #F60 75%, #C72200 100%);
+    background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,#F3C5BD), color-stop(50%,#E86C57), color-stop(51%,#EA2803), color-stop(75%,#F60), color-stop(100%,#C72200));
+    background: -webkit-linear-gradient(top, #F3C5BD 0%,#E86C57 50%,#EA2803 51%,#F60 75%,#C72200 100%);
+    background: -o-linear-gradient(top, #F3C5BD 0%,#E86C57 50%,#EA2803 51%,#F60 75%,#C72200 100%);
+    background: -ms-linear-gradient(top, #F3C5BD 0%,#E86C57 50%,#EA2803 51%,#F60 75%,#C72200 100%);
+    background: linear-gradient(to bottom, #F3C5BD 0%,#E86C57 50%,#EA2803 51%,#F60 75%,#C72200 100%);
+    filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#f3c5bd', endColorstr='#c72200',GradientType=0 );
+    color: #610202;
+    
+    border-bottom-right-radius: 2px;
+    border-bottom-left-radius: 2px;
+    font-weight: bold;
+    padding: 5px 37px 5px 8px;
+    width: 48px;
+    overflow: hidden;
+}
+.login-master-button:hover
+{
+    padding: 5px 36px 5px 7px;
+    margin-left: 794px;
+}
+
+.login-master-button:active
+{
+    padding: 5px 35px 5px 6px;
+    margin-left: 794px;
+}
+
+.login-small-icon {
+    background-repeat: no-repeat;
+    background-position: center center;
+    width: 30px;
+    height: 33px;
+    position: absolute;
+    background-image: url(/content/img/dracula/login-small-icon.png);
+    margin-left: 55px;
+    margin-top: -10px;
+    border-left: 1px solid #910505; 
+}
+.login-small-icon:active
+{
+    background-color:#5A5353;
+}
+
+.top-menus {
+    position: absolute;
+    margin-left: 400px;
+    margin-top: 12px;
+}
+.top-menus a {
+    color: #8F8B8B;
+    padding: 5px 10px;
+}
+
+.top-menus a:hover
+{
+    color:White;
+}
+
+.quick-menu
+{
+    position: absolute;
+    margin-left: 683px;
+    background: #1A1818;
+    margin-top: 27px;
+    width: 200px;
+    overflow: hidden;
+    z-index: 30;
+    color: white;
+    border: 1px solid #444;
+    display:none;
+    box-shadow: 0 0 5px #141414, 0 0 5px #5A5151, 0 0 5px #776F6F, 0 0 5px #696565;
+    border-radius: 3px;
+}
+.quick-menu h2
+{
+    border-bottom:1px solid #3C3C3C;
+    color: #8F8B8B;
+    font-size: 16px;
+}
+
+.user-links {
+    position: absolute;
+    margin-left: 71px;
+    width:130px;
+}
+
+.user-links a{color:White;}
+
+.user-links div {
+    padding: 5px 10px;
+    border-bottom: 1px solid #3C3C3C;
+    cursor:pointer;
+}
+.user-links div:hover
+{
+    background: #252525;
+}
+
+.user-links div:active
+{
+    background: #1B1919;
+}
+
+.user-image
+{
+    background-repeat: no-repeat;
+    background-position: center center;
+    background-image: url(/content/images/user.png);
+    width: 70px;
+    height: 70px;
+    margin: 3px;
+}
+
+.roshan
+    {
+        padding: 5px 10px;
+        background: #535353;
+        border-radius: 3px;
+        color: #FFFDFD;
+    }

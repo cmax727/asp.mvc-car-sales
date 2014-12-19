@@ -1,0 +1,48 @@
+﻿@{
+    ViewBag.Title = "Dracula Cars | Contact Us";
+    ViewBag.Description = "Contact Dracual Cars: a best chauffeur service provider in London, UK.";
+}
+
+@Html.Partial("_LeftMenu")
+<script>
+    $('a#contact-us').html('<span class="right-arrow"></span>' + $('a#contact-us').html()).addClass('selected').parent().removeClass('collapsed').addClass('expanded').find('.collapsed').removeClass('collapsed').addClass('expanded');
+</script>
+<style>
+.client-page div
+{
+    margin-top:5px;
+    padding-left:20px;
+}
+</style>
+<div class="client-page">
+    <h2>
+        Company // <a href="/Home/ContactUs">Contact Us</a>
+    </h2>
+
+    <h2>Contact Dracula Cars</h2>
+    <div>
+        <label for="recipient">Recipient</label>
+        <select id="recipient">
+            <option value="general-enquiry">General Enquiry</option>
+            <option value="account-enquiry">Account Enquiry</option>
+            <option value="wedding">Wedding Car Enquiry</option>
+            <option value="other">Other</option>
+            <option value="job-vacancy">Job Vacancy</option>
+            <option value="webmaster">Webmaster</option>
+        </select>
+    </div>
+    <div>
+        <label for="your-name">Your Name</label>
+        <input type="text" id="your-name">
+    </div>
+    <div>
+        <label for="your-email">Your Email</label>
+        <input type="text" id="your-email">
+    </div>
+    <div>
+        <label for="your-email" style="vertical-align:top;">Your Message</label>
+        <textarea id="your-message" style="height: 162px;width: 460px;"></textarea>
+    </div>
+
+    <div class="blue-button" id="contact-us-now" style="margin-left:153px;padding:5px 10px;">Contact Us!</div>
+</div>

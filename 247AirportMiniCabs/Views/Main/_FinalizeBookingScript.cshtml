@@ -1,0 +1,450 @@
+﻿@{
+    //---------- Pickup relevant
+    var isPickupPostCode = ViewBag.IsPickupPostCode;
+    var isPickupAirport = ViewBag.IsPickupAirport;
+
+    //---------- Drop-off relevant
+    var isDropoffPostCode = ViewBag.IsDropoffPostCode;
+    var isDropoffAirport = ViewBag.IsDropoffAirport;
+
+    Site site = ViewBag.Site;
+}
+<script>
+    $('#details-nav').addClass('done');
+    
+    var isPickupPostCode = '@isPickupPostCode' == 'True',
+        isDropoffPostCode = '@isDropoffPostCode' == 'True',
+        isPickupAirport = '@isPickupAirport' == 'True',
+        isDropoffAirport = '@isDropoffAirport' == 'True';
+
+    $('.methods div').click(function () {
+        $('.methods div.selected').removeClass('selected');
+        $(this).addClass('selected');
+    });
+
+    // booking the job --- here!
+    function bookTheJob() {
+        var pickFrom = '';
+        if (isPickupPostCode) {
+            pickFrom = $('#from-postcode').val() + ', Door No. ' + $('#from-door-no').val();
+
+            if ($('#from-other').length && $('#from-other').val().length) pickFrom += ', ' + $('#from-other').val();
+        } else pickFrom = $('#from-address').val();
+
+        if (isPickupAirport) pickFrom += ', Flight No. ' + $('#flight-from-number').val() + ' from ' + $('#flight-from').val();
+
+        var dropTo = '';
+        if (isDropoffPostCode) {
+            dropTo = $('#to-postcode').val() + ', Door No. ' + $('#to-door-no').val();
+        } else dropTo = $('#to-address').val();
+
+        if (isDropoffAirport) dropTo += ', Flight No. ' + $('#flight-to-number').val() + ' from ' + $('#flight-to').val();
+
+        // Now appending the Building names!
+        if ($('#from-building').length && $('#from-building').val().length) pickFrom += ' (From building: ' + $('#from-building').val() + ')';
+        if ($('#to-building').length && $('#to-building').val().length) dropTo += ' (To building: ' + $('#to-building').val() + ')';
+
+        var returnTime = '';
+        if ($('#journey-type').val() === 'Return') {
+            returnTime = $('#return-date').val() + ' ' + $('#return-hours').val() + ':' + $('#return-minutes').val();
+        }
+
+        var passengerName = '', passengerCell = '';
+        if ($('#are-you-passenger').val() == 'No') {
+            passengerName = $('#passenger-name').val();
+            passengerCell = $('#passenger-cell-number-dialing-code').val().split(' (')[0] + ' ' + $('#passenger-cell-number').val();
+        }
+
+        var landlineNumber = '';
+        if ($('#landline-number').val().length) {
+            landlineNumber = $('#customer-landline-dialing-code').val().split(' (')[0] + ' ' + $('#landline-number').val();
+        }
+
+        var newspaper = '';
+        if ($('#newspaper').length && $('#newspaper').val() != 'Do not need') {
+            if ($('#other-newspaper').val().length)
+                newspaper = $('#other-newspaper').val();
+            else
+                newspaper = $('#newspaper').val();
+        }
+
+        var drink = '';
+        if ($('#drink').length && $('#drink').val() != 'Do not need') {
+            if ($('#other-drink').val().length)
+                drink = $('#other-drink').val();
+            else
+                drink = $('#drink').val();
+        }
+
+        $.post('/Main/LastAction', {
+            customerName: $('#customer-name').val(),
+            cellNumber: $('#customer-cell-number-dialing-code').val().split(' (')[0] + ' ' + $('#customer-cell-number').val(),
+            landLine: landlineNumber,
+            email: $('#customer-email').val(),
+            pickFrom: pickFrom,
+            dropTo: dropTo,
+            pickupTime: $('#pickup-date').val() + ' ' + $('#pickup-hours').val() + ':' + $('#pickup-minutes').val(),
+            returnTime: returnTime,
+            numberOfPassengers: $('#number-of-passengers').val(),
+            vehicleType: $('#vehicle-type').val(),
+            childSeats: $('#child-seats').val(),
+            babySeats: $('#baby-seats').val(),
+            luggage: $('#luggages').val(),
+            handLag: $('#hand-lag').val(),
+            payAs: 'Cash',
+            fare: $('#fare').val(),
+            additionalInfo: validate($('#additional-info').val()),
+            journeyType: $('#journey-type').val(),
+            passengerName: passengerName,
+            passengerCell: passengerCell,
+            newspaper: newspaper,
+            drink: drink,
+            stops: '@ViewBag.Stops',
+            bonusToken: '@ViewBag.BonusToken',
+            airportCharges: '@ViewBag.AirportCharges'
+        },
+            function (html) {
+                window.scrollTo(0, 0);
+                $('.spinner').fadeOut();
+
+                $('.Maincontant').html(html);
+            });
+    }
+
+    var inputStops = '';
+    $('.finalize-booking').click(function () {
+        bookButtonClick();
+    });
+
+    function bookButtonClick(onlyValidateFields) {
+
+        var ids = '';
+
+        if (isPickupPostCode) ids += 'from-postcode, from-door-no, ';
+        else ids += 'from-address, ';
+
+        if (isPickupAirport) ids += 'flight-from, flight-from-number, ';
+
+        if (isDropoffPostCode) ids += 'to-postcode, to-door-no, ';
+        else ids += 'to-address, ';
+
+        if (isDropoffAirport) ids += 'flight-to, flight-to-number, ';
+
+        ids += 'pickup-date, pickup-hours, pickup-minutes, customer-name, customer-cell-number, customer-email';
+
+        if ($('#journey-type').val() === 'Return') {
+            ids += ', return-date, return-hours, return-minutes';
+        }
+
+        var elem = getEmptyElement(ids);
+        if (elem !== true) return;
+
+        if (!$('#are-you-passenger').val().length) {
+            highlight($('.are-you-passenger'));
+            return;
+        }
+
+        if ($('#are-you-passenger').val() == 'No') {
+            elem = getEmptyElement('passenger-name, passenger-cell-number');
+            if (elem !== true) return;
+        }
+
+        // Now valdiating Drop Down Options
+        if (isBadSelection('#number-of-passengers')) return;
+        if (isBadSelection('#luggages')) return;
+        if (isBadSelection('#hand-lag')) return;
+
+        var inputElement = $('#customer-cell-number');
+        if (!isValidPhoneNumber(inputElement)) return;
+
+        inputElement = $('#landline-number');
+        if ($(inputElement).val().length && !isValidPhoneNumber(inputElement)) return;
+
+        inputElement = $('#passenger-cell-number');
+        if ($('#are-you-passenger').val() == 'No' && !isValidPhoneNumber(inputElement)) return;
+
+        if (onlyValidateFields) return;
+
+        loadSpinner('html');
+        bookTheJob();
+    }
+
+    var phoneRegex = /^[0-9 ]{1,15}$/;
+    function isValidPhoneNumber(element) {
+        var value = $(element).val();
+        if (!phoneRegex.test(value)) {
+
+            $.Zebra_Dialog('You must enter a valid phone number!\nMust be less than 15 digits.<br />Must be numbers.<br /><br />You can use spaces too!', {
+                'type': 'error',
+                'title': 'Invalid Phone Number!'
+            });
+            
+
+            //highlight($(element));
+            return false;
+        }
+        return true;
+    }
+
+    function isBadSelection(element) {
+        if ($(element).val() == '---') {
+            highlight($(element).focus());
+            alertBox('Please select ' + $(element).attr('id').replace(/-/g, ' ') + '!');
+            return true;
+        }
+        return false;
+    }
+
+    /***********************************************************************************************************************/
+    $('.discount').click(function () {
+        $('.cash-method, #book-job, #login-section, .discount').hide();
+
+        $('#signup-section').fadeIn();
+
+        $('.methods div.selected').removeClass('selected');
+        $('.methods div#account').addClass('selected');
+
+        $('#signup-email').focus().html($('#customer-email').val());
+        $('#signup-name').html($('#customer-name').val());
+        $('#signup-cell-phone').html($('#customer-cell-number').val());
+    });
+    /***********************************************************************************************************************/
+
+    function goTowardJob(response) {
+        $('.login-section, #account, .spinner, .login-button, .discount, .client-menu').fadeOut();
+        $('#cash').addClass('selected');
+        $('.cash-method, .book-job').fadeIn();
+
+        $('#customer-name').val(response.name);
+        $('#customer-cell-number').val(response.cell);
+        $('#customer-email').val(response.email);
+        $('#landline-number').val(response.landline);
+
+        bookButtonClick(true);
+    }
+
+    // if postal codes ------ Allowing auto completion!
+    $('#from-postcode, #to-postcode').keyup(function () {
+        postalCodesDropDown(this, $('#required-info-table'));
+    });
+</script>
+
+
+@if (LoginHelper.Client == null)
+{
+    <script>
+        var isShowDialog = true, dontShow = false;
+        $('#customer-email, #customer-cell-number').bind('blur changed', function () {
+            var value = $(this).val(), element = $(this);
+
+            if (!value.length) return;
+
+            var field = $(this).attr('id') == 'customer-email' ? 'email' : 'phone';
+            if (field == 'phone') value = $('#customer-cell-number-dialing-code').val().split(' ')[0] + ' ' + value;
+
+            var data = {
+                field: field,
+                value: value,
+                confirmedClientsOnly: true
+            };
+
+            $.post('/Client/Verify', data, function (response) {
+                if (response.error) {
+                    message = 'This ' + field + ' ( ' + value + ' ) is already registered in our site. If you are the same person, please login and try again.';
+                    message += '<br /><br />';
+                    message += 'Otherwise, please enter your own ' + field + '.';
+                    message += '\n\n';
+                    message += 'Note: If you are the owner of this email address: contact us if following conditions true:<br /><br />';
+                    message += '1. You have not registered any account with us<br />';
+                    message += '2. You forgot your password';
+
+                    $.Zebra_Dialog(message, {
+                        'type': 'error',
+                        'title': 'Email already been used!',
+                        'buttons': ['Login', 'Cancel'],
+                        'onClose': function (caption) {
+                            if (caption == 'Login') window.location = '/logout';
+                        }
+                    });
+
+
+                    highlight(element);
+                }
+                if (response.alreadyBooked) {
+                    var message = 'We found that ' + response.total + ' jobs being booked using the same ' + field + ': ' + value;
+                    message += '<br /><br />';
+                    message += 'Why not you create an account with us?';
+                    message += '<br /><br />';
+                    message += 'You can enjoy bonuses from us by <a href="/signup">creating new account</a>!';
+
+                    if (!dontShow && isShowDialog) {
+                        $.Zebra_Dialog(message, {
+                            'type': 'information',
+                            'title': 'You already booked some jobs!',
+                            'buttons': ['Don\'t show', 'Yes', 'No'],
+                            'onClose': function (caption) {
+                                if (caption == "Don't show") dontShow = true;
+                                else isShowDialog = false;
+
+                                if (caption == 'Yes') window.location = '/signup';
+                            }
+                        });
+                    }
+                    else if (!dontShow && !isShowDialog) {
+                        $.Zebra_Dialog(message, {
+                            'type': 'information',
+                            'buttons': false,
+                            'modal': false,
+                            'position': ['right - 20', 'top + 20'],
+                            'auto_close': 2000
+                        });
+                    }
+                }
+            });
+        });
+    </script>
+}
+
+<script>
+    (function () {
+
+        function showDropDown(target, dropDown) {
+            target = $('#' + target)[0];
+            dropDown = $('#' + dropDown)[0];
+
+            var top = $(target).offset()
+                .top + target.clientHeight,
+                left = $(target).offset().left + 1;
+
+            $(dropDown)
+                .css('top', top)
+                .css('left', left)
+                .css('width', target.clientWidth)
+                .slideDown();
+        }
+
+        function pickUpDate() {
+            $('#pickup-date, #return-date').datepicker({
+                minDate: new Date('@UKTime.Now.AddHours(int.Parse(site.PrebookBeforeHours)).ToUniversalTime()'),
+                maxDate: "+1Y",
+                showAnim: 'slideDown',
+                numberOfMonths: 3,
+                showButtonPanel: true,
+                changeMonth: true,
+                changeYear: true,
+                dateFormat: 'dd/mm/yy',
+                onSelect: function(date) {
+                    var splitted = date.split('/');
+                    var month = splitted[0],
+                        day = splitted[1],
+                        year = splitted[2];
+                    
+                    if(month == @UKTime.Now.Month && day == @UKTime.Now.Day && year == @UKTime.Now.Year) {
+                        var stHour = @UKTime.Now.Hour + @site.PrebookBeforeHours;
+                        setHour(stHour, endingHour);
+                    }
+                    else setHour(startingHour, endingHour);
+                }
+            });
+        }
+
+        var startingHour = @site.StartingHour,
+            endingHour = @site.EndingHour;
+
+        function setHour(stHour, endHour) {
+            var hours = $('#hours-list')[0],
+                val, i;
+            
+            hours.innerHTML = '';
+            for (i = stHour; i <= endHour; i++) {
+                val = (i <= 9 ? '0' + i : i);
+                hours.innerHTML += '<div accesskey="' + val + '">' + val + '</div>';
+            }
+            
+            $('#hours-list div').click(function() {
+                $('#hours-list').hide();
+                hoursTarget.value = $(this).attr('accesskey');
+            });
+        }
+        
+        var hoursTarget;
+        
+        function pickupTime() {
+            $('#pickup-hours, #return-hours').focus(function () {
+                hoursTarget = this;
+                showDropDown(this.id, 'hours-list');
+            });
+
+            setHour(@UKTime.Now.Hour + @site.PrebookBeforeHours, endingHour);
+
+            $('#pickup-minutes, #return-minutes')
+                .focus(function () {
+                    minutesTarget = this;
+                    showDropDown(this.id, 'minutes');
+                });
+            var minutes = $('#minutes')[0];
+            for (i = 0; i <= 60; i += 5) {
+                if (i == 60) i = 59;
+
+                val = (i <= 9 ? '0' + i : i);
+                minutes.innerHTML += '<div accesskey="' + val + '">' + val + '</div>';
+
+                if (i == 59) i = 61;
+            }
+
+            var minutesTarget;
+            $('#minutes div').click(function () {
+                $('#minutes').hide();
+                minutesTarget.value = $(this).attr('accesskey');
+            });
+        }
+
+        call(pickUpDate, pickupTime);
+    })();
+</script>
+
+<script>
+    $('.are-you-passenger span').click(function () {
+        $('.are-you-passenger span').removeClass('selected');
+        $(this).addClass('selected');
+
+        var value = $(this).html();
+        $('#are-you-passenger').val(value);
+
+        if (value == 'No') {
+            $('#i-am-passenger').fadeIn();
+            $('#passenger-name').focus();
+        }
+        else $('#i-am-passenger').fadeOut();
+    });
+
+    var dialingCodes, index;
+    $.post('/Defaults/GetDialingCodes', function (html) {
+        dialingCodes = html.split('\n');
+        $('#customer-cell-number-dialing-code, #passenger-cell-number-dialing-code, #customer-landline-dialing-code').html(html);
+
+        var customerCellNumber = $('#customer-cell-number'),
+            passengerCellNumber = $('#passenger-cell-number'),
+            customerLandlineNumber = $('#landline-number');
+
+        getIndex(customerCellNumber);
+        $('#customer-cell-number-dialing-code option').eq(index - 1).attr('selected', true);
+
+        getIndex(passengerCellNumber);
+        $('#passenger-cell-number-dialing-code option').eq(index - 1).attr('selected', true);
+
+        getIndex(customerLandlineNumber);
+        $('#customer-landline-dialing-code option').eq(index - 1).attr('selected', true);
+    });
+
+    function getIndex(input) {
+        var term = $(input).val().split(' ')[0];
+        if (!term) { index = 129; return; }
+
+        $(input).val($(input).val().replace(term, '').trim());
+
+        $.grep(dialingCodes, function (n, i) {
+            ($(n).html() + '').split(' ')[0] == term + '' && (index = i);
+        });
+    }
+</script>

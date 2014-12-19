@@ -1,0 +1,355 @@
+﻿@{
+    Layout = null;
+    string stops = ViewBag.Stops;
+
+    DateTime pickupTime;
+    string tempPickupTime = ViewBag.PickupTime;
+    DateTime.TryParse(tempPickupTime, out pickupTime);
+
+    DateTime returnTime;
+    string tempReturnTime = ViewBag.ReturnTime;
+    DateTime.TryParse(tempReturnTime, out returnTime);
+
+    string journeyType = ViewBag.JourneyType;
+
+    var additionalInfo = ViewBag.AdditionalInfo;
+
+    string vehicleToken = ViewBag.VehicleType;
+    var vehicle = vehicleToken.GetVehicle();
+}
+<style>
+    .latest-job label { position: absolute; }
+
+    .latest-job span {
+        border-bottom: 1px solid #9A9DA0;
+        padding: 5px 20px;
+        font-weight: normal;
+        margin-left: 200px;
+        display: block;
+        border-left: 1px solid #9A9DA0;
+    }
+
+    .latest-job span, .latest-job label { padding: 10px 20px; }
+
+    .latest-job span, .latest-job div:last-child { border-bottom: 0; }
+
+    .latest-job {
+        width: 530px;
+        position: absolute;
+        margin-left: 369px;
+        border: 1px solid #9A9DA0;
+        border-radius: 5px;
+    }
+
+    .latest-job div { border-bottom: 1px solid #9A9DA0; }
+    
+    table {
+        width: 100%;
+    }
+    .outer-table td
+    {
+        padding:5px;
+        border-radius: 3px;
+    }
+    
+    .inner-table td
+    {
+        border:0;
+        padding:0;
+    }
+    .inner-table 
+    {
+        padding-top: 10px;
+    }
+    
+     .finalize-booking {
+        margin: 0 334px;
+        text-align: center;
+        margin-bottom: 20px;
+        background-color: rgba(228, 42, 42, 0.35);
+        background-repeat: no-repeat;
+        background-position: 10px center;
+        background-image: url(/content/images/checkbox.png);
+        padding-left: 46px;
+        border: 1px solid #1B0E0E;
+        border-radius: 3px;
+        margin-top: 15px;
+        color: black;
+        cursor:pointer;
+    }
+
+    .finalize-booking:hover { background-color: rgba(228, 42, 42, 0.55); }
+
+    .finalize-booking:active {
+        background-color: rgba(228, 42, 42, 0.85);
+    }
+
+    .finalize-booking h2 {
+        border-bottom: 1px solid #080A0C;
+        color: black;
+    }
+    
+    .latest-job h2 {
+    padding-left: 20px;
+    background: rgba(218, 218, 218, 0.57);
+    }
+    
+    #confirmation-message
+    {
+        color: #D5450D;
+        font-size: 20px;
+        text-align: left;
+        padding: 20px;
+        background-color: rgba(116, 15, 15, 0.24);
+        border: 5px solid rgba(238, 69, 38, 0.65);
+        margin-top: 11px;
+        line-height: 1.8;
+        border-radius: 6px;
+        display: none;
+    }
+</style>
+
+<div class="latest-job" style="margin: 0; width: auto; position: static;margin-top: 1em;">
+    <h2>@ViewBag.CustomerName</h2>
+    @if (ViewBag.IsDifferentPassenger)
+    {
+        <div>
+            <label>Passenger Name</label>
+            <span>@ViewBag.PassengerName</span>
+        </div>
+    }
+
+    @if(vehicle.Name == "Executive")
+    {
+        string newspaper = ViewBag.Newspaper;
+        
+        <div style="background: #0D690D;color:White;">
+            <label>Free Service!</label>
+            <span>
+                2 bottles of water
+                @if(!newspaper.IsEmpty()) {<text>and @newspaper newspaper!</text>}
+                else {<text> only!</text>}
+             </span>
+        </div>
+    }
+    else if(vehicle.Name == "Gold-Vip")
+    {
+        string newspaper = ViewBag.Newspaper;
+        string drink = ViewBag.Drink;
+        
+      <div style="background: #0D690D;color:White;">
+            <label>Free Service!</label>
+                <span>2 bottles of water
+                    @if (!drink.IsEmpty()){<text>... @drink</text> }
+                    @if (!newspaper.IsEmpty()){<text> and @newspaper newspaper!</text>}
+                </span>
+        </div>
+    }
+    <div>
+        <label>Pick from</label>
+        <span>@ViewBag.PickFrom</span>
+    </div>
+
+    @if (!string.IsNullOrWhiteSpace(stops))
+    {
+        stops = stops.Replace(",", "=====").Replace("-----", ",");
+        var splittedStops = stops.Split(',');
+        int index = 0;
+        
+        <div>
+            <label>Stops</label>
+            <span>
+                @foreach (string t in splittedStops)
+                {
+                    index++;
+                    @:@index: @t.Replace("=====", ",")<br/>
+                }
+            </span>
+        </div>
+    }
+	
+    <div>
+        <label>Drop to</label>
+        <span>@ViewBag.DropTo</span>
+    </div>
+
+    <div>
+        <label>When</label>
+        <span>@pickupTime.ToLongDateString() - @pickupTime.ToLongTimeString() (@pickupTime.ToAgo())</span>
+    </div>
+    
+    @if (journeyType == "Return")
+    {
+        <div>
+            <label>Return time</label>
+            <span>@returnTime.ToLongDateString() - @returnTime.ToLongTimeString() (@returnTime.ToAgo())</span>
+        </div>
+    }
+    
+    @{
+        int babySeats = int.Parse((string)ViewBag.BabySeats);
+        int childSeats = int.Parse((string)ViewBag.ChildSeats);
+    }
+    @if (babySeats > 0 || childSeats > 0)
+    {
+        <div>
+            <label>Seats</label>
+            <span>
+                @if (babySeats > 0)
+                { <text>@babySeats baby seats</text>}
+                @if (babySeats > 0 || childSeats > 0)
+                {<text> .... </text>}
+                @if (childSeats > 0)
+                { <text>@childSeats child seats</text>}
+            </span>
+        </div>
+    }
+    
+    @{
+        int luggages = int.Parse((string)ViewBag.Luggage);
+        int handLag = int.Parse((string)ViewBag.HandLag);
+    }
+
+    <div>
+        <label>Personal Info</label>
+        <span>
+            @ViewBag.NumberOfPassengers passengers
+            @if (luggages > 0)
+            { <text>.... @luggages suitcases</text>}
+            @if (handLag > 0)
+            { <text>.... @handLag hand luggages</text>}
+        </span>
+    </div>
+
+    @{ string landLine = ViewBag.LandLine; }
+    <div>
+        <label>Contact Numbers</label>
+        <span>
+            <table class="outer-table">
+                @if (ViewBag.IsDifferentPassenger)
+                {<tr><td>Passenger contact number: </td><td>@ViewBag.PassengerCell</td></tr>}
+                <tr>
+                    @if (ViewBag.IsDifferentPassenger)
+                    {<td>Customer contact numbers:</td>}
+                    <td>
+                        <table class="inner-table">
+                            <tr><td>Mobile number: @ViewBag.CellNumber</td></tr>
+                            @if (!landLine.IsEmpty())
+                            {<tr><td style="padding-top: 10px;">Landline number: @landLine</td></tr>}
+                        </table>
+                    </td>
+                </tr>
+            </table>
+        </span>
+    </div>
+
+    <div>
+        <label>Vehicle</label>
+        <span>@vehicle.Name</span>
+    </div>
+
+    <div>
+        <label>Fare</label>
+        <span>£@ViewBag.Fare</span>
+    </div>
+
+    <div>
+            <label>Email</label>
+            <span>@ViewBag.Email</span>
+    </div>
+    
+    <div>
+        <label>Journey Type</label>
+        <span>@ViewBag.JourneyType</span>
+    </div>
+
+    @if (!string.IsNullOrWhiteSpace(additionalInfo))
+    {
+        <div>
+            <label>Special Requirement</label>
+            <span>@additionalInfo</span>
+        </div>
+    }
+</div>
+
+<div id="terms-containers" style="padding: 10px;">
+    <input type="checkbox" id="terms">
+    <label for="terms" style="width: auto; margin-left: 7px; display: inline; width: auto;">
+    Please check the box to accept <a href="/terms-and-condition.html" style="color: #EC9D37;" target="_blank">Terms & Conditions</a>.
+    </label>
+</div>
+
+<div class="finalize-booking smart-panel">
+        <h2 style="text-shadow: none;font-size: 20px;">Book your Job!</h2>
+        <p style="margin: 10px; font-size: 13px;padding: 0;line-height: 1;">Now, click to book your job...to finalize it!</p>
+    </div>
+
+
+<input type="hidden" id="pay-as" value="@ViewBag.PayAs">
+<script>
+    function bookTheJob() {
+        
+        if (!$('#terms').attr('checked')) {
+            highlight($('#terms-containers').attr('tabIndex', 0).focus());
+            return;
+        }
+        
+        loadSpinner('html');
+
+        $.post('/Main/ConfirmBooking', {
+            customerName: '@ViewBag.CustomerName',
+            cellNumber: '@ViewBag.CellNumber',
+            landLine: '@ViewBag.LandLine',
+            email: '@ViewBag.Email',
+            pickFrom: '@ViewBag.PickFrom',
+            dropTo: '@ViewBag.DropTo',
+            pickupTime: '@ViewBag.PickupTime',
+            returnTime: '@ViewBag.ReturnTime',
+            numberOfPassengers: '@ViewBag.NumberOfPassengers',
+            vehicleType: '@ViewBag.VehicleType',
+            childSeats: '@ViewBag.ChildSeats',
+            babySeats: '@ViewBag.BabySeats',
+            luggage: '@ViewBag.Luggage',
+            handLag: '@ViewBag.HandLag',
+            payAs: $('#pay-as').val(),
+            fare: '@ViewBag.Fare',
+            additionalInfo: '@ViewBag.AdditionalInfo',
+            journeyType: '@ViewBag.JourneyType',
+            stops: '@ViewBag.Stops',
+            passengerName: '@ViewBag.PassengerName',
+            passengerCell: '@ViewBag.PassengerCell',
+            newspaper: '@ViewBag.Newspaper',
+            drink: '@ViewBag.Drink',
+            bonusToken: '@ViewBag.BonusToken',
+            airportCharges: '@ViewBag.AirportCharges'
+        },
+            function (respose) {
+
+                window.scrollTo(0, 0);
+                $('.spinner, .latest-job, .finalize-booking').fadeOut();
+
+                if (respose.booked) {
+                    var message = 'Thank you for booking a car with DraculCars.<br />';
+                    message += 'A confirmation mail has been send to your email address: @ViewBag.Email<br />';
+                    message += 'Please check the details of the booking and press on link to confirm the job.<br />';
+                    message += 'Your feedback is so important to us. Please leave us some feedback.<br />';
+                    @if(LoginHelper.Client != null)
+                    {
+                        <text>message += '<h2 style="text-align:center;">Goto <a href="/Client/">Client Page</a> to manage your jobs and other stuff!</h2>';</text>
+                    }
+                    $('#confirmation-message').html(message).fadeIn();
+                    
+                    if(respose.registered) {
+                        window.location = '/confirm-booking.html#confirm=' + respose.token;
+                    }
+                } else $('#confirmation-message').css('text-align', 'left').html(respose).fadeIn();
+            });
+    }
+
+    $('.finalize-booking').click(bookTheJob);
+    $('#final-nav').addClass('done');
+	
+	toolTip();
+</script>
+
+<div id="confirmation-message"></div>

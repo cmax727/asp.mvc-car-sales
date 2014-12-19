@@ -1,0 +1,235 @@
+﻿@model CabDataContext
+@{
+    Layout = null;
+    string token = ViewBag.ID;
+    var job = Model.Jobs.FirstOrDefault(j => j.Token == token);
+
+    var site = Model.Site();
+}
+
+
+@if (job != null)
+{
+    <h2>Edit your booking</h2>
+    <div id="minutes" class="dropdown"></div>
+        <div id="hours-list" class="dropdown"></div>
+        <div id="postal-codes" class="dropdown"></div>
+        <div id="addresses-autocomplete" class="dropdown"></div>
+
+
+    <div class="hidden-fields spinner"></div>
+    
+    <style>
+        /* Spinner ----- the progress indicator
+                    -----------------------------------------------------------*/
+        .spinner
+        {
+            background-color: rgba(0, 0, 0, .8);
+            background-image: url('/content/images/spinner.gif');
+            background-repeat: no-repeat;
+            background-position: 50%;
+            position:absolute;
+            z-index: 100;
+        }
+        .highlight { background:#DF8E8E!important; }
+        label {
+            display: inline-block;
+            width: 150px;
+        }
+        hr {
+            margin: 7px 0;
+            border-top: 1px solid #AA9090;
+            border-bottom: 0;
+        }
+        
+        .blue-button
+{
+	padding: 5px 10px;
+	cursor: pointer;
+	display:inline-block;
+	color: #FDFDFD;
+	
+	margin: 10px 1px;
+	margin-top: 22px;
+	
+	font-size: 20px;
+	color: black;
+	border: 1px solid rgba(231, 72, 50, 0.59);
+	border-radius: 2px;
+	background-color: rgba(204, 60, 25, 0.63);
+}
+.blue-button:hover
+{
+	 background-color: rgba(204, 60, 25, 0.83);
+}
+.blue-button:active
+{
+     background-color: rgba(204, 60, 25, 0.9);
+}
+
+.dropdown, .ac_results
+{
+	position: absolute;
+    border: 1px solid #0F0F0F;
+    display: none;
+    max-height: 200px;
+    overflow: auto;
+    overflow-x: hidden;
+    z-index: 20;
+    box-shadow: inset 0 0 3px #0C0C0C;
+    color: black;
+}
+
+.dropdown span
+{
+    display:block;
+    font-size:11px;
+    margin-top: 6px;
+    text-align: right;
+}
+.dropdown div, .ac_results li
+{
+	padding: 5px;
+	background-color: rgba(255, 255, 255, .9);
+	border-bottom: 1px solid #020202;
+	cursor:pointer;
+}
+
+.dropdown div:hover, .ac_results li:hover
+{
+	background: black;
+    color: white;
+}
+
+.dropdown div:active, .ac_results li:active
+{
+	background: #3C3A3A;
+}
+    </style>
+    
+    
+    <div>
+        <label for="pick-from">Pick from</label>
+        <input type="text" id="pick-from" value="@job.PickFrom">
+    </div>
+
+    <div>
+        <label for="drop-to">Drop to</label>
+        <input type="text" id="drop-to" value="@job.DropTo">
+    </div>
+
+    <div>
+        <label for="pickup-date">Pickup Date</label>
+        <input type="text" id="pickup-date" value="@job.PickupTime.ToShortDateString()" readonly>
+
+        <span>Hr:</span><input type="text" id="pickup-hours" class="hours-minutes" readonly value="@job.PickupTime.Hour" style="width: 25px;text-align: center;">
+        <span>Min:</span><input type="text" id="pickup-minutes" class="hours-minutes" readonly value="@job.PickupTime.Minute" style="width: 25px;text-align: center;">
+    </div>
+
+    <div>
+        <label for="message">Message</label>
+        <textarea id="message"></textarea>
+    </div>
+    
+    <a href="/Client/" rel="nofollow" class="back" style="color:white!important;text-decoration: none;margin-left: 15px;">Back</a>
+    <div id="save-changes" class="blue-button" style="margin-left: 42px;">Save Changes</div>
+    
+    <script>
+        $('#save-changes').click(function () {
+            loadSpinner(this);
+
+            var data = {
+                id: '@token',
+                pickFrom: $('#pick-from').val(),
+                dropTo: $('#drop-to').val(),
+                pickupTime: '',
+                message: $('#message').val()
+            };
+
+            $.post('/Client/TempJobEdit', data, function (response) {
+                if (response == true) {
+                    alert('Because our app is under construction; that\'s why an email has been sent to our staff.\n\nYour changes will be update in a few minutes.\n\nWe\'ll inform you via email. Thanks.');
+                } else {
+                    alert('Something went wrong. Please send a direct message to us. Thanks');
+                }
+                
+                location.reload();
+                $('.spinner').hide();
+            });
+        });
+        
+
+        (function () {
+
+        function showDropDown(target, dropDown) {
+            target = $('#' + target)[0];
+            dropDown = $('#' + dropDown)[0];
+
+            var top = $(target).offset()
+                .top + target.clientHeight,
+                left = $(target).offset().left + 1;
+
+            $(dropDown)
+                .css('top', top)
+                .css('left', left)
+                .css('width', target.clientWidth)
+                .slideDown();
+        }
+
+        function pickUpDate() {
+            $('#pickup-date, #return-date').focus(function () {
+                $(this).Zebra_DatePicker({
+                    direction: true,
+                    format: 'M d, Y'
+                });
+            });
+        }
+
+        var startingHour = @site.StartingHour,
+            endingHour = @site.EndingHour;
+
+        function pickupTime() {
+            $('#pickup-hours, #return-hours').focus(function () {
+                hoursTarget = this;
+                showDropDown(this.id, 'hours-list');
+            });
+
+            var hours = $('#hours-list')[0],
+                val, i;
+            for (i = startingHour; i <= endingHour; i++) {
+                val = (i <= 9 ? '0' + i : i);
+                hours.innerHTML += '<div accesskey="' + val + '">' + val + '</div>';
+            }
+
+            $('#pickup-minutes, #return-minutes')
+                .focus(function () {
+                    minutesTarget = this;
+                    showDropDown(this.id, 'minutes');
+                });
+            var minutes = $('#minutes')[0];
+            for (i = 0; i <= 60; i += 5) {
+                if (i == 60) i = 59;
+
+                val = (i <= 9 ? '0' + i : i);
+                minutes.innerHTML += '<div accesskey="' + val + '">' + val + '</div>';
+
+                if (i == 59) i = 61;
+            }
+
+            var hoursTarget, minutesTarget;
+            $('#hours-list div')
+                .click(function () {
+                    $('#hours-list').hide();
+                    hoursTarget.value = $(this).attr('accesskey');
+                });
+
+            $('#minutes div').click(function () {
+                $('#minutes').hide();
+                minutesTarget.value = $(this).attr('accesskey');
+            });
+        }
+
+        call(pickUpDate, pickupTime);
+    })();
+    </script>
+}

@@ -1,0 +1,32 @@
+﻿@{
+    Layout = null;
+
+    string term = ViewBag.Term;
+
+    var db = StaticHelper.PostCodes;
+
+   // var addresses = db.UKAddresses.Where(s => s.PCUnit.StartsWith(term));
+
+    IEnumerable<UKAddress> addresses = db.UKAddresses.Where(a => a.PCUnit.Contains(term));
+
+    var equals = addresses.Where(a => a.PCUnit == term);
+    var startsWith = addresses.Where(a => a.PCUnit.StartsWith(term));
+
+    addresses = equals.Union(startsWith).Take(10).Distinct();
+}
+
+<select style="width:auto;">
+<option> ---- Select your Address ----</option>
+@if (addresses.Count() <= 0) { <h2 style="background: #D81010;color: #FD6F6F;font-size: 17px;text-shadow: 0 0 2px #AC0D0D, 0 0 2px #7E1313, 0 0 2px #911;">Nothing found!</h2> }
+@foreach (var address in addresses)
+{
+    var accesskey = address.PCUnit;
+    if (!address.Street.IsEmpty())
+    {
+        accesskey += ", " + address.Street;
+    }
+    <option accesskey="@accesskey">
+        @address.Street, @address.County, @address.PCUnit
+    </option>
+}
+</select>

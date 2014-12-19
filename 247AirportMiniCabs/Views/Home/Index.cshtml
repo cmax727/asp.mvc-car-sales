@@ -1,0 +1,183 @@
+﻿@{
+    ViewBag.Title = "Alin Turi's Cab System!";
+    ViewBag.Description = "An advance taxicab management system => Designed by Muaz Khan!";
+}
+@*
+<div class="client-menu">
+    <img src="@Url.Content("~/content/images/user.png")" alt="Login or Signup" width=45>
+    <div>Login / Signup</div>
+</div>
+*@
+<div class="quote-section">
+	<h2 style="font-size: 40px;text-shadow: 1px 1px #E5E5E5, 2px 2px white, 3px 3px #E5E5E5;color: #6C96C8;">Have a Quote..</h2>
+
+    <div style="float:right">
+        <div>
+            <label for="number-of-passengers">Total Passengers</label>
+            <input id="number-of-passengers" type="text" readonly value="1" class="numbers">
+        </div>
+
+        <div>
+            <label for="child-seats">Child Seats</label>
+            <input id="child-seats" type="text" readonly value="1" class="numbers">
+        </div>
+
+        <div>
+            <label for="baby-seats">Baby Seats</label>
+            <input id="baby-seats" type="text" readonly value="1" class="numbers">
+        </div>
+
+        <div>
+            <label for="luggage">Luggage</label>
+            <input id="luggage" type="text" readonly value="1" class="numbers">
+        </div>
+    </div>
+
+    <div>
+        <label for="pick-from">Pick From</label>
+        <input id="pick-from" type="text" readonly>
+    </div>
+    <div>
+        <label for="drop-to">Drop To</label>
+        <input id="drop-to" type="text" readonly>
+    </div>
+    <div>
+        <label for="pickup-time">Pickup Time</label>
+        <input id="pickup-time" type="text" readonly />
+    </div>
+    <div>
+        <label for="vehicle-type">Vehicle Type</label>
+        <input id="vehicle-type" type="text" readonly />
+    </div>
+
+    <div>
+        <label for="journey-type">Journey Type</label>
+        <input id="journey-type" type="text" readonly value="One Way" />
+    </div>
+    <div id="add-quote" class="blue-button add-quote">Add Quote!</div>
+</div>
+
+<div class="hidden-fields next-step">
+    <h2 style="font-size: 40px;text-shadow: 1px 1px #E5E5E5, 2px 2px white, 3px 3px #E5E5E5;color: #6C96C8;">Next Step...Book your job!</h2>
+    <p style="margin-top: 10px;color: #3285AC;">Which method you prefer to use to book your job?</p>
+	
+	<div class="methods">
+		<div class="selected" id="cash">Cash</div>
+		<div id="account">Account</div>
+		<div id="paypal">Paypal</div>
+	</div>
+	
+	<div class="cash-method">
+		<div>
+			<label for="passenger-name">Full Name</label>
+			<input id="passenger-name" type="text">
+		</div>
+		<div>
+			<label for="cell-number">Cell Number</label>
+			<input id="cell-number" type="text">
+		</div>
+	</div>
+	
+	<h2 id="fare-prediction" style="font-variant: normal;"></h2>
+	
+	<div id="login-section" class="login-section">
+		<h2>Login</h2>
+		<div>
+			<label for="email">Email</label>
+			<input id="email" type="text">
+		</div>
+		<div>
+			<label for="password">Password</label>
+			<input id="password" type="password">
+		</div>
+		<div class="blue-button login-button" style="margin-left: 3px;margin-top: 15;px;font-size: 30px;">Login and Book Job!</div>
+		
+		<div class="blue-button prompt-signup" style="margin-top: 15;px;font-size: 30px;">Sign Up!</div>
+	</div>
+	
+	<div id="signup-section" class="login-section signup-section">
+    <h2>Sign Up!</h2>
+    <div>
+        <label for="signup-email">Email</label>
+        <input id="signup-email" type="text">
+    </div>
+    
+        <div>
+            <label for="signup-password">Password</label>
+            <input id="signup-password" type="password">
+        </div>
+
+        <div>
+            <label for="signup-name">Full Name</label>
+            <input id="signup-name" type="text" readonly>
+        </div>
+
+        <div>
+            <label for="signup-address">Address</label>
+            <input id="signup-address" type="text">
+        </div>
+
+        <div>
+            <label for="signup-postal-code">Postal Code</label>
+            <input id="signup-postal-code" type="text">
+        </div>
+
+        <div>
+            <label for="signup-state">State</label>
+            <input id="signup-state" type="text">
+        </div>
+
+        <div>
+            <label for="signup-city">City</label>
+            <input id="signup-city" type="text">
+        </div>
+
+        <div>
+            <label for="signup-country">Country</label>
+            <input id="signup-country" type="text" readonly>
+        </div>
+
+        <div>
+            <label for="signup-cell-phone">Cell Phone</label>
+            <input id="signup-cell-phone" type="text">
+        </div>
+    
+	<div class="blue-button signup-button" style="margin-left: 3px;margin-top: 15;px;font-size: 30px;">Sign Up and Book Job!</div>
+</div>
+	
+	<div id="book-job" class="blue-button book-job">Book Job!</div>
+</div>
+<div class="hidden-fields spinner"></div>
+
+<div id="locations" class="dropdown"></div>
+<div id="sub-locations" class="dropdown"></div>
+<div id="minutes" class="dropdown"></div>
+<div id="hours" class="dropdown"></div>
+<div id="am-pm" class="dropdown">
+    <div>AM</div>
+    <div>PM</div>
+</div>
+
+<div id="number-of-passengers-dropdown" class="dropdown"></div>
+<div id="vehicle-types" class="dropdown"></div>
+<div id="journey-types" class="dropdown">
+    <div>One Way</div>
+    <div>Return</div>
+</div>
+
+<div id="pay-types" class="dropdown">
+    <div>Cash</div>
+    <div>Account</div>
+    <div>Card</div>
+</div>
+
+<div id="country-names" class="dropdown"></div>
+
+@section CSS {
+    <link href="@Url.Content("~/Content/homepage-public.css")" rel="stylesheet"> 
+    <link href="@Url.Content("~/Scripts/datepicker/datepicker.css")" rel="stylesheet"> 
+}
+@section JavaScript { 
+    <script src="@Url.Content("~/Scripts/datepicker/datepicker.js")" type="text/javascript"></script> 
+    <script src="@Url.Content("~/Scripts/homepage-public.js")" type="text/javascript"></script> 
+}

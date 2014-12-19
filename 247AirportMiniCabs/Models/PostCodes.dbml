@@ -1,0 +1,33 @@
+﻿<?xml version="1.0" encoding="utf-8"?><Database Name="UKPostCodesPro_Data" Class="PostCodesDataContext" xmlns="http://schemas.microsoft.com/linqtosql/dbml/2007">
+  <Connection Mode="WebSettings" ConnectionString="Data Source=draculacars.com;Initial Catalog=UKPostCodesPro_Data;Persist Security Info=True;User ID=alindracula" SettingsObjectName="System.Configuration.ConfigurationManager.ConnectionStrings" SettingsPropertyName="UKPostCodesPro_DataConnectionString1" Provider="System.Data.SqlClient" />
+  <Table Name="dbo.UKAddress" Member="UKAddresses">
+    <Type Name="UKAddress">
+      <Column Name="PCUnit" Type="System.String" DbType="NVarChar(255)" CanBeNull="true" />
+      <Column Name="PCSector" Type="System.String" DbType="NVarChar(255)" CanBeNull="true" />
+      <Column Name="PCDistrict" Type="System.String" DbType="NVarChar(255)" CanBeNull="true" />
+      <Column Name="PCArea" Type="System.String" DbType="NVarChar(255)" CanBeNull="true" />
+      <Column Name="PQI" Type="System.String" DbType="NVarChar(255)" CanBeNull="true" />
+      <Column Name="Eastings" Type="System.String" DbType="NVarChar(255)" CanBeNull="true" />
+      <Column Name="Northings" Type="System.String" DbType="NVarChar(255)" CanBeNull="true" />
+      <Column Name="Latitude" Type="System.String" DbType="NVarChar(255)" CanBeNull="true" />
+      <Column Name="Longitude" Type="System.String" DbType="NVarChar(255)" CanBeNull="true" />
+      <Column Name="GridRef" Type="System.String" DbType="NVarChar(255)" CanBeNull="true" />
+      <Column Name="Street" Type="System.String" DbType="NVarChar(255)" CanBeNull="true" />
+      <Column Name="SQI" Type="System.String" DbType="NVarChar(255)" CanBeNull="true" />
+      <Column Name="Town" Type="System.String" DbType="NVarChar(255)" CanBeNull="true" />
+      <Column Name="TownCode" Type="System.String" DbType="NVarChar(255)" CanBeNull="true" />
+      <Column Name="Ward" Type="System.String" DbType="NVarChar(255)" CanBeNull="true" />
+      <Column Name="WardCode" Type="System.String" DbType="NVarChar(255)" CanBeNull="true" />
+      <Column Name="District" Type="System.String" DbType="NVarChar(255)" CanBeNull="true" />
+      <Column Name="DistrictCode" Type="System.String" DbType="NVarChar(255)" CanBeNull="true" />
+      <Column Name="County" Type="System.String" DbType="NVarChar(255)" CanBeNull="true" />
+      <Column Name="CountyCode" Type="System.String" DbType="NVarChar(255)" CanBeNull="true" />
+      <Column Name="Region" Type="System.String" DbType="NVarChar(255)" CanBeNull="true" />
+      <Column Name="RegionCode" Type="System.String" DbType="NVarChar(255)" CanBeNull="true" />
+      <Column Name="Country" Type="System.String" DbType="NVarChar(255)" CanBeNull="true" />
+      <Column Name="CountryCode" Type="System.String" DbType="NVarChar(255)" CanBeNull="true" />
+      <Column Name="NHSCode" Type="System.String" DbType="NVarChar(255)" CanBeNull="true" />
+      <Column Name="NHSRegionCode" Type="System.String" DbType="NVarChar(255)" CanBeNull="true" />
+    </Type>
+  </Table>
+</Database>

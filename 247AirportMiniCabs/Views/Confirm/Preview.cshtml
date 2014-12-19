@@ -1,0 +1,262 @@
+﻿@model Job
+@{
+    Layout = null;
+    string stops = Model.Stops;
+
+    DateTime pickupTime = Model.PickupTime;
+    DateTime returnTime = Model.ReturnTime;
+    string journeyType = Model.JourneyType;
+
+    var additionalInfo = Model.AdditionalInfo;
+
+    ViewBag.Title = "Confirming the Job!";
+
+    var isDifferentPassenger = Model.PassengerName != null && !string.IsNullOrWhiteSpace(Model.PassengerName);
+
+    var vehicle = Model.VehicleToken.GetVehicle();
+}
+
+@if (Model != null)
+{
+<style>
+    .latest-job label { position: absolute; }
+
+    .latest-job span {
+        border-bottom: 1px solid #9A9DA0;
+        padding: 5px 20px;
+        font-weight: normal;
+        margin-left: 200px;
+        display: block;
+        border-left: 1px solid #9A9DA0;
+    }
+
+    .latest-job span, .latest-job label { padding: 10px 20px; }
+
+    .latest-job span, .latest-job div:last-child { border-bottom: 0; }
+
+    .latest-job {
+        width: 530px;
+        position: absolute;
+        margin-left: 369px;
+        border: 1px solid #9A9DA0;
+        border-radius: 5px;
+    }
+
+    .latest-job div { border-bottom: 1px solid #9A9DA0; }
+    
+    table {
+        width: 100%;
+    }
+    .outer-table td
+    {
+        padding:5px;
+        border-radius: 3px;
+    }
+    
+    .inner-table td
+    {
+        border:0;
+        padding:0;
+    }
+    .inner-table 
+    {
+        padding-top: 10px;
+    }
+</style>
+
+
+<div class="latest-job" style="margin: 0; width: auto; position: static;">
+    <h2 style="color: black;
+background: white;
+text-shadow: none;
+text-align: center;">
+        @Model.Name
+    </h2>
+    @if(Model.IsConfirmed)
+    {
+        <h2 style="color: white;
+background: #128100;
+text-shadow: none;
+text-align: center;
+border: 1px solid #0C4D0C;">Booking is Confirmed!</h2>
+    }
+    else
+    {
+        <h2 style="color: white;
+background: #810000;
+text-shadow: none;
+text-align: center;
+border: 1px solid #470101;">Booking is NOT Confirmed or Cancelled!</h2>
+    }
+
+    @if (isDifferentPassenger)
+    {
+        <div>
+            <label>Passenger Name</label>
+            <span>@Model.PassengerName</span>
+        </div>
+    }
+    
+  
+    <div>
+        <label>Pick from</label>
+        <span>@Model.PickFrom</span>
+    </div>
+
+    @if (!string.IsNullOrWhiteSpace(stops))
+    {
+        stops = stops.Replace(",", "=====").Replace("-----", ",");
+        var splittedStops = stops.Split(',');
+        int index = 0;
+        
+        <div>
+            <label>Stops</label>
+            <span>
+                @foreach (string t in splittedStops)
+                {
+                    index++;
+                    @:@index: @t.Replace("=====", ",")<br/>
+                }
+            </span>
+        </div>
+    }
+	
+    <div>
+        <label>Drop to</label>
+        <span>@Model.DropTo</span>
+    </div>
+
+    <div>
+        <label>When</label>
+        <span>@pickupTime.ToLongDateString() - @pickupTime.ToLongTimeString() (@pickupTime.ToAgo())</span>
+    </div>
+    
+    @if (journeyType == "Return")
+    {
+        <div>
+            <label>Return time</label>
+            <span>@returnTime.ToLongDateString() - @returnTime.ToLongTimeString() (@returnTime.ToAgo())</span>
+        </div>
+    }
+    
+    @{
+    int babySeats = Model.BabySeats;
+    int childSeats = Model.ChildSeats;
+    }
+    @if (babySeats > 0 || childSeats > 0)
+    {
+        <div>
+            <label>Seats</label>
+            <span>
+                @if (babySeats > 0)
+                { <text>@babySeats baby seats</text>}
+                @if (babySeats > 0 || childSeats > 0)
+                {<text> .... </text>}
+                @if (childSeats > 0)
+                { <text>@childSeats child seats</text>}
+            </span>
+        </div>
+    }
+    
+    @{
+    int luggages = Model.Luggage;
+    int handLag = Model.HandLag;
+    }
+
+    <div>
+        <label>Personal Info</label>
+        <span>
+            @Model.NumberOfPassengers passengers
+            @if (luggages > 0)
+            { <text>.... @luggages suitcases</text>}
+            @if (handLag > 0)
+            { <text>.... @handLag hand luggages</text>}
+        </span>
+    </div>
+    
+    @{ string landLine = Model.LandLine; }
+    <div>
+        <label>Contact Numbers</label>
+        <span>
+            <table class="outer-table">
+                @if (isDifferentPassenger)
+                {<tr><td>Passenger contact number: </td><td>@Model.PassengerCell</td></tr>}
+                <tr>
+                    @if (isDifferentPassenger)
+                    {<td>Customer contact numbers:</td>}
+                    <td>
+                        <table class="inner-table">
+                            <tr><td>Mobile number: @Model.CellNumber</td></tr>
+                            @if (!landLine.IsEmpty())
+                            {<tr><td style="padding-top: 10px;">Landline number: @landLine</td></tr>}
+                        </table>
+                    </td>
+                </tr>
+            </table>
+        </span>
+    </div>
+
+    <div>
+        <label>Vehicle</label>
+        <span>@vehicle.Name</span>
+    </div>
+
+    <div>
+        <label>Fare</label>
+        <span>£@Model.Fare</span>
+    </div>
+    
+   <div>
+            <label>Email</label>
+            <span>@Model.Email</span>
+        </div>
+    
+    <div>
+        <label>Journey Type</label>
+        <span>@Model.JourneyType</span>
+    </div>
+
+    @if (!string.IsNullOrWhiteSpace(additionalInfo))
+    {
+        <div>
+            <label>Special Requirement</label>
+            <span>@additionalInfo</span>
+        </div>
+    }
+    
+      @if (Model.Newspaper != null && vehicle.Name == "Executive")
+      {
+          string newspaper = Model.Newspaper;
+        
+        <div style="background: white;color: black;">
+            <label>Free Service!</label>
+            <span>
+                2 bottles of water
+                @if (!newspaper.IsEmpty())
+                {<text>and @newspaper newspaper!</text>}
+                else
+                {<text> only!</text>}
+             </span>
+        </div>
+      }
+      else if (vehicle.Name == "Gold-Vip")
+      {
+          string newspaper = Model.Newspaper;
+          string drink = Model.Drink;
+        
+        <div style="background: white;color: black;">
+            <label>Free Service!</label>
+                <span>2 bottles of water
+                    @if (!drink.IsEmpty())
+                    {<text>... @drink</text> }
+                    @if (!newspaper.IsEmpty())
+                    {<text> and @newspaper newspaper!</text>}
+                </span>
+        </div>
+      }
+</div>
+}
+else
+{
+    <h2>No such booking found!</h2>
+}

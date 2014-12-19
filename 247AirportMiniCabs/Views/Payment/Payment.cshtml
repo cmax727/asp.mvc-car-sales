@@ -1,0 +1,181 @@
+﻿@model AlinTuriCab.Models.Helper
+@{
+    ViewBag.Title = "Payment";
+    Layout = "~/Views/Shared/_PaymentLayout.cshtml";
+}
+
+@{
+    
+    AlinTuriCab.Models.PaymentModel _model = (AlinTuriCab.Models.PaymentModel)ViewData["_model"];
+}
+<div id="paymentFomr">
+    @using (Html.BeginForm())
+    {
+    <div style="width: 800px; margin: auto">
+        @Html.Hidden("hfFormMode", "PAYMENTFORM")
+        <asp:panel id="pnMessagePanel" runat="server" visible="@_model.pnMessagePanelVisible">
+            @Html.Label("lbMessageLabel", @_model.lbMessageLableText)
+        </asp:panel>
+        <asp:multiview id="PaymentFormMultiView" runat="server" activeviewindex="0">
+            <asp:View ID="PaymentFormView" runat="server">
+                <div class="ContentRight">
+                    <div class="ContentHeader">
+                        Fare Details
+                    </div>
+	                <div class="FormItem">
+	                    <div class="FormLabel">Amount:</div>
+	                    <div class="FormInputTextOnly"></div>
+                        @Html.TextBox("hfAmount", "")GBP
+                        @Html.Hidden("hfCurrencyISOCode", "826")
+                        
+	                </div>
+	                <div class="FormItem">
+	                    <div class="FormLabel">Fare Description:</div>
+	                    <div class="FormInputTextOnly">Heathrow Terminal 1 TW6 1AP, Flight No. ba2424 from Paris</div>
+                        @Html.Hidden("hfOrderID", "Order-1234")
+                        @Html.Hidden("hfOrderDescription", "A Test Order")
+	                </div>
+	                <div class="ContentRight">
+	                    <div class="ContentHeader">
+	                        Card Details
+	                    </div>
+	                </div>
+	                <div class="FormItem">
+	                    <div class="FormLabel">Name On Card:</div>
+	                    <div class="FormInput">
+                        @Html.TextBox("tbCardName", "")
+	                    </div>
+	                </div>
+	                <div class="FormItem">
+	                    <div class="FormLabel">Card Number:</div>
+	                    <div class="FormInput">            
+	                        @Html.TextBox("tbCardNumber", "")
+	                    </div>
+	                </div>
+	                <div class="FormItem">
+	                    <div class="FormLabel">
+	                        Expiry Date:
+	                    </div>
+	                    <div class="FormInput">
+	                        @Html.DropDownList("ddExpiryDateMonth", ((SelectList)ViewData["months"]))
+	                        /
+                            @Html.DropDownList("ddExpiryDateYear", ((SelectList)ViewData["expiryYears"]))
+	                    </div>
+	                </div>
+	                <div class="FormItem">
+	                    <div class="FormLabel">
+	                        Start Date:
+	                    </div>
+	                    <div class="FormInput">
+	                        @Html.DropDownList("ddStartDateMonth", ((SelectList)ViewData["months"]))
+	                        /
+	                        @Html.DropDownList("ddStartDateYear", ((SelectList)ViewData["startYears"]))
+	                    </div>
+	                </div>
+	                <div class="FormItem">
+	                    <div class="FormLabel">Issue Number:</div>
+	                    <div class="FormInput">
+	                         @Html.TextBox("tbIssueNumber", "")
+	                    </div>
+	                </div>
+	                <div class="FormItem">
+	                    <div class="FormLabel">CV2:</div>
+	                    <div class="FormInput">
+	                        @Html.TextBox("tbCV2", "")
+	                    </div>
+	                </div>
+                </div>
+                
+                <div class="ContentRight">
+                    <div class="ContentHeader">
+                        Customer Details
+                    </div>
+	                <div class="FormItem">
+	                    <div class="FormLabel">Address:</div>
+	                    <div class="FormInput">
+	                        @Html.TextBox("tbAddress1", "")
+                            
+	                    </div>
+	                </div>
+	                <div class="FormItem">
+	                    <div class="FormLabel">&nbsp</div>
+	                    <div class="FormInput">
+	                       @Html.TextBox("tbAddress2", "") 
+	                    </div>
+	                </div>
+	                <div class="FormItem">
+	                    <div class="FormLabel">&nbsp</div>
+	                    <div class="FormInput">
+	                        @Html.TextBox("tbAddress3", "") 
+	                    </div>
+	                </div>
+	                <div class="FormItem">
+	                    <div class="FormLabel">&nbsp</div>
+	                    <div class="FormInput">
+	                         @Html.TextBox("tbAddress4", "") 
+	                    </div>
+	                </div>
+	                <div class="FormItem">
+	                    <div class="FormLabel">City:</div>
+	                    <div class="FormInput">
+	                         @Html.TextBox("tbCity", "") 
+	                    </div>
+	                </div>
+	                <div class="FormItem">
+	                    <div class="FormLabel">State:</div>
+	                    <div class="FormInput">
+	                         @Html.TextBox("tbState", "") 
+	                    </div>
+	                </div>
+	                <div class="FormItem">
+	                    <div class="FormLabel">Post Code:</div>
+	                    <div class="FormInput">
+	                       @Html.TextBox("tbPostCode", "")  
+	                    </div>
+	                </div>
+	                <div class="FormItem">
+	                    <div class="FormLabel">
+	                        Country:
+	                    </div>
+	                    <div class="FormInput">
+	                     @Html.DropDownList("ddCountries", ((SelectList)ViewData["ddlCountries"]))
+                            
+	                    </div>
+	                </div>
+	                <div class="FormItem">
+	                    <div class="FormSubmit">
+	                        <input type="submit" id="SubmitButton" value="Submit For Processing" />
+                            
+	                    </div>
+	                </div>
+                </div>
+            </asp:View>
+            <asp:View ID="ThreeDSecureView" runat="server">
+                <iframe ID="ACSFrame" name="ACSFrame" width="800" height="400" frameborder="0" runat="server"></iframe>        
+            </asp:View>
+            <asp:View ID="ResultsView" runat="server">
+                <asp:Panel ID="pnTransactionResultsPanel" runat="server" Visible="@_model.pnTransactionResultPanelVisible.ToString()">
+                    <div class="TransactionResultsItem">
+                        <div class="TransactionResultsLabel">Payment Processor Response:</div>    
+                        <div class="TransactionResultsText"><asp:Label ID="lbGatewayResponse" runat="server">@_model.lbGatewayResponseText</asp:Label></div>
+                    </div>
+                    <asp:Panel ID="pnDuplicateTransactionPanel" runat="server" Visible="@_model.pnDuplicateTransactionVisible.ToString()">
+                        <div style="color:#000;margin-top:10px">
+						    A duplicate transaction means that a transaction with these details
+							has already been processed by the payment provider. The details of
+							the original transaction are given below
+					    </div>
+						<div class="TransactionResultsItem" style="margin-top:10px">
+						    <div class="TransactionResultsLabel">Previous Transaction Response:</div>
+						    <div class="TransactionResultsText"><asp:Label ID="lbPreviousTransactionMessage" runat="server">@_model.lbPreviewTransactionMessageText</asp:Label></div>
+					    </div>
+                    </asp:Panel>
+                    <div style="margin-top:10px">
+                        @*<asp:HyperLink ID="hlProcessAnother" runat="server">Process Another</asp:HyperLink>*@
+                    </div>
+                </asp:Panel>
+            </asp:View>
+        </asp:multiview>
+    </div>
+    }
+</div>

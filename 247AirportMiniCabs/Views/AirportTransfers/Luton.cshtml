@@ -1,0 +1,168 @@
+﻿@{
+    ViewBag.Title = "Luton Airport Transfers";
+}
+
+@Html.Partial("_LeftMenu")
+
+<script>
+    $('a#luton').html('<span class="right-arrow"></span>' + $('a#luton').html()).addClass('selected').parent().removeClass('collapsed').addClass('expanded').find('.collapsed').removeClass('collapsed').addClass('expanded');
+</script>
+
+<div class="client-page">
+
+
+
+<style>
+.list
+{
+    margin:10px;
+    border: 5px solid lightGrey;
+    background: white;
+    border-radius: 9px;
+    box-shadow: inset 0 0 2px black;
+}
+.item label
+{
+    vertical-align:top;
+    width:200px;
+}
+.item label:nth-child(3), .item label:last-child
+{
+    width:80px;
+}
+
+.item label:nth-child(1)
+{
+    width:240px;
+}
+.item
+{
+    padding:5px 10px;
+    border-bottom: 1px solid gray;
+}
+
+.header-item
+{
+    background: #C7BEBE;
+    border: 1px solid gray
+}
+</style>
+
+<h2>
+    <a href="/AirportTransfers/">Airport Transfers</a> // <a href="/AirportTransfers/Luton">Luton Airport Transfers</a>
+</h2>
+
+<h2>Need a Taxi to Luton Airport?</h2>
+
+<p>Are you looking for a taxi to Luton from central London, from a nereby airport or town? Our London cabs are comfortable, always in time and give you a smooth ride to the airport.</p>
+
+<h2>Cab fares to Luton Airport: </h2>
+<p>From Distance Est. time Price</p>
+
+<div class="list">
+    <div class="item header-item">
+        <label>From</label>
+        <label>Distance</label>
+        <label>Estimated</label>
+        <label>Price</label>
+    </div>
+
+    <div class="item">
+        <label>Picadilly (W1)</label>
+            <label>14 miles (22.5 km)</label>
+            <label>35 min</label>
+            <label>£47</label>
+    </div>
+
+    <div class="item">
+        <label>Holborn (WC2)</label>
+            <label>14.7 miles (23.7 km)</label>
+            <label>40 min</label>
+            <label>£52</label>
+    </div>
+
+    <div class="item">
+        <label>Liverpool St (EC2)</label>
+            <label>16.3 miles (26.2 km)</label>
+            <label>45 min</label>
+            <label>£60</label>
+    </div>
+
+    <div class="item">
+        <label>Gatwick-Luton</label>
+            <label>43.3 miles (69.7 km)</label>
+            <label>50 min</label>
+            <label>£85</label>
+    </div>
+
+    <div class="item">
+         <label>Stansted-Luton</label>
+            <label>64.6 miles (103.9 km)</label>
+            <label>1h 10 min</label>
+            <label>£99</label>
+    </div>
+</div>
+
+<p><a href="/book">Book a cab</a> at least 24 hours in advance and receive 5 % discount.</p>
+
+<h2>Note:</h2>
+<p><em>In rush hour (8-10.00, and 16-19.00), transfer times can be way longer.</em></p>
+
+<h2>Need A Taxi From Luton Airport?</h2>
+
+<p>We can pick up you, your friends or family from Luton Airport and bring them to central London, nearby airports (Stansted, Gatwick) or towns.</p>
+
+<p>London Cabs is an outstanding mini cab service, with way lower prices than average black taxis. Book a London MiniCab today.</p>
+
+<h2>Cab fares from Luton Airport:</h2>
+<p>From Distance Est. time Price</p>
+
+<div class="list">
+    <div class="item header-item">
+        <label>From</label>
+        <label>Distance</label>
+        <label>Estimated</label>
+        <label>Price</label>
+    </div>
+
+    <div class="item">
+         <label>Winchmore Hill (N17)</label>
+            <label>25 miles (40.2 km)</label>
+            <label>49 min</label>
+            <label>£59</label>
+    </div>
+
+    <div class="item">
+        <label>Finchley (N3)</label>
+            <label>19.5 miles (31.4 km)</label>
+            <label>36 min</label>
+            <label>£49</label>
+    </div>
+
+    <div class="item">
+        <label>Westminister (SW1)</label>
+            <label>17.3 miles (27.8 km)</label>
+            <label>45 min</label>
+            <label>£48</label>
+    </div>
+
+    <div class="item">
+        <label>Luton to Luton Airport</label>
+            <label>43.3 miles (69.7 km)</label>
+            <label>55 min</label>
+            <label>£79</label>
+    </div>
+
+    <div class="item">
+        <label>Luton to London City Airport</label>
+            <label>64.6 miles (103.9 km)</label>
+            <label>1h 10 min</label>
+            <label>£99</label>
+    </div>
+</div>
+
+<div style="text-align:center;">
+    <a href="/book"><img src="/content/img/dracula/book-journey.png" style="border-radius: 4px;"></a>
+</div>
+
+</div>

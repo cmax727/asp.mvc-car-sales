@@ -1,0 +1,16 @@
+﻿@{
+    ViewBag.Title = "About Dracula Cars";
+}
+
+@Html.Partial("_LeftMenu")
+<script>
+    $('a#about-us').html('<span class="right-arrow"></span>' + $('a#about-us').html()).addClass('selected').parent().removeClass('collapsed').addClass('expanded').find('.collapsed').removeClass('collapsed').addClass('expanded');
+</script>
+
+<div class="client-page">
+    <h2>
+        Company // <a href="/Home/AboutUs">About Us</a>
+    </h2>
+    <h2>About Dracula Cars</h2>
+    <p>Dracula Cars is a London-based mini-cab provide best chauffeurs in London City.</p>
+</div>

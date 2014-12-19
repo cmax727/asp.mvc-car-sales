@@ -1,0 +1,359 @@
+﻿@{
+    Layout = null;
+
+    string fare = ViewBag.Fare;
+    double tempFare;
+    double.TryParse(fare, out tempFare);
+
+    var isClient = LoginHelper.Client != null;
+
+    //---------- Pickup relevant
+    var isPickupPostCode = ViewBag.IsPickupPostCode;
+    var isPickupAirport = ViewBag.IsPickupAirport;
+
+    //---------- Drop-off relevant
+    var isDropoffPostCode = ViewBag.IsDropoffPostCode;
+    var isDropoffAirport = ViewBag.IsDropoffAirport;
+
+    string vehicleToken = ViewBag.VehicleType;
+    
+    var db = new CabDataContext();
+
+    string numberOfPassengers = db.GetOptions("number-of-passengers", vehicleToken);
+    string suitcases = db.GetOptions("luggages", vehicleToken);
+
+    string handLag = db.GetOptions("hand-lag", vehicleToken);
+
+    string stops = ViewBag.Stops;
+
+    var currentDate = UKTime.Now;
+}
+
+        <div style="margin-left:20px;">
+            <label>Current Date:</label>
+            <input type="text" value="@currentDate.ToString("dd/MM/yyyy")" readonly>
+
+            <label style="margin-left:138px;">Time:</label>
+            <input type="text" value="@currentDate.ToString("H:mm:ss")" readonly>
+        </div>
+
+
+@Html.Partial("_FinalizeBookingCSS")
+
+@Html.Partial("_offers")
+
+
+
+    <div class="smart-panel edit-panel additional">
+        
+        <h2 class="threeD-background">Required info..</h2>
+        @*******************************************************@
+        @**************** Pickup Locations ***************@
+        @*******************************************************@
+	
+        <table id="required-info-table">
+            <tr>
+                <td>
+                    <div class="from-location">
+                        @if (isPickupPostCode)
+                        {
+                            <div>
+                                <label for="from-postcode" class="required" style="vertical-align:top;">From Postcode</label>
+                                <input type="text" id="from-postcode" value="@ViewBag.PickFrom" disabled>
+                            </div>
+
+                            <hr />
+
+                            <div>
+                                <label for="from-door-no" class="required">From Door No.</label>
+                                <input type="text" id="from-door-no">
+                            </div>
+                        }
+                        else
+                        {
+                            <div>
+                                <label for="from-address" style="vertical-align: top;" class="required">From @ViewBag.FromType</label>
+                                <textarea type="text" id="from-address" style="height: 80px;width: 150px;" disabled>@ViewBag.PickFrom</textarea>
+                            </div>
+                        }
+		
+                        @if (isPickupAirport)
+                        {
+                            <hr />
+
+                            <div>
+                                <label for="flight-from" class="required">Flight from</label>
+                                <input type="text" id="flight-from">
+                            </div>
+
+                            <hr />
+
+                            <div>
+                                <label for="flight-from-number" class="required">Flight No.</label>
+                                <input type="text" id="flight-from-number">
+                            </div>
+                        }
+                        
+                        @if (isPickupPostCode || ViewBag.FromType == "Address")
+                        {
+                            <hr />
+                            <div>
+                                <label for="from-building">Building Name</label>
+                                <input type="text" id="from-building">
+                            </div>
+                        }
+                    </div>
+                </td>
+			
+                @*******************************************************@
+                @**************** Drop-off Locations ***************@
+                @*******************************************************@
+			
+
+                <td>
+                    <div class="to-location">
+                        @if (isDropoffPostCode)
+                        {
+                            <div>
+                                <label for="to-postcode" class="required" style="vertical-align:top;">To Postcode</label>
+                                <input type="text" id="to-postcode" value="@ViewBag.DropTo" disabled>
+                            </div>
+
+                            <hr />
+
+                            <div>
+                                <label for="to-door-no" class="required">To Door No.</label>
+                                <input type="text" id="to-door-no">
+                            </div>
+                        }
+                        else
+                        {
+                            <div>
+                                <label for="to-address" style="vertical-align: top;" class="required">To @ViewBag.ToType</label>
+                                <textarea type="text" id="to-address" style="height: 80px;width: 150px;" disabled>@ViewBag.DropTo</textarea>
+                            </div>
+                        }
+		
+                        @if (isDropoffAirport)
+                        {
+                            <hr />
+
+                            <div>
+                                <label for="flight-to" class="required">Flight to</label>
+                                <input type="text" id="flight-to">
+                            </div>
+
+                            <hr />
+
+                            <div>
+                                <label for="flight-to-number" class="required">Flight No.</label>
+                                <input type="text" id="flight-to-number">
+                            </div>
+                        }
+                        @if (isDropoffPostCode || ViewBag.ToType == "Address")
+                        {
+                            <hr />
+                            <div>
+                                <label for="to-building">Building Name</label>
+                                <input type="text" id="to-building">
+                            </div>
+                        }
+                    </div>
+                </td>
+            </tr>
+        </table>
+        
+        <table>
+            <tr>
+                <td>
+                    <div>
+                        <label for="pickup-date" class="required">Pickup Date</label>
+                        <input type="text" id="pickup-date" readonly>
+                    </div>
+                </td>
+                
+                <td>
+                    <div>
+                        <label for="pickup-hours" class="required">Pickup Time</label>
+                        <span>Hr:</span><input type="text" id="pickup-hours" class="hours-minutes" readonly>
+                        <span>Min:</span><input type="text" id="pickup-minutes" class="hours-minutes" readonly>
+                    </div>
+                </td>
+            </tr>
+            
+            <tr>
+                <td>
+                    @if (!stops.IsEmpty())
+                    {
+                        stops = stops.Replace(",", "=====").Replace("-----", ",");
+                        var splittedStops = stops.Split(',');
+                        int index = 0;
+            
+                        <div>
+                            @foreach (string t in splittedStops)
+                            {
+                                index++;
+                                <label>Stop No. @index</label><input type="text" disabled value="@t.Replace("=====", ",")" style="margin-top: 2px;" /><br />
+                            }
+                        </div>
+                    }
+                </td>
+                
+                <td>
+                    
+                </td>
+            </tr>
+            
+            <tr>
+                <td>
+                    <div>
+                        <label for="customer-name" class="required">Full Name</label>
+                        <input id="customer-name" type="text" value="@(isClient ? LoginHelper.Client.Name : "")">
+                    </div>
+
+                    <hr />
+
+                    <div>
+                        <label for="customer-cell-number" class="required">Mobile Number</label>
+                        <select id="customer-cell-number-dialing-code"></select>
+                        <input id="customer-cell-number" type="text" value="@(isClient ? LoginHelper.Client.MobilePhone : "")" style="width: 100px;">
+                    </div>
+	
+                    <hr />
+
+                    <div>
+                        <label for="landline-number">Land Line Number</label>
+                        <select id="customer-landline-dialing-code"></select>
+                        <input id="landline-number" type="text" value="@(isClient ? LoginHelper.Client.HomePhone : "")" style="width: 100px;">
+                    </div>
+
+                    <hr />
+
+                    <div>
+                        <label for="customer-email" class="required">Email</label>
+                        <input id="customer-email" type="text" value="@(isClient ? LoginHelper.Client.Email : "")">
+                    </div>
+                </td>
+                
+                <td>
+                    <div class="additional-info-container">
+                        <div id="note-box" style="margin-top: 33px;text-shadow: none;position: absolute;width: 258px;margin-left: 8px;padding: 11px;line-height: 1.5;">Let us know if you need any extra time for airport pickup or anything else you want to tell us! --- Enter your special requirements too!</div>
+                        <label for="additional-info">Special Requirement</label>
+                        <textarea id="additional-info"></textarea>
+                    </div>
+                    
+                    <script>
+                        $('#note-box').click(function () {
+                            $(this).hide();
+                            $('#additional-info').focus();
+                        });
+                        $('#additional-info').blur(function () {
+                            if (!$(this).val().length) $('#note-box').show();
+                        }).focus(function () {
+                            $('#note-box').hide();
+                        });
+                    </script>
+                    
+                    <div class="select-container">
+                        <div>
+                            <img src="/content/img/passengers.png" style="margin-left: 18px;">
+                            <select id="number-of-passengers" title="Number of Passengers">@Html.Raw(numberOfPassengers)</select>
+                        </div>
+                        <div>
+                            <img src="/content/img/luggages.png">
+                            <select id="luggages" title="Number of Luggages">@Html.Raw(suitcases)</select>
+                        </div>
+                        <div>
+                            <img src="/content/img/HandLag.png">
+                            <select id="hand-lag" title="Number of HandLags">@Html.Raw(handLag)</select>
+                        </div>
+
+                        <div>
+                            <img src="/content/img/baby-seats.png">
+                            <select id="baby-seats" title="Number of Baby Seats">@Html.Raw(db.GetOptions("baby-seats", vehicleToken))</select>
+                        </div>
+
+                        <div>
+                            <img src="/content/img/child-seats.png">
+                            <select id="child-seats" title="Number of Child Seats">@Html.Raw(db.GetOptions("child-seats", vehicleToken))</select>
+                        </div>
+                    </div>
+                </td>
+            </tr>
+            
+            @{ string journeyType = ViewBag.JourneyType; }
+
+                    @if (journeyType == "Return")
+                    {
+                        <tr>
+                            <td>
+                                <div>
+                                    <label for="return-date" class="required">Return Date</label>
+                                    <input type="text" id="return-date" readonly>
+                                </div>
+                            </td>
+                            
+                            <td>
+                                <div>
+                                    <label for="return-hours" class="required">Return Time</label>
+                                    <span>Hr:</span><input type="text" id="return-hours" class="hours-minutes" readonly>
+                                     <span>Min:</span><input type="text" id="return-minutes" class="hours-minutes" readonly>
+                                </div>
+                            </td>
+                        </tr>
+                    }
+                    
+            <tr>
+                
+                <td>
+                    <div class="are-you-passenger">
+                        <label for="are-you-passenger">Are you the passenger?</label>
+                        <input type="hidden" id="are-you-passenger">
+
+                        <span id="yes-passenger">Yes</span>
+                        <span id="no-passenger">No</span>
+				
+                        <div id="i-am-passenger" style="padding-left: 0; display: none;">
+                
+                            <div>
+                                <label for="passenger-name" class="required">Passenger Name</label>
+                                <input id="passenger-name" type="text">
+                            </div>
+
+                            <hr />
+
+                            <div>
+                                <label for="passenger-cell-number" class="required">Contact Number</label>
+                                <select id="passenger-cell-number-dialing-code"></select>
+                                <input id="passenger-cell-number" type="text" style="width:100px;">
+                            </div>
+
+                        </div>
+                    </div>
+                </td>
+                
+                <td>
+                    <div>
+                        <label for="journey-type">Journey Type</label>
+                        <select id="journey-type">
+                            <option>One Way</option>
+                            <option>Return</option>
+                        </select>
+                    </div>
+                </td>
+            </tr>
+        </table>
+    </div>
+	
+    
+
+    <div class="finalize-booking smart-panel">
+        <h2 style="text-shadow: none;font-size: 20px;">Proceed to final stage!</h2>
+        <p style="margin: 10px; font-size: 13px;padding: 0;line-height: 1;">Now, click to preview your job...then finalize it!</p>
+    </div>
+
+    <input id="vehicle-type" type="hidden" value="@vehicleToken">
+    <input id="distance" type="hidden" value="@ViewBag.DistancePreview">
+    <input type=hidden id="fare" value="@ViewBag.Fare">
+
+@Html.Partial("_FinalizeBookingScript")

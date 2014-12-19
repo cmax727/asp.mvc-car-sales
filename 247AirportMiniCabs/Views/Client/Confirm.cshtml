@@ -1,0 +1,72 @@
+﻿@model CabDataContext
+@{
+    ViewBag.Title = "Confirm your account";
+    string token = ViewBag.Token;
+    Client client = Model.Clients.FirstOrDefault(c => c.ConfirmationToken == token);
+}
+
+@if (client != null && !client.IsConfirmed)
+{
+    var jobs = Model.Jobs.Where(j => j.Email == client.Email || j.CellNumber == client.MobilePhone || j.CellNumber == client.HomePhone);
+    @Html.AntiForgeryToken()
+
+    <div class="login-section" style="display:block;margin:50px 240px;position:absolute;">
+    <h2 style="border-radius: 50px;">Confirm your account, please!</h2>
+    <div style="margin-top: 10px;">
+        <label for="confirmationToken">
+            Confirmation token</label>
+        <input id="confirmationToken" type="text" value="@client.ConfirmationToken" disabled>
+    </div>
+    <div>
+        <label for="password">
+            Password</label>
+        <input id="password" type="password">
+    </div>
+
+    <div id="verify" class="blue-button signup-button" style="margin: 13px;margin-left: 185px;">Confirm now!</div>
+    </div>
+    
+    <script>
+        $('#password').focus();
+        $('#verify').click(function () {
+            var elem = getEmptyElement('confirmationToken, password');
+            if (elem !== true) return;
+
+            $.post('/Client/Confirm', { confirmationToken: $('#confirmationToken').val(), password: $('#password').val(), __RequestVerificationToken: $('[name="__RequestVerificationToken"]').val() },
+                function (response) {
+                    if (response != false) {
+                        loadSpinner('html');
+                        alert('Hi @client.Name,\n\nYour account has been confirmed successfully.\n\nThanks for using our service.');
+
+                        location = '/client/';
+                    }
+                    else alert('Something went wrong.\n\nPlease make sure you entered valid info in following fields:\n1. Confirmation Token\n2. Password');
+                });
+        });
+    </script>
+ 
+    <div style="position: absolute;width: 600px;margin-top: 280px;margin-left: 180px;border-radius: 7px;box-shadow: 0 0 5px gray, 0 0 15px gray, 0 0 55px gray, 0 0 25px gray, 0 0 35px gray, 0 0 45px gray;">
+        @if (!jobs.Any())
+        {
+            <h2 style="border-top: 1px solid #9A9DA0; margin-top: 20px; text-align:center;">Bonus offer for you!</h2>
+            <p style="font-size: 20px;text-align: center;border-bottom: 1px solid #9A9DA0;">confirm your account and pay 5% less amount for first job!</p>
+            <div style="text-align: left; font-size: 17px; line-height: 1.6;padding: 20px;">You'll get 5% discount for first job. Afterwards, if you book 10 jobs with us; you'll get 10% percent bonus for each 11th job.</div>
+        }
+        else
+        {
+            <h2 style="border-top: 1px solid #9A9DA0; margin-top: 20px; text-align:center;">Advantages!</h2>
+            <div style="text-align: left; font-size: 17px; line-height: 1.6;padding: 20px;">You'll get 5% discount for first job. Afterwards, if you book 10 jobs with us; you'll get 10% percent bonus for each 11th job.</div>
+        }
+    </div>
+}
+
+@if (client != null && client.IsConfirmed)
+{
+    <div style="position: absolute;width: 600px;margin-top: 80px;margin-left: 180px;border-radius: 7px;box-shadow: 0 0 5px gray, 0 0 15px gray, 0 0 55px gray, 0 0 25px gray, 0 0 35px gray, 0 0 45px gray;">
+            <h2 style="border-top: 1px solid #9A9DA0; margin-top: 20px; text-align:center;">Dear @client.Name!</h2>
+            <p style="font-size: 20px;text-align: center;border-bottom: 1px solid #9A9DA0;">You already confirmed your account!</p>
+            <div style="text-align: left; font-size: 17px; line-height: 1.6;padding: 20px;">
+                Please <a href="/">click here</a> to goto homepage or book a <a href="/Main/MakeABooking">new job</a> with us!
+            </div>
+    </div>
+}

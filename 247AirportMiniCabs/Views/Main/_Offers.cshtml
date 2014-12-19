@@ -1,0 +1,127 @@
+﻿@{
+    string vehicleToken = ViewBag.VehicleType;
+
+    var db = new CabDataContext();
+
+    Vehicle vehicle = vehicleToken.GetVehicle(db);
+}
+
+@if (vehicle.Name == "Executive")
+    {
+        <style>
+            .div-panel div { padding: 10px 20px;}
+            .newspaper, .bottle-of-water
+            {
+                background-position: 340px center;
+            }
+            .newspaper
+            {
+                background-image: url(/content/img/Newspaper.png);
+            }
+            .bottle-of-water
+            {
+                background-image: url(/content/img/Bottle-of-Water.png);
+            }
+        </style>
+    <div class="smart-panel edit-panel div-panel">
+        <h2 class="threeD-background">Enjoy our free service for Exective cars!</h2>
+        <div class="bottle-of-water">
+            <label for="bottle-of-water">Bottle of Water</label>
+            <input id="bottle-of-water" type="text" readonly value="2">
+        </div>
+        
+        <div class="newspaper">
+            <label for="newspaper">Today Newspaper</label>
+            <select id="newspaper">
+                <option>Sun</option>
+                <option>Independent</option>
+                <option>Gardian</option>
+                <option>Do not need</option>
+                <option>Other</option>
+            </select>
+            <input type="text" id="other-newspaper" style="display:none;">
+        </div>
+    </div>
+    <script>
+        $('#newspaper').change(function () {
+            var value = $(this).val();
+            $('#other-newspaper').val('');
+            if (value == "Other") {
+                $(this).hide();
+                $('#other-newspaper').show().focus();
+            }
+        });
+    </script>
+    }
+else if (vehicle.Name == "Gold-Vip")
+{
+        <style>
+            .div-panel div { padding: 10px 20px;}
+            .newspaper, .drink
+            {
+                background-position: 410px center;
+            }
+            .newspaper
+            {
+                background-image: url(/content/img/Newspaper.png);
+            }
+            .drink
+            {
+                background-image: url(/content/img/drink.png);
+            }
+        </style>
+    <div class="smart-panel edit-panel div-panel">
+        <h2 class="threeD-background">Enjoy our free service for Gold-Vip cars!</h2>
+        
+        <div class="bottle-of-water" style="position: absolute;margin-left: 570px;background-position: right center;background-image: url(/content/img/Bottle-of-Water.png);width: 208px;">
+            <label for="bottle-of-water" style="width: auto;">Bottle of Water</label>
+            <input id="bottle-of-water" type="text" readonly="" value="2" style="width: 17px;text-align: center;">
+        </div>
+
+        <div class="drink">
+            <label for="drink">Select Drink</label>
+            <select id="drink">
+                <option>Cold Drinks</option>
+                <option>Hot Drinks</option>
+                <option>Can of Pepsi</option>
+                <option>Coca Cola</option>
+                <option>Diet Coke</option>
+                <option>Fanta</option>
+                <option>Do not need</option>
+                <option>Other</option>
+            </select>
+            <input type="text" id="other-drink" style="display:none;">
+        </div>
+        
+        <div class="newspaper">
+            <label for="newspaper">Today Newspaper</label>
+            <select id="newspaper">
+                <option>Sun</option>
+                <option>Independent</option>
+                <option>Gardian</option>
+                <option>Do not need</option>
+                <option>Other</option>
+            </select>
+            <input type="text" id="other-newspaper" style="display:none;">
+        </div>
+    </div>
+    <script>
+        $('#newspaper').change(function () {
+            var value = $(this).val();
+            $('#other-newspaper').val('');
+            if (value == "Other") {
+                $(this).hide();
+                $('#other-newspaper').show().focus();
+            }
+        });
+
+        $('#drink').change(function () {
+            var value = $(this).val();
+            $('#other-drink').val('');
+            if (value == "Other") {
+                $(this).hide();
+                $('#other-drink').show().focus();
+            }
+        });
+    </script>
+}

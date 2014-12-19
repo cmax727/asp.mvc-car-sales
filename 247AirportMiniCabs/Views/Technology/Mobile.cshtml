@@ -1,0 +1,15 @@
+﻿@{
+    ViewBag.Title = "Dracula Cars | Mobile Technology";
+}
+
+@Html.Partial("_LeftMenu")
+<script>
+    $('a#mobile').html('<span class="right-arrow"></span>' + $('a#mobile').html()).addClass('selected').parent().removeClass('collapsed').addClass('expanded').find('.collapsed').removeClass('collapsed').addClass('expanded');
+</script>
+
+<div class="client-page">
+    <h2>
+        <a href="/Technology/">Technology</a> // <a href="/Technology/Mobile">Mobile</a>
+    </h2>
+    <h2>Mobile Technology is under construction!</h2>
+</div>

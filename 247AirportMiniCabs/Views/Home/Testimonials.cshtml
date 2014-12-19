@@ -1,0 +1,16 @@
+﻿@{
+    ViewBag.Title = "Testimonials";
+}
+
+@Html.Partial("_LeftMenu")
+<script>
+    $('a#testimonials').html('<span class="right-arrow"></span>' + $('a#testimonials').html()).addClass('selected').parent().removeClass('collapsed').addClass('expanded').find('.collapsed').removeClass('collapsed').addClass('expanded');
+</script>
+
+<div class="client-page">
+    <h2>
+        Home // <a href="/Home/Testimonials">Testimonials</a>
+    </h2>
+    <h2>Testimonials</h2>
+    <p>This page is under construction!</p>
+</div>

@@ -1,0 +1,151 @@
+﻿<style>
+.add-new-stop, .remove-stop {
+       position: absolute;
+padding: 5px 10px!important;
+background: rgba(196, 20, 20, 0.23);
+font-size: 22px;
+margin-left: 325px;
+margin-top: 0px;
+border: 1px solid #D13C28;
+border-radius: 1px;
+cursor: pointer;
+color: #EBE0DD;
+    }
+
+    .add-new-stop:hover, .remove-stop:hover { background: rgba(196, 20, 20, 0.53); }
+
+    .add-new-stop:active, .remove-stop:active { background: rgba(196, 20, 20, 0.83); }
+
+    .remove-stop {
+        position: static;
+        margin: 0 5px;
+        font-size: 15px;
+        padding: 1px 7px!important;
+    }
+    
+    
+    
+    
+    
+    .diversions-and-stops span {
+        display: inline-block;
+        padding: 5px 10px;
+        cursor:pointer;
+    }
+    
+    #yes {
+        background-color: rgba(43, 206, 43, 0.48);
+    }
+    #yes:hover {
+        background-color: rgba(43, 206, 43, 0.68);
+    }
+    #yes:active {
+        background-color: rgba(43, 206, 43, 0.88);
+    }
+    
+    #no {
+        background-color: rgba(247, 126, 126, 0.32);
+        margin-left: -4px;
+    }
+    #no:hover {
+        background-color: rgba(247, 126, 126, 0.52);
+    }
+    #no:active {
+        background-color: rgba(247, 126, 126, 0.82);
+    }
+    .selected
+    {
+        background-repeat: no-repeat;
+        padding-left: 21px!important;
+        background-position: 2px center;
+        background-image: url(/content/images/checkbox-32.png);
+    }
+</style>
+
+<div class="diversions-and-stops">
+            <label for="stops" style="display:inline;">Diversions & Stops</label>
+            
+            <span id="yes" class="tip" title="Any via stop?">Yes</span>
+            <span id="no" class="selected tip" title="No via stop!">No</span>
+				
+            <div id="enter-stops" style="padding-left: 0; display: none;">
+                <input type="hidden" id="hidden-stops">
+                <div id="prev-stops" style="padding: 0;"></div>
+
+                <div class="add-new-stop tip" title="Add a via stop">+</div>
+                <div style="padding: 0;">
+                    <select id="stops-type" style="vertical-align: top;">
+                        <option>Post code</option>
+                        <option>Airport</option>
+                        <option>Address</option>
+                        <option>Hotel</option>
+                        <option>Train Station</option>
+                        <option>Famous Place</option>
+                    </select>
+					
+                    <input type="text" id="input-stops" class="tip" title="Enter via stop postcode">
+                    <hr id="postcodes-hr" style="display:none;" />
+                    <select id="postcodes" style="display:none;width:180px;margin-left: 164px;" class="tip" title="Select via stop postcode."></select>
+
+                    <textarea id="textarea-stops" style="display:none;width: 148px;height: 50px;vertical-align: bottom;" class="tip" title="Enter via stop address."></textarea>
+                    <select id="select-stops" style="display: none;" class="options-list"></select>
+                </div>
+
+            </div>
+        </div>
+
+<script>
+    $('.diversions-and-stops span').click(function () {
+        $('.diversions-and-stops span').removeClass('selected');
+        $(this).addClass('selected');
+
+        var value = $(this).html();
+        $('#are-you-passenger').val(value);
+
+        if (value == 'No') $('#enter-stops').slideUp();
+        else $('#enter-stops').slideDown();
+    });
+
+
+    $('.add-new-stop').click(function () {
+        var input = $('#input-stops');
+        if ($(input).css('display') == 'none') {
+            if ($('#select-stops').css('display') != 'none')
+                input = $('#select-stops');
+            else
+                input = $('#textarea-stops');
+        }
+
+        if (!$(input).val().length) {
+            highlight($(input).focus());
+            return;
+        }
+
+        var prevStops = $('#prev-stops')[0];
+
+        var value = $(input).val();
+
+        prevStops.innerHTML += '<div><span class="remove-stop">x</span>' + value + '</div>';
+
+        var hiddenStops = document.getElementById('hidden-stops');
+
+        if (hiddenStops.value.length) hiddenStops.value += '-----' + value;
+        else hiddenStops.value = value;
+
+        $('.remove-stop').click(function () {
+            var stops = $('#hidden-stops').val(),
+                    remove = $(this).parent().text();
+
+            remove = remove.substr(1, remove.length - 1);
+
+            stops = stops.replace('-----' + remove, '').replace(remove, '').replace('----------', '-----');
+            if (stops.indexOf('-----') == 0) stops = stops.substr(5, stops.length - 1);
+
+            $('#hidden-stops').val(stops);
+
+            this.parentNode.parentNode.removeChild(this.parentNode);
+        });
+
+        $(input).val('').focus();
+    });
+    </script>

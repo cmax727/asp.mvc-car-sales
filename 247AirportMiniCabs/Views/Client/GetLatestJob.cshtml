@@ -1,0 +1,148 @@
+﻿@model CabDataContext
+@{
+    Layout = null;
+    
+    var client = LoginHelper.Client;
+    var clientJobs = Model.Jobs.Where(j => j.Email == client.Email || j.CellNumber == client.MobilePhone || j.CellNumber == client.HomePhone);
+    var latestJob = clientJobs.Where(j => j.PickupTime > UKTime.Now && j.Status != "Completed").OrderByDescending(j => j.ID).FirstOrDefault();
+}
+
+ @if (latestJob == null)
+ { 
+     <h2 style="font-size: 15px;">Welcome Sir. You've not posted a single job in our site. Are you feeling trouble?<br />→ <a href="/contact-us.html">We Love to help you</a><br />→ <a href="/book">Book your first job with us!</a></h2> 
+ }
+else
+{
+    var token = latestJob.Token;
+
+    <div class="latest-job" style="display:none;">
+        @if (latestJob.PickupTime > UKTime.Now)
+        {
+         <div id="@token" style="float: right;">
+             <div id="edit-job" class="edit-job">Edit</div>
+             <div id="delete-job" class="delete-button">Cancel Booking</div>
+         </div>
+     
+          <script>
+              $('#back').click(function () {
+                  prevPage && $('.jobs-history').html(prevPage) && clientJobsTRClicks();
+              });
+
+              $('.latest-job #edit-job').click(function () {
+                  loadSpinner(this);
+                  showEditJobPanel('@token');
+              });
+
+              $('.latest-job #delete-job').click(function () {
+                  $.Zebra_Dialog('Are you sure you want to cancel your booking?', {
+                      'type': 'question',
+                      'buttons': ['Yes, Cancel Booking', 'No'],
+                      'onClose': function (caption) {
+                          if (caption == 'Yes, Cancel Booking') {
+                              $.post('/Client/CancelBooking', { id: '@token' }, function (response) {
+                                  if (response == true) {
+
+                                      $.Zebra_Dialog('We\'ll take final cancel booking action in a few minutes.<br /><br />We\'ll inform you via email when your booking will be cancelled. Thanks.', {
+                                          'type': 'information'
+                                      });
+                                  }
+                              });
+                          }
+                      }
+                  });
+              });
+    </script>
+        }
+        
+        <h2>Your latest job!</h2>
+
+        @if (!latestJob.PassengerName.IsEmpty())
+        {
+            <div accesskey="passenger-name">
+                <label>Passenger name</label>
+                <span>@latestJob.PassengerName</span>
+            </div>
+                
+            <div accesskey="passenger-cell">
+                <label>Passenger Mobile No.</label>
+                <span>@latestJob.PassengerCell</span>
+            </div>
+        }
+
+        <div accesskey="pick-from">
+            <label>Pick from</label>
+            <span>@latestJob.PickFrom</span>
+        </div>
+
+        @if (!latestJob.Stops.IsEmpty())
+        {
+            var stops = latestJob.Stops.Replace(",", "=====").Replace("-----", ",");
+            var splittedStops = stops.Split(',');
+            int index = 0;
+        
+            <div>
+                <label>Stops</label>
+                <span>
+                    @foreach (string t in splittedStops)
+                    {
+                        index++;
+                        @:@index: @t.Replace("=====", ",")<br/>
+                    }
+                </span>
+            </div>
+        }
+
+        <div accesskey="drop-to">
+            <label>Drop to</label>
+            <span>@latestJob.DropTo</span>
+        </div>
+
+        <div accesskey="pickup-time">
+            <label>Pickup time</label>
+            <span>@latestJob.PickupTime.ToAgo() (@latestJob.PickupTime.ToLongDateString() - @latestJob.PickupTime.ToLongTimeString())</span>
+        </div>
+
+        <div accesskey="fare">
+            <label>Fare</label>
+            <span>£@latestJob.Fare</span>
+        </div>
+
+        <div>
+            <label>Vehicle</label>
+            <span>@latestJob.VehicleToken.GetVehicle().Name</span>
+        </div>
+
+        <div>
+            <label>Journey type</label>
+            @if (latestJob.JourneyType == "Return")
+            {
+                <span>Wait & Return → @latestJob.ReturnTime.ToAgo() ( @latestJob.ReturnTime.ToLongDateString() : @latestJob.ReturnTime.ToLongTimeString() )</span>
+            }
+            else
+            { <span>@latestJob.JourneyType</span> }
+        </div>
+        
+        <div>
+            <label>Status</label>
+            <span>@latestJob.Status</span>
+        </div>
+        
+        @if (!latestJob.DriverToken.IsEmpty())
+        {
+            var driver = Model.Drivers.FirstOrDefault(d => d.Token == latestJob.DriverToken);
+            if (driver != null)
+            {
+                <div>
+                    <label>Driver</label>
+                    <span>@driver.CallSignAbbr@driver.CallSignNumber ( @driver.FullName, @driver.PhoneNumber )</span>
+                </div>
+
+                <div>
+                    <label>Car</label>
+                    <span>@driver.VehicleType ( Registration No. @driver.VehicleRegistrationNumber )</span>
+                </div>
+            }
+        }
+
+    </div>
+}

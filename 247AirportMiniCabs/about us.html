@@ -1,0 +1,248 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1" />
+<title>About us</title>
+<link href="style.css" rel="stylesheet" type="text/css" />
+<!--- jquery banner-slider !--->
+<link rel="stylesheet" href="css/global.css">
+	
+	<script src="js/jquery.min.js"></script>
+	<script src="js/slides.min.jquery.js"></script>
+	<script>
+		$(function(){
+			$('#slides').slides({
+				preload: true,
+				preloadImage: 'img/loading.gif',
+				play: 5000,
+				pause: 2500,
+				hoverPause: true,
+				animationStart: function(current){
+					$('.caption').animate({
+						bottom:-35
+					},100);
+					if (window.console && console.log) {
+						// example return of current slide number
+						console.log('animationStart on slide: ', current);
+					};
+				},
+				animationComplete: function(current){
+					$('.caption').animate({
+						bottom:0
+					},200);
+					if (window.console && console.log) {
+						// example return of current slide number
+						console.log('animationComplete on slide: ', current);
+					};
+				},
+				slidesLoaded: function() {
+					$('.caption').animate({
+						bottom:0
+					},200);
+				}
+			});
+		});
+	</script>
+<!--- jquery banner-slider close !--->
+</head>
+
+<body>
+
+<div class="mainheader"> 
+<div class="header-contant">
+
+
+	<div class="logo"> <a href="index.html"> <img src="images/logo.png" /> </a> </div> <!--- logo close !---> 
+		<div class="header-right">  <div class="header-right-text"> 
++44(0)207205677
+
+		 </div>	<img src="images/phone.png" /> <img src="images/visa.png" /> 
+		
+			 </div> <!--- header-right close !---> 
+ </div><!--- header-contant close !---> 
+</div> <!--- mainheader close !---> 
+<div class="clear"> </div>
+
+<div id="body-navigation"> 
+<div class="navigtion">
+<div class="mainnavgation"> 
+		
+		<div id="cssmenu">
+		<ul>
+		<li class="active"><a href='index.html'><span>Home</span></a></li> 
+		<li><a href="vehicles.html"><span>Vehicles</span></a></li>
+		
+		
+		<li><a href="srevices.html"><span>Services</span></a></li>
+		<li><a href="passenger-services.html"> <span>Passenger Services</span></a></li>
+	
+	
+		<li><a href="online-booking.html"><span>Bookings & Charges</span></a></li>
+	
+		<li><a href="t&c.html"><span>  Terms of trading </span></a></li>
+        		<li><a href="about us.html"><span>About Us</span></a></li>
+		<li><a href="contact.html"><span>Contact Us</span></a></li>
+		</ul>
+		</div> <!--- cssmenu close !---> 
+		
+</div> <!--- mainnavgation close !--->  
+</div> <!--- navigtion close !---> 
+<div class="clear"> </div>
+</div> <!--- body-navigation close !--->
+
+
+
+<div id="body-banner"> 
+<div class="banner"> 
+ <div class="mainbanner">
+ 
+		<div class="booking">
+		<form> 
+		<div class="box">
+		
+ 
+  		  <div class="drop">Pick-Up Point :</div> 
+		<select  class="input_text"> <option>  Gatwick </option>
+		<option>Erminal North and South  </option>
+		<option> Luton  </option>
+		<option> Stansted  </option>
+		<option> City Airport.  </option>
+		
+		 </select> 
+		 <br />
+		 <select  class="input_text"> <option>  Airport  </option>
+		<option> Airport  </option>
+		<option> Airport  </option>
+		<option> Airport  </option>
+		<option> Airport  </option>
+		<option> Airport  </option>
+		 </select> 
+		               
+		            
+		           
+		</label>  <div class="drop">Drop off Point: </div> 
+		  <select  class="input_text"> <option>  Airport  </option>
+		<option> Airport  </option>
+		<option> Airport  </option>
+		<option> Airport  </option>
+		<option> Airport  </option>
+		<option> Airport  </option>
+		 </select> 
+		                  
+		 <textarea class="message" name="feedback" id="feedback"></textarea>                 
+		 <input type="button" class="button" value="Submit Form" /> 
+		 </label> 
+		 </div>     
+		 </form>
+		
+		</div> <!--- booking close !--->
+		<div class="banner-right">
+		<!--- banner!--->
+		<div id="container">
+		<div id="example">
+		
+			<div id="slides">
+				<div class="slides_container">
+					<div class="slide">
+						<a href="#"><img src="img/6.jpg" width="636" height="306"  alt="Slide 1"></a>
+						
+					</div>
+					<div class="slide">
+						<a href="#"><img src="img/1.jpg" width="636" height="306"  alt="Slide 2"></a>
+						
+					</div>
+					
+				</div>
+				<a href="#" class="prev"><img src="img/arrow-prev.png" width="24" height="43" alt="Arrow Prev"></a>
+				<a href="#" class="next"><img src="img/arrow-next.png" width="24" height="43" alt="Arrow Next"></a>
+			</div>
+			
+		</div>
+		<!--- banner close!--->
+		
+		
+		</div> <!--- banner-right close !--->  
+ </div> <!--- mainbanner close !--->
+</div> <!--- banner close !--->
+  <div class="clear"> </div>
+</div> <!--- body-banner close !--->
+   
+<div id="body-contant"> 
+ <div class="contant">
+ <div class="Maincontant">
+ 		
+		<div class="welcome-box">
+		<h1>About Us </h1>
+		<P> 
+
+<strong>   Airport M iniCabs247 its a London based company. We are a </strong>  professional private hire minicab company specialized in transfers to and from  all London Airports. Our services are based on a  prompt and reliable minicab service. We combine a top class service with highly competitive prices to ensure we remain your  only  choice when it comes to book airport transfers.
+  </P> 
+
+<P>Our core is to make sure that we offer excellent customer service and  give you a high value for money  especially if you compare us to Heathrow Taxis, Gatwick Taxis, Stansted Taxis, Luton Taxis and other pre-booked airport transfers companies. </P> 
+
+<P> We choose very carefully our drivers because we value our customers. </P> 
+<P> 
+Our Drivers Meet & Greet passengers in the airport arrivals hall.For airport pick ups we add £5 car park charges and free waiting time for 1 hour. </P>
+<P> We use the best possible route in terms of mileage to calculate our prices. </P>
+<P> Bookings can be made by phone or on our secure website. We offer 2 ways to pay either by cash or card. Very important we do not charge for paying by card. </P>
+<P> <strong>  We wish a pleasant journey with us. </strong> </P>
+
+
+		</div> <!--- wllcome-box close !---><!--- leftcontant close !---><!--- rightcontant close !---> 
+		
+		
+ 
+ 
+ 
+
+ </div> <!--- Maincontant close !--->
+</div> <!--- contant close !--->
+<div class="clear"> </div>
+</div> <!--- body-contant close !--->
+
+<div id="body-footer"> 
+<div class="main-footer"> 
+
+		<div class="left-footer"> 
+		
+		
+		<a href="index.html">Home</a> 
+		<a href="vehicles.html">Vehicles</a>
+		
+		
+		<a href="srevices.html">Services</a>
+		<a href="passenger-services.html"> Passenger Services</a>
+	
+	
+		<a href="online-booking.html">Bookings & Charges</a>
+	
+		<a href="t&c.html">  Terms of trading </a>
+         <a href="about us.html">About Us</a>
+	<a href="contact.html">Contact Us</a>
+   
+	
+		
+	</div> <!--- left-footer close !---->
+		
+		<div class="right-footer"> 
+		<a href="#"> <img src="images/linkedin.png" /> </a>
+		<a href="#"> <img src="images/twitter.png" /> </a>
+		<a href="#"> <img src="images/gplus-32.png" /> </a>
+		<a href="#"> <img src="images/facebook.png" /> </a>
+		</div> <!---right-footer close !----> 
+
+</div> <!--- main-footer close !---->
+	
+		<div class="main-footer-2">
+			<hr size="1" width="980" color="#333333" />
+		<div class="left-footer-2">  Company Registartion Number: 08227211 Operator Licence: 08146/01/01 <br /> 
+		Airportsminicabs247 is a trade name of Airportminicabs247
+		</div><!--- main-footer close !---->
+		<div class="left-footer-3"> Developed by  <a href="http://webxcellence.co.in" target='blank'>Webxcellence</a>    </div>
+			
+		</div><!--- main-footer close !---->
+</div> <!----------------------- main-footer close !------------------------->
+<div class="clear"> </div>
+
+</body>
+</html>

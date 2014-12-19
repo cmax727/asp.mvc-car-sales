@@ -1,0 +1,118 @@
+﻿@model CabDataContext
+@{
+    Layout = null;
+
+    var client = LoginHelper.Client;
+    var allByYou = Model.Notifications.Where(n => n.Receiver == client.Token).OrderByDescending(o => o.ID);
+    var notifications = allByYou.Take(10);
+
+    int unreadCount = allByYou.Count(c => c.Status == "New");
+}
+
+@if (unreadCount > 0)
+{
+    <script>
+        $('.notifications div#notification .roshan').html(@unreadCount).css('background', 'red');
+    </script>
+}
+else
+{
+    <script>
+        $('.notifications div#notification .roshan').html('0').css('background', '#615858');
+    </script>
+}
+
+ @if (!notifications.Any())
+ { <h2>There is no notification for you!</h2> }
+@foreach (var notification in notifications)
+{
+    <div class="your-notification" accesskey="@notification.Status" id="@notification.Token">
+        @if (notification.Type == JobType.JobConfirmed) { <h2>Job successfully confirmed (<span class="roshan">@notification.Status</span>)</h2>}
+        else if (notification.Type == JobType.AccountConfirmed) { <h2>Account successfully confirmed (<span class="roshan">@notification.Status</span>)</h2>}
+        else
+        {<h2>@notification.Type (<span class="roshan">@notification.Status</span>)</h2>}
+        
+        <div class="time">@notification.SentAt.ToAgo() (@notification.SentAt.ToLongDateString() - @notification.SentAt.ToLongTimeString())</div>
+        <div>@Html.Raw(notification.Message)</div>
+   
+        @if (notification.Type == "Job Confirmed" && notification.Status == "New")
+        {
+            var job = Model.Jobs.FirstOrDefault(j => j.Token == notification.JobToken);
+            if (job != null)
+            {
+                <div class="latest-job" style="padding: 0;margin: 0;">
+                <h2>Your job quick info..</h2>
+
+                @if (!job.PassengerName.IsEmpty())
+                {
+                    <div accesskey="passenger-name">
+                        <label>Passenger name</label>
+                        <span>@job.PassengerName</span>
+                    </div>
+                
+                    <div accesskey="passenger-cell">
+                        <label>Passenger Mobile No.</label>
+                        <span>@job.PassengerCell</span>
+                    </div>
+                }
+
+                <div accesskey="pick-from">
+                    <label>Pick from</label>
+                    <span>@job.PickFrom</span>
+                </div>
+
+                @if (!job.Stops.IsEmpty())
+                {
+                    var stops = job.Stops.Replace(",", "=====").Replace("-----", ",");
+                    var splittedStops = stops.Split(',');
+                    int index = 0;
+        
+                    <div>
+                        <label>Stops</label>
+                        <span>
+                            @foreach (string t in splittedStops)
+                            {
+                                index++;
+                                @:@index: @t.Replace("=====", ",")<br/>
+                            }
+                        </span>
+                    </div>
+                }
+
+                <div accesskey="drop-to">
+                    <label>Drop to</label>
+                    <span>@job.DropTo</span>
+                </div>
+
+                <div accesskey="pickup-time">
+                    <label>Pickup time</label>
+                     <span>@job.PickupTime.ToAgo() (@job.PickupTime.ToLongDateString() - @job.PickupTime.ToLongTimeString())</span>
+                 </div>
+
+                <div accesskey="fare">
+                    <label>Fare</label>
+                    <span>£@job.Fare</span>
+                </div>
+
+                <div>
+                    <label>Vehicle</label>
+                    <span>@job.VehicleToken.GetVehicle().Name</span>
+                </div>
+
+                <div>
+                    <label>Journey type</label>
+                        @if (job.JourneyType == "Return")
+                        {
+                            <span style="border-bottom:0;">Wait & Return → @job.ReturnTime.ToAgo() ( @job.ReturnTime.ToLongDateString() : @job.ReturnTime.ToLongTimeString() )</span>
+                        }
+                        else
+                        { <span style="border-bottom:0;">@job.JourneyType</span> }
+                </div>
+
+            </div>
+         
+            }
+        }
+        
+         </div>
+}

@@ -1,0 +1,17 @@
+﻿@model CabDataContext
+@{
+    Layout = null;
+    
+    var client = LoginHelper.Client;
+    var yourMessages = Model.Notifications.Where(n => n.Sender == client.Token).OrderByDescending(o => o.ID);
+}
+
+ @if (!yourMessages.Any()) { <h2>You've not sent any message.</h2> }
+@foreach (var notification in yourMessages)
+{
+    <div class="your-notification">
+        <h2>@notification.Type to @notification.Receiver (status: @notification.Status)</h2>
+        <div class="time">@notification.SentAt.ToAgo() (@notification.SentAt.ToLongDateString() - @notification.SentAt.ToLongTimeString())</div>
+        <div>@Html.Raw(notification.Message)</div>
+    </div>
+}

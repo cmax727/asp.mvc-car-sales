@@ -1,0 +1,525 @@
+﻿@{
+    ViewBag.Title = "Add Feedback!";
+}
+
+<style>
+.edit-div
+{
+    margin: 45px 0;    
+    border: 1px solid #33A2E0;
+    border-left:0;
+    outline:none;
+}
+
+.number
+{
+    position: absolute;
+    margin: -9px -45px;
+    border: 1px solid #33A2E0;
+    background: #E9E7E7;
+    width: 44px;
+    height: 25px;
+    text-align: center;
+    padding-top: 11px;
+    border-radius: 38px 20px;
+}
+
+.div-title {
+    position: absolute;
+    margin: -30px 0;
+    background: #E9E7E7;
+    border: 1px solid #33A2E0;
+    padding: 6px;
+    font-weight: bold;
+}
+.edit-div label
+{
+    width:auto;
+    margin: 0 5px;
+}
+textarea
+{
+    border: 1px solid #33A2E0;
+    width: 845px;
+    height: 100px;
+}
+
+.splitter
+{
+    padding: 21px 32px 20px 20px;
+    border-left: 1px solid #33A2E0;
+    border-right: 1px solid #33A2E0;
+    display: inline-block;
+    margin-left: -5px;
+}
+.first-child
+{
+    margin-left: 0;
+}
+
+.splitter-check:hover, .selected, .score:hover
+{
+    background: #D6D2D2;
+}
+.score-selected
+{
+    background-color: #D6D2D2!important;
+    background-repeat:no-repeat!important;
+    background-position: bottom left!important;
+    background-image:url(/content/images/checkbox-32.png)!important;
+}
+</style>
+
+<img src="/content/img/backgrounds/feedback.png" style="float: right;">
+<h2>Add Feedback!</h2>
+
+<div class="edit-div">
+    <div class="div-title">Job Number #</div>
+    
+    <div class="splitter first-child">
+        <input type="text" id="job-number">
+    </div>
+</div>
+
+<div class="edit-div">
+    <div class="number">1</div>
+    <div class="div-title">Was this your first Time when you used us?</div>
+    
+    <div class="splitter splitter-check first-child">
+        <input type="checkbox" id="yes-first-time">
+        <label for="yes-first-time">YES</label>
+    </div>
+
+    <div class="splitter splitter-check">
+        <input type="checkbox" id="no-first-time">
+        <label for="no-first-time">NO</label>
+    </div>
+    <input type="hidden" id="first-time-selected">
+</div>
+
+<div class="edit-div">
+    <div class="number">2</div>
+    <div class="div-title">Would you recommend us to a friend?</div>
+    
+    <div class="splitter splitter-check first-child">
+    <input type="checkbox" id="recommend-strongly-agree">
+    <label for="recommend-strongly-agree">Strongly Agree</label>
+    </div>
+
+    <div class="splitter splitter-check">
+    <input type="checkbox" id="recommend-agree">
+    <label for="recommend-agree">Agree</label>
+    </div>
+
+    <div class="splitter splitter-check">
+    <input type="checkbox" id="recommend-neutral">
+    <label for="recommend-neutral">Neutral</label>
+    </div>
+
+    <div class="splitter splitter-check">
+    <input type="checkbox" id="recommend-disagree">
+    <label for="recommend-disagree">Disagree</label>
+    </div>
+
+    <div class="splitter splitter-check">
+    <input type="checkbox" id="recommend-strongly-disagree">
+    <label for="recommend-strongly-disagree">Strongly Disagree</label>
+    </div>
+
+    <input type="hidden" id="recommend-selected">
+</div>
+
+<div class="edit-div">
+    <div class="number">3</div>
+    <div class="div-title">How does our services compare to other company?</div>
+    
+    <div class="splitter splitter-check first-child">
+    <input type="checkbox" id="compare-very-satisfied">
+    <label for="compare-very-satisfied">Very Satisfied</label>
+    </div>
+
+    <div class="splitter splitter-check">
+    <input type="checkbox" id="compare-satisfied">
+    <label for="compare-satisfied">Satisfied</label>
+    </div>
+
+    <div class="splitter splitter-check">
+    <input type="checkbox" id="compare-neutral">
+    <label for="compare-neutral">Neutral</label>
+    </div>
+
+    <div class="splitter splitter-check">
+    <input type="checkbox" id="compare-dissatisfied">
+    <label for="compare-dissatisfied">Dissatisfied</label>
+    </div>
+
+    <div class="splitter splitter-check">
+    <input type="checkbox" id="compare-very-dissatisfied">
+    <label for="compare-very-dissatisfied">Very Dissatisfied</label>
+    </div>
+    <input type="hidden" id="compare-selected">
+</div>
+
+<div class="edit-div">
+    <div class="number">4</div>
+    <div class="div-title">If you were to review what score would you give it out of 10?</div>
+    
+    <div class="splitter score first-child">0</div>
+    <div class="splitter score">1</div>
+    <div class="splitter score">2</div>
+    <div class="splitter score">3</div>
+    <div class="splitter score">4</div>
+    <div class="splitter score">5</div>
+    <div class="splitter score">6</div>
+    <div class="splitter score">7</div>
+    <div class="splitter score">8</div>
+    <div class="splitter score">9</div>
+    <div class="splitter score">10</div>
+
+    <input type="hidden" id="service-score-selected">
+</div>
+
+<div class="edit-div">
+    <div class="number">5</div>
+    <div class="div-title">How you will rate driver customer service?</div>
+    
+    <div class="splitter score first-child">0</div>
+    <div class="splitter score">1</div>
+    <div class="splitter score">2</div>
+    <div class="splitter score">3</div>
+    <div class="splitter score">4</div>
+    <div class="splitter score">5</div>
+    <div class="splitter score">6</div>
+    <div class="splitter score">7</div>
+    <div class="splitter score">8</div>
+    <div class="splitter score">9</div>
+    <div class="splitter score">10</div>
+
+    <input type="hidden" id="driver-score-selected">
+</div>
+
+<div class="edit-div">
+    <div class="number">6</div>
+    <div class="div-title">How you will rate your Journey</div>
+    
+    <div class="splitter score first-child">0</div>
+    <div class="splitter score">1</div>
+    <div class="splitter score">2</div>
+    <div class="splitter score">3</div>
+    <div class="splitter score">4</div>
+    <div class="splitter score">5</div>
+    <div class="splitter score">6</div>
+    <div class="splitter score">7</div>
+    <div class="splitter score">8</div>
+    <div class="splitter score">9</div>
+    <div class="splitter score">10</div>
+
+    <input type="hidden" id="journey-score-selected">
+</div>
+
+<div class="edit-div">
+    <div class="number">7</div>
+    <div class="div-title">How you will rate our online booking?</div>
+    
+    <div class="splitter score first-child">0</div>
+    <div class="splitter score">1</div>
+    <div class="splitter score">2</div>
+    <div class="splitter score">3</div>
+    <div class="splitter score">4</div>
+    <div class="splitter score">5</div>
+    <div class="splitter score">6</div>
+    <div class="splitter score">7</div>
+    <div class="splitter score">8</div>
+    <div class="splitter score">9</div>
+    <div class="splitter score">10</div>
+
+    <input type="hidden" id="booking-score-selected">
+</div>
+
+<div class="edit-div">
+    <div class="number">8</div>
+    <div class="div-title">How satisfied you ware with the vehicle condition?</div>
+    
+    <div class="splitter splitter-check first-child">
+    <input type="checkbox" id="condition-very-satisfied">
+    <label for="condition-very-satisfied">Very Satisfied</label>
+    </div>
+
+
+    <div class="splitter splitter-check">
+    <input type="checkbox" id="condition-satisfied">
+    <label for="condition-satisfied">Satisfied</label>
+    </div>
+
+
+    <div class="splitter splitter-check">
+    <input type="checkbox" id="condition-neutral">
+    <label for="condition-neutral">Neutral</label>
+    </div>
+
+    <div class="splitter splitter-check">
+    <input type="checkbox" id="condition-dissatisfied">
+    <label for="condition-dissatisfied">Dissatisfied</label>
+    </div>
+
+    <div class="splitter splitter-check">
+    <input type="checkbox" id="condition-very-dissatisfied">
+    <label for="condition-very-dissatisfied">Very Dissatisfied</label>
+    </div>
+    <input type="hidden" id="condition-selected">
+</div>
+
+<div class="edit-div">
+    <div class="number">9</div>
+    <div class="div-title">How easy to use do you find our websites online booking?</div>
+    
+    <div class="splitter splitter-check first-child">
+    <input type="checkbox" id="easiness-very-easy">
+    <label for="easiness-very-easy">Very Easy</label>
+    </div>
+
+    <div class="splitter splitter-check">
+    <input type="checkbox" id="easiness-easy">
+    <label for="easiness-easy">Easy</label>
+    </div>
+
+    <div class="splitter splitter-check">
+    <input type="checkbox" id="easiness-not-so-easy">
+    <label for="easiness-not-so-easy">Not so easy</label>
+    </div>
+
+    <div class="splitter splitter-check">
+    <input type="checkbox" id="easiness-no-easy-at-all">
+    <label for="easiness-no-easy-at-all">Not easy at all</label>
+    </div>
+    <input type="hidden" id="easiness-selected">
+</div>
+
+<div class="edit-div">
+    <div class="number">10</div>
+    <div class="div-title">What do you like best about website?</div>
+    
+    <div class="splitter first-child" style="border-right: 0;">
+    <textarea id="suggestions-add"></textarea>
+    </div>
+</div>
+
+<div class="edit-div">
+    <div class="number">11</div>
+    <div class="div-title">What do you find most frustrating about our services?</div>
+    
+    <div class="splitter first-child" style="border-right: 0;">
+    <textarea id="suggestions-remove"></textarea>
+    </div>
+</div>
+
+<div class="edit-div">
+    <div class="number">12</div>
+    <div class="div-title">How would you describe our services in one or more words?</div>
+    
+    <div class="splitter first-child" style="border-right: 0;">
+    <textarea id="define-service"></textarea>
+    </div>
+</div>
+
+<div class="edit-div">
+    <div class="number">13</div>
+    <div class="div-title">If you could change one thing about website what would it be and why?</div>
+    
+    <div class="splitter first-child" style="border-right: 0;">
+    <textarea id="change-site"></textarea>
+    </div>
+</div>
+
+<div class="edit-div">
+    <div class="number">14</div>
+    <div class="div-title">If you could change one thing about our services what would it be and why?</div>
+    
+    <div class="splitter first-child" style="border-right: 0;">
+    <textarea id="change-service"></textarea>
+    </div>
+</div>
+
+<div class="edit-div">
+    <div class="number">15</div>
+    <div class="div-title">Anything else you care to share or get off your chest?</div>
+    
+    <div class="splitter first-child" style="border-right: 0;">
+    <textarea id="extra"></textarea>
+    </div>
+</div>
+
+<div class="edit-div">
+    <div class="number">16</div>
+    <div class="div-title">How likely are you to book a cab with us again?</div>
+    
+    <div class="splitter splitter-check first-child">
+    <input type="checkbox" id="book-again-very-likely">
+    <label for="book-again-very-likely">Very Likely</label>
+    </div>
+
+    <div class="splitter splitter-check">
+    <input type="checkbox" id="book-again-likely">
+    <label for="book-again-likely">Likely</label>
+    </div>
+
+    <div class="splitter splitter-check">
+    <input type="checkbox" id="book-again-neutral">
+    <label for="book-again-neutral">Neutral</label>
+    </div>
+
+    <div class="splitter splitter-check">
+    <input type="checkbox" id="book-again-unlikely">
+    <label for="book-again-unlikely">Unlikely</label>
+    </div>
+
+    <div class="splitter splitter-check">
+    <input type="checkbox" id="book-again-very-unlikely">
+    <label for="book-again-very-unlikely">Very Unlikely</label>
+    </div>
+    <input type="hidden" id="book-again-selected">
+</div>
+
+
+<div class="edit-div">
+    <div class="number">17</div>
+    <div class="div-title">Overall, how satisfied were you with your visit?</div>
+    
+    <div class="splitter splitter-check first-child">
+    <input type="checkbox" id="visit-very-satisfied">
+    <label for="visit-very-satisfied">Very Satisfied</label>
+    </div>
+
+    <div class="splitter splitter-check">
+
+    <input type="checkbox" id="visit-satisfied">
+    <label for="visit-satisfied">Satisfied</label>
+    </div>
+
+    <div class="splitter splitter-check">
+    <input type="checkbox" id="visit-neutral">
+    <label for="visit-neutral">Neutral</label>
+    </div>
+
+    <div class="splitter splitter-check">
+    <input type="checkbox" id="visit-dissatisfied">
+    <label for="visit-dissatisfied">Dissatisfied</label>
+    </div>
+
+    <div class="splitter splitter-check">
+    <input type="checkbox" id="visit-very-dissatisfied">
+    <label for="visit-very-dissatisfied">Very Dissatisfied</label>
+    </div>
+    <input type="hidden" id="visit-selected">
+</div>
+
+<div class="blue-button" style="margin: 0 0 29px 0;padding: 10px 20px;font-size: 25px;">Add Feedback</div>
+
+<script>
+    $('.splitter-check').click(function () {
+        $(this).parent().find('.selected').removeClass('selected').find('input[type=checkbox]').removeAttr('checked');
+        var checkBox = $(this).addClass('selected').find('input[type=checkbox]').attr('checked', true);
+        $(this).parent().find('input[type=hidden]').val($(checkBox).attr('id'));
+    });
+
+    $('.score').click(function () {
+        $(this).parent().find('.score-selected').removeClass('score-selected');
+        var _this = $(this).addClass('score-selected');
+        $(this).parent().find('input[type=hidden]').val($(_this).html());
+    });
+
+    function check(id) {
+        var value = $(id).val();
+        if (!value.length) {
+            highlight($(id).parent().attr('tabIndex', 0).focus());
+        }
+        return value;
+    }
+
+    $('.blue-button').click(function () {
+        var firstTimeSelected = check('#first-time-selected');
+        if (!firstTimeSelected.length) return;
+
+        var recommendUs = check('#recommend-selected');
+        if (!recommendUs.length) return;
+
+        var compareSelected = check('#compare-selected');
+        if (!compareSelected.length) return;
+
+        var serviceScore = check('#service-score-selected');
+        if (!serviceScore.length) return;
+
+        var driverScore = check('#driver-score-selected');
+        if (!driverScore.length) return;
+
+        var journeyScore = check('#journey-score-selected');
+        if (!journeyScore.length) return;
+
+        var bookinScore = check('#booking-score-selected');
+        if (!bookinScore.length) return;
+
+        var conditionSelected = check('#condition-selected');
+        if (!conditionSelected.length) return;
+
+        var easinessSelected = check('#easiness-selected');
+        if (!easinessSelected.length) return;
+
+        var suggestionsAdd = check('#suggestions-add');
+        if (!suggestionsAdd.length) return;
+
+        var suggestionsRemove = check('#suggestions-remove');
+        if (!suggestionsRemove.length) return;
+
+        var defineService = check('#define-service');
+        if (!defineService.length) return;
+
+        var changeSite = check('#change-site');
+        if (!changeSite.length) return;
+
+        var changeService = check('#change-service');
+        if (!changeService.length) return;
+
+        var extra = check('#extra');
+        if (!extra.length) return;
+
+        var bookAgainSelected = check('#book-again-selected');
+        if (!bookAgainSelected.length) return;
+
+        var visitedSelected = check('#visit-selected');
+        if (!visitedSelected.length) return;
+
+        loadSpinner(this);
+
+        var data = {
+            isFirstBooking: firstTimeSelected == 'YES',
+            recommendUs: recommendUs,
+            compareOurService: compareSelected,
+            scoreForService: serviceScore,
+            scoreForDriver: driverScore,
+            scoreForJourney: journeyScore,
+            scoreForOnlineBooking: bookinScore,
+            vehicleCondition: conditionSelected,
+            bookingDifficulties: easinessSelected,
+            suggestionsToAdd: validate(suggestionsAdd),
+            suggestionsToRemove: validate(suggestionsRemove),
+            defineService: validate(defineService),
+            changeWebsite: validate(changeSite),
+            changeService: validate(changeService),
+            bookUsAgain: bookAgainSelected,
+            satisfeidWithVisit: visitedSelected,
+            extra: validate(extra),
+            jobNumber: $('#job-number').val()
+        };
+
+        $.post('/Feedback/Add', data, function (response) {
+            if (response == true) {
+                alert('Your feedback is added successfully.');
+                location.reload();
+            }
+            else alert('Something went wrong. Please refresh the page and try again.');
+
+            $('.spinner').fadeOut();
+        });
+    });
+
+</script>

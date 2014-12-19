@@ -1,0 +1,313 @@
+﻿.invisible
+{
+	display:none;
+}
+.absolute
+{
+	position:absolute;
+}
+.border
+{
+	border: 1px solid #2E609B;
+}
+.panel
+{
+    padding-bottom: 20px;
+}
+
+.panel div
+{
+	padding: 5px 20px;
+}
+
+.hours-minutes
+{
+	width: 66px;
+}
+
+/* ------------- Geo Auto Complete Style --------------------- */
+
+.roshan
+{
+    padding:5px 10px;
+    background: #494945;
+    color: white;
+}
+
+/* Search UK addresses button
+******************************************/
+.search-uk-addresses
+{
+    width: 27px;
+    height: 30px;
+    background-color: #E7E7E7;
+    display: inline-block;
+    background-repeat: no-repeat;
+    background-position: center center;
+    background-image: url(/content/img/search.png);
+    margin: -7px -5px;
+    border: 1px solid #1F1C1C;
+}
+.search-image .ZebraDialog_Body  
+{
+    background-image:none!important;
+    padding: 2px 5px!important;
+}
+
+.search-uk-addresses:hover
+{
+    background-color: #AAA7A7;
+}
+.search-uk-addresses:active
+{
+    background-color: #746C6C;
+}
+
+hr {
+	border: 0;
+	height: 1px;
+	background: -webkit-gradient(linear, 0% 50%, 100% 50%, color-stop(0%, transparent), color-stop(50%, rgba(243, 237, 237, 0.5)), color-stop(100%, transparent));
+	background: -webkit-linear-gradient(left, transparent,rgba(243, 237, 237, 0.5),transparent);
+	background: -moz-linear-gradient(left, transparent,rgba(243, 237, 237, 0.5),transparent);
+	background: -o-linear-gradient(left, transparent,rgba(243, 237, 237, 0.5),transparent);
+	background: linear-gradient(left, transparent,rgba(243, 237, 237, 0.5),transparent);
+	margin: 7px 0 6px 0;
+}
+
+* {
+	padding: 0;
+	margin: 0;
+	
+	-webkit-user-select:none;
+	-o-user-select:none;
+	-moz-user-select:none;
+	-ms-user-select:none;
+	user-select:none;
+}
+
+.allow-user-select, input, textarea
+{
+	-webkit-user-select:initial;
+	-o-user-select:initial;
+	-moz-user-select:initial;
+	-ms-user-select:initial;
+	user-select:initial;
+}
+
+/* Input ----- typ=text,password,etc.
+-----------------------------------------------------------*/
+.blue-button
+{
+	padding: 5px 10px;
+	cursor: pointer;
+	display:inline-block;
+	color: #FDFDFD;
+	
+	margin: 10px 1px;
+	margin-top: 22px;
+	
+	font-size: 20px;
+	color: black;
+	border: 1px solid rgba(231, 72, 50, 0.59);
+	border-radius: 2px;
+	background-color: rgba(204, 60, 25, 0.63);
+}
+.blue-button:hover
+{
+	 background-color: rgba(204, 60, 25, 0.83);
+}
+.blue-button:active
+{
+     background-color: rgba(204, 60, 25, 0.9);
+}
+
+.dropdown, .ac_results
+{
+	position: absolute;
+    border: 1px solid #0F0F0F;
+    display: none;
+    max-height: 200px;
+    overflow: auto;
+    overflow-x: hidden;
+    z-index: 20;
+    box-shadow: inset 0 0 3px #0C0C0C;
+    color: black;
+}
+
+.dropdown span
+{
+    display:block;
+    font-size:11px;
+    margin-top: 6px;
+    text-align: right;
+}
+.dropdown div, .ac_results li
+{
+	padding: 5px;
+	background-color: rgba(255, 255, 255, .9);
+	border-bottom: 1px solid #020202;
+	cursor:pointer;
+}
+
+.dropdown div:hover, .ac_results li:hover
+{
+	background: black;
+    color: white;
+}
+
+.dropdown div:active, .ac_results li:active
+{
+	background: #3C3A3A;
+}
+
+.highlight { background:#DF8E8E!important; }
+
+input[disabled], select[disabled], textarea[disabled], input[readonly], select[readonly], textarea[readonly] {
+cursor: pointer!important;
+background-color: white!important;
+}
+
+
+/* Spinner ----- the progress indicator
+-----------------------------------------------------------*/
+.spinner
+{
+	background-color: rgba(0, 0, 0, .8);
+	background-image: url('images/spinner.gif');
+	background-repeat: no-repeat;
+	background-position: 50%;
+	position:absolute;
+	z-index: 100;
+}
+
+.cover-full-screen
+{
+    background:rgba(0, 0, 0, .4);
+    position:absolute;
+    z-index:6;
+    left:0;
+    right:0;
+    display:none;
+}
+
+/* Navigation Bar */
+.navigation-bar {
+    height: 63px;
+}
+
+.navigation-line {
+   position: absolute;
+    background: #420303;
+    width: 940px;
+    height: 20px;
+    margin-top: 20px;
+}
+
+.navigation-bar span {
+    background: rgba(189, 179, 179, 0.73);
+    color: white;
+    padding: 10px 15px;
+    position: absolute;
+    font-size: 25px;
+    margin-top: 9px;
+    border: 1px solid #420303;
+}
+
+.navigation-bar strong {
+    position: absolute;
+    margin-top: 15px;
+    margin-left: -15px;
+    font-size: 15px;
+    display: block;
+}
+
+.navigation-bar span.done {
+    background: rgba(0, 0, 0, 0.8);
+    color: #FC0;
+}
+
+.back-to-booking {
+    background-repeat: no-repeat;
+    background-position: 5px;
+    background-image: url(/content/img/back.png);
+    width: 38px;
+    height: 38px;
+    position: absolute;
+    background-color: rgba(214, 121, 121, 0.44);
+    margin: 10px 10px;
+    border-radius: 50%;
+    border: 1px solid #7C0B0B;
+    box-shadow: 0 0 5px white;
+    cursor: pointer;
+    display: none;
+}
+.back-to-booking:hover {
+    background-color: rgba(214, 121, 121, 0.64);
+}
+.back-to-booking:active {
+    background-color: rgba(214, 121, 121, 0.94);
+}
+
+.output-postcodes {
+    position: static;
+    max-height: 200px;
+    overflow: auto;
+}
+
+.bonus-offer-div .roshan
+    {
+        background: #3A3838;
+        color: white;
+        border: 1px solid #424141;
+        box-shadow: inset 0 0 2px #969494, inset 0 0 2px #1B1818, inset 0 0 2px #534A4A, inset 0 0 2px #5A5757;
+        border-radius: 2px;
+        padding: 2px 4px;
+    }
+    .offer-big-img
+    {
+        border: 2px solid white;
+        border-radius: 6px;
+        float: right;
+        width: 195px;
+        background: white;
+        box-shadow: inset 0 0 5px #420808, inset 0 0 5px #420808, inset 0 0 5px #420808;
+    }
+    .offer-big-img:hover
+    {
+        background: #EBE0E0;
+    }
+    .offer-big-img:active
+    {
+        margin-top:2px;
+    }
+    
+    input[type=text], textarea {
+        width: 207px;
+        background: #262626;
+        border-bottom: 1px double #171717;
+        border-top: 1px double #171717;
+        border-left: 1px double #333;
+        border-right: 1px double #333;
+        overflow: hidden;
+        height: auto;
+        padding-top: 7px;
+        padding-right: 7px;
+        padding-bottom: 7px;
+        padding-left: 15px;
+    }
+    label {
+width: 150px;
+display: inline-block;
+}
+select {
+    width: 230px;
+background: #262626;
+border-bottom: 1px double #171717;
+border-top: 1px double #171717;
+border-left: 1px double #333;
+border-right: 1px double #333;
+padding-top: 4px;
+padding-right: 4px;
+padding-bottom: 4px;
+padding-left: 10px;
+}

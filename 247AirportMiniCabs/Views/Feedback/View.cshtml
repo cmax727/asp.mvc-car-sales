@@ -1,0 +1,90 @@
+﻿@model CabDataContext
+@{
+    List<Feedback> feedbacks = Model.Feedbacks.OrderByDescending(o => o.ID).ToList();
+
+    bool isFullPage = ViewBag.IsFullPage;
+
+    if (!isFullPage)
+    {
+        Layout = null;
+        feedbacks = feedbacks.Take(1).ToList();
+    }
+    else
+    {
+        ViewBag.Title = feedbacks.Count() + " feedback!";
+    }
+}
+
+
+<style>
+.customer-reviews, .customer-reviews div
+{
+    padding:0;
+}
+
+.customer-reviews
+{
+    width: 217px;
+    border: 1px solid #B1B1B1;
+    margin: 12px;
+    border-radius: 3px;
+}
+.review div, .customer-reviews h2
+{
+    padding:5px 10px;
+}
+.review, .customer-reviews h2
+{
+   border-bottom: 1px solid #CECCCA;
+}
+.review .date
+{
+    float:right;
+    font-size: 10px;
+}
+.review .message:last-child{border-bottom:0;}
+.review .name
+{
+    font-size:18px;
+}
+
+.review
+{
+    background-repeat: no-repeat;
+    background-position: 2px 3px;
+    background-image: url(/content/img/quote.png);
+    padding-left: 34px!important;
+    padding-bottom: 15px!important;
+}
+</style>
+
+@if (isFullPage)
+{
+    <style>
+    .customer-reviews
+    {
+        position: static;
+        width: auto;
+        margin-top:0;
+    }
+    </style>
+    <h2>@feedbacks.Count feedbacks! --- <a href="/Feedback/">Add New Feedback</a></h2>
+}
+
+
+<div class="customer-reviews">
+@foreach (var feedback in feedbacks)
+{
+    var client = Model.Clients.FirstOrDefault(c => c.Token == feedback.ClientToken);
+    <div class="review">
+            <div class="date"><abbr title="@feedback.FeedbackDate.ToLongDateString() at @feedback.FeedbackDate.ToLongTimeString()">@feedback.FeedbackDate.ToAgo()</abbr></div>
+            <div class="name"><span style="color:Red;">@(client != null ? client.Name : "Anonymous")</span> written:</div>
+            <div class="message" style="color:#0C59AC;">@Html.Raw(feedback.DefineOurService)</div>
+        </div>
+}
+</div>
+
+@if (!isFullPage)
+{
+    <h2 style="text-align: center;font-size: 18px;border: 1px solid #CACACA;margin: -13px 12px;margin-right: 9px;background: #DFDADA;"><a href="/Feedback/View">See all feedbacks →</a></h2>
+}

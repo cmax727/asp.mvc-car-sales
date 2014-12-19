@@ -1,0 +1,73 @@
+﻿@model Client
+@{
+    Layout = null;
+}
+<style>
+    .roshan
+    {
+        padding: 5px 10px !important;
+        background: yellow !important;
+        border-radius: 3px !important;
+        color: Black !important;
+    }
+</style>
+@Html.AntiForgeryToken()
+
+<div class="offer" style="border-radius: 5px;margin-top: 65px;">
+    <h2 class="first-h2" style="margin-top: -5px;margin-left: 70px;margin-right: 70px;">To get 5% Discount</h2>
+    <p style="padding: 10px;">confirm your account and pay 5% less amount for first job!</p>
+    <h2 style="border-top: 1px solid #6C96C8; margin-top: 20px;">Otherwise!</h2>
+    <div style="text-align: left; font-size: 14px; line-height: 1.6;">
+        Without confirming your account; you'll unable to get bonuses from us. You'll have
+        to pay full amount for each new job.<br />
+        We strongly recommend you confirm your account.
+    </div>
+    <h2 style="border-top: 1px solid #6C96C8; margin-top: 20px;">
+        How to confirm?</h2>
+    <div style="text-align: left; font-size: 17px; line-height: 1.6;">
+        We sent you a confirmation token at your email address: <span class="roshan"><a href="mailto:@Model.Email">@Model.Email</a></span><br />
+        Paste that token in the <span class="roshan">Confirmation Token</span> box (see
+        left-side) and click <span class="roshan" style="margin-top: 8px!important; display: inline-block;
+            padding: 2px 10px!important;">Confirm now</span> button.
+    </div>
+</div>
+<h2 class="first-h2">
+    Confirm your account, please!</h2>
+<div style="margin-top: 10px;">
+    <label for="confirmationToken">
+        Confirmation token</label>
+    <input id="confirmationToken" type="text">
+</div>
+<div>
+    <label for="password">
+        Password</label>
+    <input id="password" type="password">
+</div>
+<div id="verify" class="blue-button signup-button">
+    Confirm now!</div>
+
+<div style="padding-left: 175px;">
+    Otherwise <a href="#" id="verify-later">Verify Later</a>
+</div>
+<script>
+    signupResponse = {
+            name: '@Model.Name',
+            cell: '@Model.MobilePhone',
+            email: '@Model.Email',
+            landline: '@Model.HomePhone'
+    };
+    $('#verify').click(function () {
+        var elem = getEmptyElement('confirmationToken, password');
+        if (elem !== true) return;
+
+        $.post('/Client/Confirm', { confirmationToken: $('#confirmationToken').val(), password: $('#password').val(), __RequestVerificationToken: $('[name="__RequestVerificationToken"]').val() },
+            function (response) {
+                if (response != false && signupCallback) signupCallback({ isverified: true });
+                else alert('Something went wrong.\n\nPlease make sure you entered valid info in following fields:\n1. Confirmation Token\n2. Password');
+            });
+    });
+
+    $('#verify-later').click(function() {
+        if (signupCallback) signupCallback({isverified: false});
+    });
+</script>

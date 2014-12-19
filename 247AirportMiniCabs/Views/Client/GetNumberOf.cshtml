@@ -1,0 +1,37 @@
+﻿@model CabDataContext
+@{
+    string vehicleToken = ViewBag.VehicleToken;
+    Layout = null;
+}
+
+<div>
+    <img src="/content/img/passengers.png" style="margin-left: 18px;">
+    <select id="number-of-passengers">@Html.Raw(Model.GetOptions("number-of-passengers", vehicleToken))
+    </select>
+</div>
+
+<div>
+    <img src="/content/img/luggages.png">
+    <select id="luggages">@Html.Raw(Model.GetOptions("luggages", vehicleToken))
+    </select>
+</div>
+
+<div>
+    <img src="/content/img/HandLag.png">
+    <select id="hand-lag">@Html.Raw(Model.GetOptions("hand-lag", vehicleToken))
+    </select>
+</div>
+
+<div>
+    <img src="/content/img/baby-seats.png">
+    <select id="baby-seats">@Html.Raw(Model.GetOptions("baby-seats", vehicleToken))
+    </select>
+</div>
+
+<div>
+    <img src="/content/img/child-seats.png">
+    <select id="child-seats">@Html.Raw(Model.GetOptions("child-seats", vehicleToken))
+    </select>
+</div>
+
+<script>fareForOneMeter = @vehicleToken.GetVehicle().PricePerMile;</script>

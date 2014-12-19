@@ -1,0 +1,155 @@
+﻿<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1" />
+<title>Services</title>
+<link href="style.css" rel="stylesheet" type="text/css" />
+<script src="/Scripts/jquery.min.js"></script>
+</head>
+
+<body>
+
+<div class="mainheader"> 
+<div class="header-contant">
+
+
+		<div class="logo"> <a href="index.html"> <img src="images/logo.png" /> </a> </div> <!--- logo close !---> 
+		<div class="header-right">  <div class="header-right-text"> 
++44(0)207205677
+
+		 </div>	<img src="images/phone.png" /> <img src="images/visa.png" /> 
+		
+			 </div> <!--- header-right close !---> 
+ </div><!--- header-contant close !---> 
+</div> <!--- mainheader close !---> 
+<div class="clear"> </div>
+
+<div id="body-navigation"> 
+<div class="navigtion">
+<div class="mainnavgation"> 
+		
+	<div id="cssmenu">
+		<ul>
+		<li><a href='index.html'><span>Home</span></a></li> 
+		<li><a href="vehicles.html"><span>Vehicles</span></a></li>
+		
+		
+		<li class="active"><a href="srevices.html"><span>Services</span></a></li>
+		<li><a href="passenger-services.html"> <span>Passenger Services</span></a></li>
+	
+	
+		<li><a href="online-booking.html"><span>Bookings & Charges</span></a></li>
+	
+		<li><a href="t&c.html"><span>  Terms of Trading </span></a></li>
+        	<li><a href="about us.html"><span>About Us</span></a></li>
+		<li><a href="contact.html"><span>Contact Us</span></a></li>
+		</ul>
+		</div> <!--- cssmenu close !---> 
+</div> <!--- mainnavgation close !--->  
+</div> <!--- navigtion close !---> 
+<div class="clear"> </div>
+</div> <!--- body-navigation close !--->
+	
+<div id="body-contant"> 
+<div class="contant">
+<div class="Maincontant">
+ 		
+		
+		
+		<div class="services">
+                        
+		    <table width="300" border="0" style="width:100%;padding: 2em 4em;">
+		        <tr>
+		            <td>
+		                <div id="preview" style="color:white;vertical-align: top;">
+		                </div>
+		            </td>
+		        </tr>
+		    </table>
+            
+             <link href="/Scripts/zebra-tooltips/zebra_tooltips.css" rel="stylesheet" type="text/css" />
+        <script src="/Scripts/zebra-tooltips/zebra_tooltips.js" type="text/javascript"></script>
+        <script src="/Scripts/common.js"></script>
+
+        <link href="/Scripts/zebra-dialog/zebra_dialog.css" rel="stylesheet" type="text/css" />
+        <script src="/Scripts/zebra-dialog/zebra_dialog.js" type="text/javascript"></script>
+       
+        <div class="hidden-fields spinner"></div>
+<style>
+/* Spinner ----- the progress indicator
+-----------------------------------------------------------*/
+.spinner
+{
+	background-color: rgba(0, 0, 0, .8);
+	background-image: url('/content/images/spinner.gif');
+	background-repeat: no-repeat;
+	background-position: 50%;
+	position:absolute;
+	z-index: 100;
+}
+.highlight { background:#DF8E8E!important; }
+</style>
+        
+
+        <script>
+            var isEmail = false;
+            var locationHash = location.hash.replace('#', '').split('=');
+            $.get('/Confirm/Preview', { token: locationHash[1], type: locationHash[0] }, function (html) {
+                $('#preview').html(html).slideDown();
+            });
+        </script>
+
+
+                        
+		</div> <!--- services close !--->
+		
+</div> <!--- Maincontant close !--->
+</div> <!--- contant close !--->
+<div class="clear"> </div>
+</div> <!--- body-contant close !--->
+
+<div id="body-footer"> 
+<div class="main-footer"> 
+
+		<div class="left-footer"> 
+		
+		
+		<a href="index.html">Home</a> 
+		<a href="vehicles.html">Vehicles</a>
+		
+		
+		<a href="srevices.html">Services</a>
+		<a href="passenger-services.html"> Passenger Services</a>
+	
+	
+		<a href="online-booking.html">Bookings & Charges</a>
+	
+		<a href="t&c.html">  Terms of Trading </a>
+         <a href="about us.html">About Us</a>
+	<a href="contact.html">Contact Us</a>
+	
+		
+		</div> <!--- left-footer close !---->
+		
+		<div class="right-footer"> 
+		<a href="#"> <img src="images/linkedin.png" /> </a>
+		<a href="#"> <img src="images/twitter.png" /> </a>
+		<a href="#"> <img src="images/gplus-32.png" /> </a>
+		<a href="#"> <img src="images/facebook.png" /> </a>
+		</div> <!---right-footer close !----> 
+
+</div> <!--- main-footer close !---->
+	
+		<div class="main-footer-2">
+			<hr size="1" width="980" color="#333333" />
+		<div class="left-footer-2">  Company Registartion Number: 08227211 Operator Licence: 08146/01/01 <br /> 
+		Airportsminicabs247 is a trade name of Airportminicabs247
+		</div><!--- main-footer close !---->
+		<div class="left-footer-3"> Developed by  <a href="http://webxcellence.co.in" target='blank'>Webxcellence</a>    </div>
+			
+		</div><!--- main-footer close !---->
+</div> <!----------------------- main-footer close !------------------------->
+<div class="clear"> </div>
+
+</body>
+</html>

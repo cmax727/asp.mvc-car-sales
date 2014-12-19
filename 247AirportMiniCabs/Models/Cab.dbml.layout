@@ -1,0 +1,78 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<ordesignerObjectsDiagram dslVersion="1.0.0.0" absoluteBounds="0, 0, 15, 19.5" name="Cab">
+  <DataContextMoniker Name="/CabDataContext" />
+  <nestedChildShapes>
+    <classShape Id="4109d52a-36a7-4191-b675-d49ff51832a1" absoluteBounds="0.75, 0.75, 2, 2.3478011067708335">
+      <DataClassMoniker Name="/CabDataContext/Account" />
+      <nestedChildShapes>
+        <elementListCompartment Id="34d030f9-f21b-4a0c-a076-4a225a329131" absoluteBounds="0.765, 1.21, 1.9700000000000002, 1.7878011067708335" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
+      </nestedChildShapes>
+    </classShape>
+    <classShape Id="e735832e-3ddb-4a6a-9d7e-8c26f3227784" absoluteBounds="3.75, 0.75, 2, 4.2708154296875">
+      <DataClassMoniker Name="/CabDataContext/Client" />
+      <nestedChildShapes>
+        <elementListCompartment Id="f1aec0e8-78f8-4e0f-bc80-2b9a25700d78" absoluteBounds="3.765, 1.21, 1.9700000000000002, 3.7108154296875" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
+      </nestedChildShapes>
+    </classShape>
+    <classShape Id="1427e62c-62ad-47a0-a3cd-e24a35c24fea" absoluteBounds="6.75, 0.75, 2, 2.3478011067708335">
+      <DataClassMoniker Name="/CabDataContext/Discount" />
+      <nestedChildShapes>
+        <elementListCompartment Id="a229dc35-d152-44cd-bd72-48de2908ae60" absoluteBounds="6.765, 1.21, 1.9700000000000002, 1.7878011067708335" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
+      </nestedChildShapes>
+    </classShape>
+    <classShape Id="152658bd-5b68-4b44-a87d-d120a8c2fb7b" absoluteBounds="0.75, 6.75, 2, 12.539777018229167">
+      <DataClassMoniker Name="/CabDataContext/Driver" />
+      <nestedChildShapes>
+        <elementListCompartment Id="2b2021c7-4a2c-4064-842c-b9e4f766e6a2" absoluteBounds="0.765, 7.21, 1.9700000000000002, 11.979777018229166" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
+      </nestedChildShapes>
+    </classShape>
+    <classShape Id="591082bb-5319-4f2e-ac46-17b8ff224c7c" absoluteBounds="3.75, 6.75, 2, 2.3478011067708344">
+      <DataClassMoniker Name="/CabDataContext/Fare" />
+      <nestedChildShapes>
+        <elementListCompartment Id="ef34e11c-8785-44a3-be53-47a326e69ce2" absoluteBounds="3.765, 7.21, 1.9700000000000002, 1.7878011067708335" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
+      </nestedChildShapes>
+    </classShape>
+    <classShape Id="73eaf4dc-1683-485e-9ecd-683e1f505388" absoluteBounds="6.75, 4.75, 2, 3.1170068359375005">
+      <DataClassMoniker Name="/CabDataContext/Feedback" />
+      <nestedChildShapes>
+        <elementListCompartment Id="4bd393bb-22da-4e14-81a3-e589f7f23a07" absoluteBounds="6.765, 5.21, 1.9700000000000002, 2.5570068359375" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
+      </nestedChildShapes>
+    </classShape>
+    <classShape Id="06098c65-9d60-4e10-99ea-74d368822df4" absoluteBounds="6.75, 8.75, 2, 8.5014469401041666">
+      <DataClassMoniker Name="/CabDataContext/Job" />
+      <nestedChildShapes>
+        <elementListCompartment Id="acb200a2-2a03-4b58-ac9e-0e5c680fc910" absoluteBounds="6.765, 9.21, 1.9700000000000002, 7.941446940104167" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
+      </nestedChildShapes>
+    </classShape>
+    <classShape Id="2b5ae2f6-2326-478c-872b-755941f43c53" absoluteBounds="9.75, 0.75, 2, 2.1554996744791666">
+      <DataClassMoniker Name="/CabDataContext/Location" />
+      <nestedChildShapes>
+        <elementListCompartment Id="84ad1026-72e1-4d6c-abc2-cc6abf5e099c" absoluteBounds="9.765, 1.21, 1.9700000000000002, 1.5954996744791665" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
+      </nestedChildShapes>
+    </classShape>
+    <classShape Id="9ef9b750-f4c7-410b-a4dc-9c8c3e9aee3a" absoluteBounds="9.75, 3.75, 2, 2.347801106770834">
+      <DataClassMoniker Name="/CabDataContext/MinicabOffice" />
+      <nestedChildShapes>
+        <elementListCompartment Id="db9eff73-2904-48c3-9b4e-99c17b580065" absoluteBounds="9.765, 4.21, 1.9700000000000002, 1.7878011067708335" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
+      </nestedChildShapes>
+    </classShape>
+    <classShape Id="3ae2efe8-f4ea-4c57-81be-67c73de44bb7" absoluteBounds="9.75, 7.75, 2, 2.7324039713541666">
+      <DataClassMoniker Name="/CabDataContext/Notification" />
+      <nestedChildShapes>
+        <elementListCompartment Id="365388d7-4178-4169-8d32-f10c17c8f4e2" absoluteBounds="9.765, 8.21, 1.9700000000000002, 2.1724039713541665" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
+      </nestedChildShapes>
+    </classShape>
+    <classShape Id="2ab6224f-23c1-40e6-a7c8-596ac73b1448" absoluteBounds="9.75, 11.75, 2, 4.4631168619791666">
+      <DataClassMoniker Name="/CabDataContext/Site" />
+      <nestedChildShapes>
+        <elementListCompartment Id="ad78bcdc-0e5c-4830-a7af-551fa65914ef" absoluteBounds="9.765, 12.21, 1.9700000000000002, 3.903116861979167" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
+      </nestedChildShapes>
+    </classShape>
+    <classShape Id="66f5c910-db67-4139-b7e3-560bb2ecc595" absoluteBounds="12.75, 0.75, 2, 5.0400211588541666">
+      <DataClassMoniker Name="/CabDataContext/Vehicle" />
+      <nestedChildShapes>
+        <elementListCompartment Id="3beea0aa-2081-4c1e-8a2a-3dcd454f1c1d" absoluteBounds="12.765, 1.21, 1.9700000000000002, 4.4800211588541661" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
+      </nestedChildShapes>
+    </classShape>
+  </nestedChildShapes>
+</ordesignerObjectsDiagram>

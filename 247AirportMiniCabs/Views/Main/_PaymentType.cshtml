@@ -1,0 +1,91 @@
+﻿@*
+<style>
+.pay {
+        
+        width: 196px;
+        background-repeat: no-repeat;
+        background-position: right center;
+        border: 1px solid rgba(231, 72, 50, 0.59);
+        border-radius: 5px;
+        margin: 20px;
+        display: inline-block;
+        color: #369212;
+        padding:0!important;
+        height: 124px;
+    }
+
+    .pay h2 {
+        border-bottom: 1px solid #369212;
+        color: #369212;
+    }
+
+    .pay .amount {
+        font-size: 19px;
+        margin-right: 80px;
+        text-align: center;
+        margin-top: 10px;
+    }
+
+    .pay .button {
+        border: 0;
+border-top: 1px solid rgba(231, 72, 50, 0.59);
+margin-top: 73px;
+text-align: center;
+text-shadow: none;
+color: black;
+font-size: 20px;
+background-color: rgba(204, 60, 25, 0.63);
+border-bottom: 1px solid rgba(231, 72, 50, 0.59);
+cursor:pointer;
+    }
+
+    .pay .button:hover { background-color: rgba(204, 60, 25, 0.83); }
+
+    .pay .button:active { background-color: rgba(204, 60, 25, 0.9); }
+    
+    .pay .selected-type
+    {
+        background-repeat: no-repeat;
+        background-position: 27px center;
+        background-image: url(/content/images/checkbox-32.png);
+        background-color: rgba(77, 177, 53, 0.91)!important;
+        border: 1px solid rgba(77, 177, 53, 0.91)!important;
+    }
+
+    .pay-in-cash {
+        background-image: url(/content/img/backgrounds/pay-in-cash.png);
+        margin-left: 21px;
+    }
+
+    .pay-by-card {
+        background-image: url(/content/img/backgrounds/pay-by-card.png);
+        margin-left: 15px;
+    }
+</style>
+
+<div class="pay pay-in-cash">
+    <div style="margin: 0;padding: 0;">
+        <h2 id="pay-in-cash-button" class="button">Pay Later!</h2>
+    </div>
+</div>
+
+<div class="pay pay-by-card">
+    <div style="margin: 0;padding: 0;">
+        <h2 id="pay-by-card-button" class="button">Pay Now!</h2>
+    </div>
+</div>
+*@
+
+<div id="terms-containers" style="padding: 10px;margin-left: 33px;margin-top: -10px;">
+    <input type="checkbox" id="terms">
+    <label for="terms" style="width: auto;margin-left: 7px;display: inline;width: auto;" class="tip" title="Please read our terms and services.">Please check the box to accept <a href="/Home/TermsAndConditions" style="color: #EC9D37;text-shadow: 0 0 1px #743504;">terms & services</a>!</label>
+</div>
+
+@*
+<script>
+    $('.button').click(function () {
+        $('.selected-type').removeClass('selected-type');
+        $(this).addClass('selected-type');
+    });
+</script>
+*@

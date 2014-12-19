@@ -1,0 +1,93 @@
+﻿@model CabDataContext
+@{
+    Layout = null;
+    string token = ViewBag.Token;
+    var booking = Model.Jobs.FirstOrDefault(j => j.Token == token && j.ClientToken == LoginHelper.Client.Token);
+}
+
+
+
+@if (booking != null)
+{
+    <div id="back" class="back">Back</div>
+    if (booking.PickupTime > UKTime.Now)
+     {
+         <div id="edit-job" class="edit-job">Edit</div>
+         <div id="delete-job" class="delete-button">Cancel Booking</div>
+     }
+
+    <style>
+        label {
+            display: inline-block;
+            width: 150px;
+        }
+        hr {
+            margin: 7px 0;
+            border-top: 1px solid #AA9090;
+            border-bottom: 0;
+        }
+    </style>
+    <div id="@booking.Token" class="bookings-div">
+        @if (!booking.PassengerName.IsEmpty())
+        {
+            <label>Booked by:</label> @booking.Name
+            <label>Booked for:</label> @booking.PassengerName <text> ( @booking.PassengerCell )</text>
+        }
+        else
+        {
+            <label>Name:</label> @booking.Name
+        }
+        <hr />
+        <label>Pick from:</label> @booking.PickFrom
+        <hr />
+        <label>Drop to:</label> @booking.DropTo
+        <hr />
+        <label>Fare:</label> @booking.Fare
+        <hr />
+        <label>Vehicle booked:</label> @booking.VehicleToken.GetVehicle().Name
+        @if (!booking.Stops.IsEmpty())
+        {
+            var stops = booking.Stops.Replace(",", "=====").Replace("-----", ",");
+            var splittedStops = stops.Split(',');
+            int index = 0;
+            foreach (string t in splittedStops)
+            {
+                index++;
+                <hr /><label>Stop @index:</label> @t.Replace("=====", ",")
+            }
+        }
+    </div>
+    <script>
+        $('#back').click(function () {
+            prevPage && $('.jobs-history').html(prevPage) && clientJobsTRClicks();
+        });
+
+        $('.jobs-history #edit-job').click(function () {
+            loadSpinner(this);
+            showEditJobPanel('@booking.Token');
+        });
+
+        $('.jobs-history #delete-job').click(function () {
+            $.Zebra_Dialog('Are you sure you want to cancel your booking?', {
+                'type': 'question',
+                'buttons': ['Yes, Cancel Booking', 'No'],
+                'onClose': function (caption) {
+                    if (caption == 'Yes, Cancel Booking') {
+                        $.post('/Client/CancelBooking', { id: '@booking.Token' }, function (response) {
+                            if (response == true) {
+
+                                $.Zebra_Dialog('We\'ll take final cancel booking action in a few minutes.<br /><br />We\'ll inform you via email when your booking will be cancelled. Thanks.', {
+                                    'type': 'information'
+                                });
+                            }
+                        });
+                    }
+                }
+            });
+        });
+</script>
+}
+else
+{
+    <h2>Booking not found. Please refresh the page.</h2>
+}

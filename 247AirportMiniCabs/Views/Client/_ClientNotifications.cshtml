@@ -1,0 +1,74 @@
+﻿@model CabDataContext
+<div class="notifications" style="display:none;">
+
+    @if (Model.Notifications.Any(n => n.Receiver == LoginHelper.Client.Token && n.Status == "New"))
+    {
+    <div style="float:left;margin:2em;">
+        <input type="checkbox" id="read-all" />
+        <label for="read-all" style="display:inline-block;">Mark all as read</label>
+    </div>
+    <script>
+        $('#read-all').change(function () {
+            loadSpinner(this);
+            $.post('/Client/MarkAllRead', function (response) {
+                if (response == true) location.reload();
+            });
+        });
+    </script>
+    }
+
+    <div class="top-menu">
+
+        <div class="selected" id="notification">
+            <span>Notifications</span>
+            <span class="roshan" style="margin-right: -16px;margin-left: 5px;background: #615858;">0</span>
+            <span class="selected select"></span>
+        </div>
+
+        <div id="messages">
+            <span>Messages</span>
+            <span style="font-size:12px;">(by You!)</span>
+            <span class="select"></span>
+        </div>
+        
+        <div id="new-message">
+            <span>New Message</span>
+            <span class="select"></span>
+        </div>
+    </div>
+
+    <div class="notifications-content">
+        <div class="notifications-for-you"></div>
+        <div class="messages-by-you" style="display:none;"></div>
+
+        <div class="new-message" style="display:none;">
+            <h2>Send direct message to admin/operator</h2>
+            <div style="margin-top: 11px;">
+                <label>Send message to</label>
+                <select id="message-to">
+                    <option>Operator</option>
+                    <option>Admin</option>
+                </select>
+            </div>
+
+            <div style="margin-top: 11px;">
+                <label>Message type</label>
+                <select id="message-type">
+                    <option>Direct Message</option>
+                    <option>Complain</option>
+                </select>
+            </div>
+
+            <div style="margin-top: 11px;">
+                <label style="vertical-align: top;">Your message</label>
+                <textarea id="direct-message" style="height: 162px;width: 512px;"></textarea>
+            </div>
+      
+            <div id="send-direct-message" class="make-a-booking send-direct-message" style="position: static;width: 185px;font-size: 18px;">
+                <span class="make-a-booking-arrow"></span>
+                <span>Send Direct Message</span>
+            </div>
+        </div>
+    </div>
+
+</div>

@@ -1,0 +1,26 @@
+﻿@{
+    ViewBag.Title = "Dracula Cars | Driver Job";
+}
+
+@Html.Partial("_LeftMenu")
+<script>
+    $('a#driver-job').html('<span class="right-arrow"></span>' + $('a#driver-job').html()).addClass('selected').parent().removeClass('collapsed').addClass('expanded').find('.collapsed').removeClass('collapsed').addClass('expanded');
+</script>
+
+<div class="client-page">
+
+<h2>Driver Job</h2>
+<p>Draculacars aim to recruit further First Class Drivers to join our ever-expanding team of PCO licensed drivers who share our commitment in providing a First Class Experience for our well-appreciated clients We require only customer orientated people who take pride in their work.</p>
+<p>If you are interested in participating in First Class Airport work as well as Tailored Journey’s in addition to your other private hire commitments, then take action now. Our application process is rigorous – not every driver that applies is accepted. Every successful applicant will be required to undergo a thorough induction before undertaking any appointments, ensuring that all drivers operate at the same consistent high standard.</p>
+
+<p>If you are interested in working for us then, please email the following details <a href="#">here</a>.</p>
+
+<ol>
+    <li>Your Full Name</li>
+    <li>Where do you live?</li>
+    <li>Your Car/Van/Coach details</li>
+    <li>Your Mobile Contact Number</li>
+    <li>PCO License Number</li>
+</ol>
+
+</div>

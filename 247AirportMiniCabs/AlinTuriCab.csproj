@@ -1,0 +1,745 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProductVersion>
+    </ProductVersion>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>{96EF440B-FDE2-4BE9-A7DD-1EBCA072FBBB}</ProjectGuid>
+    <ProjectTypeGuids>{E53F8FEA-EAE0-44A6-8774-FFD645390401};{349c5851-65df-11da-9384-00065b846f21};{fae04ec0-301f-11d3-bf4b-00c04f79efbc}</ProjectTypeGuids>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>AlinTuriCab</RootNamespace>
+    <AssemblyName>AlinTuriCab</AssemblyName>
+    <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
+    <MvcBuildViews>false</MvcBuildViews>
+    <UseIISExpress>false</UseIISExpress>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <ExcludeApp_Data>true</ExcludeApp_Data>
+    <ExcludeGeneratedDebugSymbol>true</ExcludeGeneratedDebugSymbol>
+    <PublishDatabaseSettings>
+      <Objects>
+      </Objects>
+    </PublishDatabaseSettings>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="BCrypt">
+      <HintPath>..\..\..\2012\DTweet - Latest\bin\BCrypt.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="EntityFramework">
+      <HintPath>C:\Users\Muaz Khan\Desktop\New folder (4)\MVCPaymentGateway\MVCPaymentGateway\SamplePaymentGateway\bin\EntityFramework.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Data.Linq">
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="System.Web.Mvc, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL" />
+    <Reference Include="System.Web.WebPages" />
+    <Reference Include="System.Web.Helpers" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.Web.DynamicData" />
+    <Reference Include="System.Web.Entity" />
+    <Reference Include="System.Web.ApplicationServices" />
+    <Reference Include="System.ComponentModel.DataAnnotations" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Web" />
+    <Reference Include="System.Web.Extensions" />
+    <Reference Include="System.Web.Abstractions" />
+    <Reference Include="System.Web.Routing" />
+    <Reference Include="System.Xml" />
+    <Reference Include="System.Configuration" />
+    <Reference Include="System.Web.Services" />
+    <Reference Include="System.EnterpriseServices" />
+    <Reference Include="ThePaymentGatewayPublicShared">
+      <HintPath>C:\Users\Muaz Khan\Documents\Visual Studio 2010\Projects\WebApplication1\WebApplication1\bin\ThePaymentGatewayPublicShared.dll</HintPath>
+    </Reference>
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="App_Code\Global.asax.cs" />
+    <Compile Include="Controllers\AccountController.cs" />
+    <Compile Include="Controllers\AddressController.cs" />
+    <Compile Include="Controllers\AirportTransfersController.cs" />
+    <Compile Include="Controllers\ConfirmController.cs" />
+    <Compile Include="Controllers\FeedbackController.cs" />
+    <Compile Include="Controllers\MainController.cs" />
+    <Compile Include="Controllers\ClientController.cs" />
+    <Compile Include="Controllers\DefaultsController.cs" />
+    <Compile Include="Controllers\HomeController.cs" />
+    <Compile Include="Controllers\JobController.cs" />
+    <Compile Include="Controllers\PaymentController.cs" />
+    <Compile Include="Controllers\TechnologyController.cs" />
+    <Compile Include="Global.asax.cs">
+      <DependentUpon>Global.asax</DependentUpon>
+    </Compile>
+    <Compile Include="Helpers\ClientExtensions.cs" />
+    <Compile Include="Helpers\CommonExtensions.cs" />
+    <Compile Include="Helpers\CookiesExtensions.cs" />
+    <Compile Include="Helpers\DiscountHelper.cs" />
+    <Compile Include="Helpers\Email.cs" />
+    <Compile Include="Helpers\JobType.cs" />
+    <Compile Include="Helpers\LoginHelper.cs" />
+    <Compile Include="Helpers\NotificationExtensions.cs" />
+    <Compile Include="Helpers\NotificationsHelper.cs" />
+    <Compile Include="Helpers\RandomNumbers.cs" />
+    <Compile Include="Helpers\StaticHelper.cs" />
+    <Compile Include="Helpers\ToAgoDateTime.cs" />
+    <Compile Include="Helpers\UKTime.cs" />
+    <Compile Include="Helpers\ValidateRequestAttribute.cs" />
+    <Compile Include="Models\Cab.designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Cab.dbml</DependentUpon>
+    </Compile>
+    <Compile Include="Models\Country.cs" />
+    <Compile Include="Models\Helper.cs" />
+    <Compile Include="Models\PaymentModel.cs" />
+    <Compile Include="Models\PaymentServiceAttributes.cs" />
+    <Compile Include="Models\PostCodes.designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>PostCodes.dbml</DependentUpon>
+    </Compile>
+    <Compile Include="Properties\AssemblyInfo.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="about us.html" />
+    <Content Include="App.html" />
+    <Content Include="confirm-booking.html" />
+    <Content Include="contact.html" />
+    <Content Include="Content\client-page.css" />
+    <Content Include="Content\common.css" />
+    <Content Include="Content\images\checkbox-32.png" />
+    <Content Include="Content\images\checkbox.png" />
+    <Content Include="Content\images\down-arrow.png" />
+    <Content Include="Content\images\h1-back.png" />
+    <Content Include="Content\images\pay-by-card.png" />
+    <Content Include="Content\images\pay-in-cash.png" />
+    <Content Include="Content\images\progress.gif" />
+    <Content Include="Content\images\required.png" />
+    <Content Include="Content\images\spinner.gif" />
+    <Content Include="Content\images\uncheck.png" />
+    <Content Include="Content\images\user.png" />
+    <Content Include="Content\img\baby-seats.png" />
+    <Content Include="Content\img\back.png" />
+    <Content Include="Content\img\backgrounds\booking-right-panel.png" />
+    <Content Include="Content\img\backgrounds\feedback.png" />
+    <Content Include="Content\img\backgrounds\pay-by-card.png" />
+    <Content Include="Content\img\backgrounds\pay-in-cash.png" />
+    <Content Include="Content\img\Bottle-of-Water.png" />
+    <Content Include="Content\img\cancel.png" />
+    <Content Include="Content\img\child-seats.png" />
+    <Content Include="Content\img\comments.png" />
+    <Content Include="Content\img\dracula\arrow-downward.png" />
+    <Content Include="Content\img\dracula\arrow-external-link.png" />
+    <Content Include="Content\img\dracula\back.png" />
+    <Content Include="Content\img\dracula\bonus-offer.png" />
+    <Content Include="Content\img\dracula\book-journey.png" />
+    <Content Include="Content\img\dracula\check.png" />
+    <Content Include="Content\img\dracula\close.png" />
+    <Content Include="Content\img\dracula\collapsed.png" />
+    <Content Include="Content\img\dracula\down-arrow.png" />
+    <Content Include="Content\img\dracula\draculacars-vouncher-codes.png" />
+    <Content Include="Content\img\dracula\edit-small-icon.png" />
+    <Content Include="Content\img\dracula\edit.png" />
+    <Content Include="Content\img\dracula\expanded.png" />
+    <Content Include="Content\img\dracula\expect-more-gray.png" />
+    <Content Include="Content\img\dracula\expect-more.png" />
+    <Content Include="Content\img\dracula\footer-img-back.png" />
+    <Content Include="Content\img\dracula\leftward-arrow.png" />
+    <Content Include="Content\img\dracula\login-small-icon.png" />
+    <Content Include="Content\img\dracula\main-logo.png" />
+    <Content Include="Content\img\dracula\roshan-balb.png" />
+    <Content Include="Content\img\dracula\welcome-screen-back.png" />
+    <Content Include="Content\img\drink.png" />
+    <Content Include="Content\img\h2-background.png" />
+    <Content Include="Content\img\HandLag.png" />
+    <Content Include="Content\img\homepage\customer.jpg" />
+    <Content Include="Content\img\homepage\discount.jpg" />
+    <Content Include="Content\img\homepage\mobile.jpg" />
+    <Content Include="Content\img\homepage\online.jpg" />
+    <Content Include="Content\img\homepage\save-money.jpg" />
+    <Content Include="Content\img\homepage\telephone.jpg" />
+    <Content Include="Content\img\luggages.png" />
+    <Content Include="Content\img\Newspaper.png" />
+    <Content Include="Content\img\passengers.png" />
+    <Content Include="Content\img\quote.png" />
+    <Content Include="Content\img\search.png" />
+    <Content Include="Content\img\sliding\1.jpg" />
+    <Content Include="Content\img\sliding\2.jpg" />
+    <Content Include="Content\img\sliding\3.jpg" />
+    <Content Include="Content\img\sliding\4.jpg" />
+    <Content Include="Content\img\sliding\5.jpg" />
+    <Content Include="Content\img\vehicles\7_Seater.png" />
+    <Content Include="Content\img\vehicles\Estate.jpg" />
+    <Content Include="Content\img\vehicles\Executive.png" />
+    <Content Include="Content\img\vehicles\Gold-Vip.jpg" />
+    <Content Include="Content\img\vehicles\MPV.jpg" />
+    <Content Include="Content\img\vehicles\Sallon.jpg" />
+    <Content Include="Content\img\why-use-us.png" />
+    <Content Include="Content\main-page.css" />
+    <Content Include="Content\make-a-booking.css" />
+    <Content Include="Content\paymentform.css" />
+    <Content Include="css\global.css" />
+    <Content Include="Global.asax" />
+    <Content Include="Images\3.jpg" />
+    <Content Include="Images\add.jpg" />
+    <Content Include="Images\adds.png" />
+    <Content Include="Images\arrow.png" />
+    <Content Include="Images\Arrow_R_Red.png" />
+    <Content Include="Images\bg-contant.png" />
+    <Content Include="Images\bg-footer.jpg" />
+    <Content Include="Images\bg.png" />
+    <Content Include="Images\black-arrow.gif" />
+    <Content Include="Images\contant-bg.png" />
+    <Content Include="Images\current-bg.gif" />
+    <Content Include="Images\ema.png" />
+    <Content Include="Images\email.png" />
+    <Content Include="Images\facebook.png" />
+    <Content Include="Images\footer-bg.png" />
+    <Content Include="Images\form-h1.png" />
+    <Content Include="Images\gplus-32.png" />
+    <Content Include="Images\linkedin.png" />
+    <Content Include="Images\logo.png" />
+    <Content Include="Images\mail.png" />
+    <Content Include="Images\main-bot.jpg" />
+    <Content Include="Images\menu-bg.gif" />
+    <Content Include="Images\nav-1.png" />
+    <Content Include="Images\nav.png" />
+    <Content Include="Images\phone.png" />
+    <Content Include="Images\right.jpg" />
+    <Content Include="Images\right.png" />
+    <Content Include="Images\spacer.png" />
+    <Content Include="Images\tel.png" />
+    <Content Include="Images\twitter.png" />
+    <Content Include="Images\visa.png" />
+    <Content Include="img\1.jpg" />
+    <Content Include="img\6.jpg" />
+    <Content Include="img\arrow-next.png" />
+    <Content Include="img\arrow-prev.png" />
+    <Content Include="img\loading.gif" />
+    <Content Include="index.html" />
+    <Content Include="js\jquery.min.js" />
+    <Content Include="js\slides.min.jquery.js" />
+    <Content Include="online-booking.html" />
+    <Content Include="passenger-services.html" />
+    <Content Include="Scripts\client-page.js" />
+    <Content Include="Scripts\common.js" />
+    <Content Include="Scripts\datepicker\calendar-disabled.png" />
+    <Content Include="Scripts\datepicker\calendar.png" />
+    <Content Include="Scripts\datepicker\datepicker.css" />
+    <Content Include="Scripts\datepicker\datepicker.js" />
+    <Content Include="Scripts\datepicker\datepicker2.css" />
+    <Content Include="Scripts\datepicker\metallic\default-date.png" />
+    <Content Include="Scripts\datepicker\metallic\disabled-date.png" />
+    <Content Include="Scripts\datepicker\metallic\header.png" />
+    <Content Include="Scripts\datepicker\metallic\selected-date.png" />
+    <Content Include="Scripts\datepicker\metallic\titles.png" />
+    <Content Include="Scripts\geo-autocomplete\auto-complete.css" />
+    <Content Include="Scripts\geo-autocomplete\auto-complete.js" />
+    <Content Include="Scripts\jquery-ui\themes\base\images\ui-bg_flat_0_aaaaaa_40x100.png" />
+    <Content Include="Scripts\jquery-ui\themes\base\images\ui-bg_flat_75_ffffff_40x100.png" />
+    <Content Include="Scripts\jquery-ui\themes\base\images\ui-bg_glass_55_fbf9ee_1x400.png" />
+    <Content Include="Scripts\jquery-ui\themes\base\images\ui-bg_glass_65_ffffff_1x400.png" />
+    <Content Include="Scripts\jquery-ui\themes\base\images\ui-bg_glass_75_dadada_1x400.png" />
+    <Content Include="Scripts\jquery-ui\themes\base\images\ui-bg_glass_75_e6e6e6_1x400.png" />
+    <Content Include="Scripts\jquery-ui\themes\base\images\ui-bg_glass_95_fef1ec_1x400.png" />
+    <Content Include="Scripts\jquery-ui\themes\base\images\ui-bg_highlight-soft_75_cccccc_1x100.png" />
+    <Content Include="Scripts\jquery-ui\themes\base\images\ui-icons_222222_256x240.png" />
+    <Content Include="Scripts\jquery-ui\themes\base\images\ui-icons_2e83ff_256x240.png" />
+    <Content Include="Scripts\jquery-ui\themes\base\images\ui-icons_454545_256x240.png" />
+    <Content Include="Scripts\jquery-ui\themes\base\images\ui-icons_888888_256x240.png" />
+    <Content Include="Scripts\jquery-ui\themes\base\images\ui-icons_cd0a0a_256x240.png" />
+    <Content Include="Scripts\jquery-ui\themes\base\jquery-ui.css" />
+    <Content Include="Scripts\jquery-ui\themes\base\jquery.ui.accordion.css" />
+    <Content Include="Scripts\jquery-ui\themes\base\jquery.ui.all.css" />
+    <Content Include="Scripts\jquery-ui\themes\base\jquery.ui.autocomplete.css" />
+    <Content Include="Scripts\jquery-ui\themes\base\jquery.ui.base.css" />
+    <Content Include="Scripts\jquery-ui\themes\base\jquery.ui.button.css" />
+    <Content Include="Scripts\jquery-ui\themes\base\jquery.ui.core.css" />
+    <Content Include="Scripts\jquery-ui\themes\base\jquery.ui.datepicker.css" />
+    <Content Include="Scripts\jquery-ui\themes\base\jquery.ui.dialog.css" />
+    <Content Include="Scripts\jquery-ui\themes\base\jquery.ui.menu.css" />
+    <Content Include="Scripts\jquery-ui\themes\base\jquery.ui.progressbar.css" />
+    <Content Include="Scripts\jquery-ui\themes\base\jquery.ui.resizable.css" />
+    <Content Include="Scripts\jquery-ui\themes\base\jquery.ui.selectable.css" />
+    <Content Include="Scripts\jquery-ui\themes\base\jquery.ui.slider.css" />
+    <Content Include="Scripts\jquery-ui\themes\base\jquery.ui.spinner.css" />
+    <Content Include="Scripts\jquery-ui\themes\base\jquery.ui.tabs.css" />
+    <Content Include="Scripts\jquery-ui\themes\base\jquery.ui.theme.css" />
+    <Content Include="Scripts\jquery-ui\themes\base\jquery.ui.tooltip.css" />
+    <Content Include="Scripts\jquery-ui\themes\base\minified\images\ui-bg_flat_0_aaaaaa_40x100.png" />
+    <Content Include="Scripts\jquery-ui\themes\base\minified\images\ui-bg_flat_75_ffffff_40x100.png" />
+    <Content Include="Scripts\jquery-ui\themes\base\minified\images\ui-bg_glass_55_fbf9ee_1x400.png" />
+    <Content Include="Scripts\jquery-ui\themes\base\minified\images\ui-bg_glass_65_ffffff_1x400.png" />
+    <Content Include="Scripts\jquery-ui\themes\base\minified\images\ui-bg_glass_75_dadada_1x400.png" />
+    <Content Include="Scripts\jquery-ui\themes\base\minified\images\ui-bg_glass_75_e6e6e6_1x400.png" />
+    <Content Include="Scripts\jquery-ui\themes\base\minified\images\ui-bg_glass_95_fef1ec_1x400.png" />
+    <Content Include="Scripts\jquery-ui\themes\base\minified\images\ui-bg_highlight-soft_75_cccccc_1x100.png" />
+    <Content Include="Scripts\jquery-ui\themes\base\minified\images\ui-icons_222222_256x240.png" />
+    <Content Include="Scripts\jquery-ui\themes\base\minified\images\ui-icons_2e83ff_256x240.png" />
+    <Content Include="Scripts\jquery-ui\themes\base\minified\images\ui-icons_454545_256x240.png" />
+    <Content Include="Scripts\jquery-ui\themes\base\minified\images\ui-icons_888888_256x240.png" />
+    <Content Include="Scripts\jquery-ui\themes\base\minified\images\ui-icons_cd0a0a_256x240.png" />
+    <Content Include="Scripts\jquery-ui\themes\base\minified\jquery-ui.min.css" />
+    <Content Include="Scripts\jquery-ui\themes\base\minified\jquery.ui.accordion.min.css" />
+    <Content Include="Scripts\jquery-ui\themes\base\minified\jquery.ui.autocomplete.min.css" />
+    <Content Include="Scripts\jquery-ui\themes\base\minified\jquery.ui.button.min.css" />
+    <Content Include="Scripts\jquery-ui\themes\base\minified\jquery.ui.core.min.css" />
+    <Content Include="Scripts\jquery-ui\themes\base\minified\jquery.ui.datepicker.min.css" />
+    <Content Include="Scripts\jquery-ui\themes\base\minified\jquery.ui.dialog.min.css" />
+    <Content Include="Scripts\jquery-ui\themes\base\minified\jquery.ui.menu.min.css" />
+    <Content Include="Scripts\jquery-ui\themes\base\minified\jquery.ui.progressbar.min.css" />
+    <Content Include="Scripts\jquery-ui\themes\base\minified\jquery.ui.resizable.min.css" />
+    <Content Include="Scripts\jquery-ui\themes\base\minified\jquery.ui.selectable.min.css" />
+    <Content Include="Scripts\jquery-ui\themes\base\minified\jquery.ui.slider.min.css" />
+    <Content Include="Scripts\jquery-ui\themes\base\minified\jquery.ui.spinner.min.css" />
+    <Content Include="Scripts\jquery-ui\themes\base\minified\jquery.ui.tabs.min.css" />
+    <Content Include="Scripts\jquery-ui\themes\base\minified\jquery.ui.theme.min.css" />
+    <Content Include="Scripts\jquery-ui\themes\base\minified\jquery.ui.tooltip.min.css" />
+    <Content Include="Scripts\jquery-ui\themes\redmond\images\ui-bg_flat_0_aaaaaa_40x100.png" />
+    <Content Include="Scripts\jquery-ui\themes\redmond\images\ui-bg_flat_55_fbec88_40x100.png" />
+    <Content Include="Scripts\jquery-ui\themes\redmond\images\ui-bg_glass_75_d0e5f5_1x400.png" />
+    <Content Include="Scripts\jquery-ui\themes\redmond\images\ui-bg_glass_85_dfeffc_1x400.png" />
+    <Content Include="Scripts\jquery-ui\themes\redmond\images\ui-bg_glass_95_fef1ec_1x400.png" />
+    <Content Include="Scripts\jquery-ui\themes\redmond\images\ui-bg_gloss-wave_55_5c9ccc_500x100.png" />
+    <Content Include="Scripts\jquery-ui\themes\redmond\images\ui-bg_inset-hard_100_f5f8f9_1x100.png" />
+    <Content Include="Scripts\jquery-ui\themes\redmond\images\ui-bg_inset-hard_100_fcfdfd_1x100.png" />
+    <Content Include="Scripts\jquery-ui\themes\redmond\images\ui-icons_217bc0_256x240.png" />
+    <Content Include="Scripts\jquery-ui\themes\redmond\images\ui-icons_2e83ff_256x240.png" />
+    <Content Include="Scripts\jquery-ui\themes\redmond\images\ui-icons_469bdd_256x240.png" />
+    <Content Include="Scripts\jquery-ui\themes\redmond\images\ui-icons_6da8d5_256x240.png" />
+    <Content Include="Scripts\jquery-ui\themes\redmond\images\ui-icons_cd0a0a_256x240.png" />
+    <Content Include="Scripts\jquery-ui\themes\redmond\images\ui-icons_d8e7f3_256x240.png" />
+    <Content Include="Scripts\jquery-ui\themes\redmond\images\ui-icons_f9bd01_256x240.png" />
+    <Content Include="Scripts\jquery-ui\themes\redmond\jquery-ui.css" />
+    <Content Include="Scripts\jquery-ui\themes\redmond\jquery.ui.accordion.css" />
+    <Content Include="Scripts\jquery-ui\themes\redmond\jquery.ui.all.css" />
+    <Content Include="Scripts\jquery-ui\themes\redmond\jquery.ui.autocomplete.css" />
+    <Content Include="Scripts\jquery-ui\themes\redmond\jquery.ui.base.css" />
+    <Content Include="Scripts\jquery-ui\themes\redmond\jquery.ui.button.css" />
+    <Content Include="Scripts\jquery-ui\themes\redmond\jquery.ui.core.css" />
+    <Content Include="Scripts\jquery-ui\themes\redmond\jquery.ui.datepicker.css" />
+    <Content Include="Scripts\jquery-ui\themes\redmond\jquery.ui.dialog.css" />
+    <Content Include="Scripts\jquery-ui\themes\redmond\jquery.ui.menu.css" />
+    <Content Include="Scripts\jquery-ui\themes\redmond\jquery.ui.progressbar.css" />
+    <Content Include="Scripts\jquery-ui\themes\redmond\jquery.ui.resizable.css" />
+    <Content Include="Scripts\jquery-ui\themes\redmond\jquery.ui.selectable.css" />
+    <Content Include="Scripts\jquery-ui\themes\redmond\jquery.ui.slider.css" />
+    <Content Include="Scripts\jquery-ui\themes\redmond\jquery.ui.spinner.css" />
+    <Content Include="Scripts\jquery-ui\themes\redmond\jquery.ui.tabs.css" />
+    <Content Include="Scripts\jquery-ui\themes\redmond\jquery.ui.theme.css" />
+    <Content Include="Scripts\jquery-ui\themes\redmond\jquery.ui.tooltip.css" />
+    <Content Include="Scripts\jquery-ui\themes\redmond\minified\images\ui-bg_flat_0_aaaaaa_40x100.png" />
+    <Content Include="Scripts\jquery-ui\themes\redmond\minified\images\ui-bg_flat_55_fbec88_40x100.png" />
+    <Content Include="Scripts\jquery-ui\themes\redmond\minified\images\ui-bg_glass_75_d0e5f5_1x400.png" />
+    <Content Include="Scripts\jquery-ui\themes\redmond\minified\images\ui-bg_glass_85_dfeffc_1x400.png" />
+    <Content Include="Scripts\jquery-ui\themes\redmond\minified\images\ui-bg_glass_95_fef1ec_1x400.png" />
+    <Content Include="Scripts\jquery-ui\themes\redmond\minified\images\ui-bg_gloss-wave_55_5c9ccc_500x100.png" />
+    <Content Include="Scripts\jquery-ui\themes\redmond\minified\images\ui-bg_inset-hard_100_f5f8f9_1x100.png" />
+    <Content Include="Scripts\jquery-ui\themes\redmond\minified\images\ui-bg_inset-hard_100_fcfdfd_1x100.png" />
+    <Content Include="Scripts\jquery-ui\themes\redmond\minified\images\ui-icons_217bc0_256x240.png" />
+    <Content Include="Scripts\jquery-ui\themes\redmond\minified\images\ui-icons_2e83ff_256x240.png" />
+    <Content Include="Scripts\jquery-ui\themes\redmond\minified\images\ui-icons_469bdd_256x240.png" />
+    <Content Include="Scripts\jquery-ui\themes\redmond\minified\images\ui-icons_6da8d5_256x240.png" />
+    <Content Include="Scripts\jquery-ui\themes\redmond\minified\images\ui-icons_cd0a0a_256x240.png" />
+    <Content Include="Scripts\jquery-ui\themes\redmond\minified\images\ui-icons_d8e7f3_256x240.png" />
+    <Content Include="Scripts\jquery-ui\themes\redmond\minified\images\ui-icons_f9bd01_256x240.png" />
+    <Content Include="Scripts\jquery-ui\themes\redmond\minified\jquery-ui.min.css" />
+    <Content Include="Scripts\jquery-ui\themes\redmond\minified\jquery.ui.accordion.min.css" />
+    <Content Include="Scripts\jquery-ui\themes\redmond\minified\jquery.ui.autocomplete.min.css" />
+    <Content Include="Scripts\jquery-ui\themes\redmond\minified\jquery.ui.button.min.css" />
+    <Content Include="Scripts\jquery-ui\themes\redmond\minified\jquery.ui.core.min.css" />
+    <Content Include="Scripts\jquery-ui\themes\redmond\minified\jquery.ui.datepicker.min.css" />
+    <Content Include="Scripts\jquery-ui\themes\redmond\minified\jquery.ui.dialog.min.css" />
+    <Content Include="Scripts\jquery-ui\themes\redmond\minified\jquery.ui.menu.min.css" />
+    <Content Include="Scripts\jquery-ui\themes\redmond\minified\jquery.ui.progressbar.min.css" />
+    <Content Include="Scripts\jquery-ui\themes\redmond\minified\jquery.ui.resizable.min.css" />
+    <Content Include="Scripts\jquery-ui\themes\redmond\minified\jquery.ui.selectable.min.css" />
+    <Content Include="Scripts\jquery-ui\themes\redmond\minified\jquery.ui.slider.min.css" />
+    <Content Include="Scripts\jquery-ui\themes\redmond\minified\jquery.ui.spinner.min.css" />
+    <Content Include="Scripts\jquery-ui\themes\redmond\minified\jquery.ui.tabs.min.css" />
+    <Content Include="Scripts\jquery-ui\themes\redmond\minified\jquery.ui.theme.min.css" />
+    <Content Include="Scripts\jquery-ui\themes\redmond\minified\jquery.ui.tooltip.min.css" />
+    <Content Include="Scripts\jquery-ui\ui\i18n\jquery-ui-i18n.js" />
+    <Content Include="Scripts\jquery-ui\ui\i18n\jquery.ui.datepicker-af.js" />
+    <Content Include="Scripts\jquery-ui\ui\i18n\jquery.ui.datepicker-ar-DZ.js" />
+    <Content Include="Scripts\jquery-ui\ui\i18n\jquery.ui.datepicker-ar.js" />
+    <Content Include="Scripts\jquery-ui\ui\i18n\jquery.ui.datepicker-az.js" />
+    <Content Include="Scripts\jquery-ui\ui\i18n\jquery.ui.datepicker-bg.js" />
+    <Content Include="Scripts\jquery-ui\ui\i18n\jquery.ui.datepicker-bs.js" />
+    <Content Include="Scripts\jquery-ui\ui\i18n\jquery.ui.datepicker-ca.js" />
+    <Content Include="Scripts\jquery-ui\ui\i18n\jquery.ui.datepicker-cs.js" />
+    <Content Include="Scripts\jquery-ui\ui\i18n\jquery.ui.datepicker-cy-GB.js" />
+    <Content Include="Scripts\jquery-ui\ui\i18n\jquery.ui.datepicker-da.js" />
+    <Content Include="Scripts\jquery-ui\ui\i18n\jquery.ui.datepicker-de.js" />
+    <Content Include="Scripts\jquery-ui\ui\i18n\jquery.ui.datepicker-el.js" />
+    <Content Include="Scripts\jquery-ui\ui\i18n\jquery.ui.datepicker-en-AU.js" />
+    <Content Include="Scripts\jquery-ui\ui\i18n\jquery.ui.datepicker-en-GB.js" />
+    <Content Include="Scripts\jquery-ui\ui\i18n\jquery.ui.datepicker-en-NZ.js" />
+    <Content Include="Scripts\jquery-ui\ui\i18n\jquery.ui.datepicker-eo.js" />
+    <Content Include="Scripts\jquery-ui\ui\i18n\jquery.ui.datepicker-es.js" />
+    <Content Include="Scripts\jquery-ui\ui\i18n\jquery.ui.datepicker-et.js" />
+    <Content Include="Scripts\jquery-ui\ui\i18n\jquery.ui.datepicker-eu.js" />
+    <Content Include="Scripts\jquery-ui\ui\i18n\jquery.ui.datepicker-fa.js" />
+    <Content Include="Scripts\jquery-ui\ui\i18n\jquery.ui.datepicker-fi.js" />
+    <Content Include="Scripts\jquery-ui\ui\i18n\jquery.ui.datepicker-fo.js" />
+    <Content Include="Scripts\jquery-ui\ui\i18n\jquery.ui.datepicker-fr-CH.js" />
+    <Content Include="Scripts\jquery-ui\ui\i18n\jquery.ui.datepicker-fr.js" />
+    <Content Include="Scripts\jquery-ui\ui\i18n\jquery.ui.datepicker-gl.js" />
+    <Content Include="Scripts\jquery-ui\ui\i18n\jquery.ui.datepicker-he.js" />
+    <Content Include="Scripts\jquery-ui\ui\i18n\jquery.ui.datepicker-hi.js" />
+    <Content Include="Scripts\jquery-ui\ui\i18n\jquery.ui.datepicker-hr.js" />
+    <Content Include="Scripts\jquery-ui\ui\i18n\jquery.ui.datepicker-hu.js" />
+    <Content Include="Scripts\jquery-ui\ui\i18n\jquery.ui.datepicker-hy.js" />
+    <Content Include="Scripts\jquery-ui\ui\i18n\jquery.ui.datepicker-id.js" />
+    <Content Include="Scripts\jquery-ui\ui\i18n\jquery.ui.datepicker-is.js" />
+    <Content Include="Scripts\jquery-ui\ui\i18n\jquery.ui.datepicker-it.js" />
+    <Content Include="Scripts\jquery-ui\ui\i18n\jquery.ui.datepicker-ja.js" />
+    <Content Include="Scripts\jquery-ui\ui\i18n\jquery.ui.datepicker-ka.js" />
+    <Content Include="Scripts\jquery-ui\ui\i18n\jquery.ui.datepicker-kk.js" />
+    <Content Include="Scripts\jquery-ui\ui\i18n\jquery.ui.datepicker-km.js" />
+    <Content Include="Scripts\jquery-ui\ui\i18n\jquery.ui.datepicker-ko.js" />
+    <Content Include="Scripts\jquery-ui\ui\i18n\jquery.ui.datepicker-lb.js" />
+    <Content Include="Scripts\jquery-ui\ui\i18n\jquery.ui.datepicker-lt.js" />
+    <Content Include="Scripts\jquery-ui\ui\i18n\jquery.ui.datepicker-lv.js" />
+    <Content Include="Scripts\jquery-ui\ui\i18n\jquery.ui.datepicker-mk.js" />
+    <Content Include="Scripts\jquery-ui\ui\i18n\jquery.ui.datepicker-ml.js" />
+    <Content Include="Scripts\jquery-ui\ui\i18n\jquery.ui.datepicker-ms.js" />
+    <Content Include="Scripts\jquery-ui\ui\i18n\jquery.ui.datepicker-nl-BE.js" />
+    <Content Include="Scripts\jquery-ui\ui\i18n\jquery.ui.datepicker-nl.js" />
+    <Content Include="Scripts\jquery-ui\ui\i18n\jquery.ui.datepicker-no.js" />
+    <Content Include="Scripts\jquery-ui\ui\i18n\jquery.ui.datepicker-pl.js" />
+    <Content Include="Scripts\jquery-ui\ui\i18n\jquery.ui.datepicker-pt-BR.js" />
+    <Content Include="Scripts\jquery-ui\ui\i18n\jquery.ui.datepicker-pt.js" />
+    <Content Include="Scripts\jquery-ui\ui\i18n\jquery.ui.datepicker-rm.js" />
+    <Content Include="Scripts\jquery-ui\ui\i18n\jquery.ui.datepicker-ro.js" />
+    <Content Include="Scripts\jquery-ui\ui\i18n\jquery.ui.datepicker-ru.js" />
+    <Content Include="Scripts\jquery-ui\ui\i18n\jquery.ui.datepicker-sk.js" />
+    <Content Include="Scripts\jquery-ui\ui\i18n\jquery.ui.datepicker-sl.js" />
+    <Content Include="Scripts\jquery-ui\ui\i18n\jquery.ui.datepicker-sq.js" />
+    <Content Include="Scripts\jquery-ui\ui\i18n\jquery.ui.datepicker-sr-SR.js" />
+    <Content Include="Scripts\jquery-ui\ui\i18n\jquery.ui.datepicker-sr.js" />
+    <Content Include="Scripts\jquery-ui\ui\i18n\jquery.ui.datepicker-sv.js" />
+    <Content Include="Scripts\jquery-ui\ui\i18n\jquery.ui.datepicker-ta.js" />
+    <Content Include="Scripts\jquery-ui\ui\i18n\jquery.ui.datepicker-th.js" />
+    <Content Include="Scripts\jquery-ui\ui\i18n\jquery.ui.datepicker-tj.js" />
+    <Content Include="Scripts\jquery-ui\ui\i18n\jquery.ui.datepicker-tr.js" />
+    <Content Include="Scripts\jquery-ui\ui\i18n\jquery.ui.datepicker-uk.js" />
+    <Content Include="Scripts\jquery-ui\ui\i18n\jquery.ui.datepicker-vi.js" />
+    <Content Include="Scripts\jquery-ui\ui\i18n\jquery.ui.datepicker-zh-CN.js" />
+    <Content Include="Scripts\jquery-ui\ui\i18n\jquery.ui.datepicker-zh-HK.js" />
+    <Content Include="Scripts\jquery-ui\ui\i18n\jquery.ui.datepicker-zh-TW.js" />
+    <Content Include="Scripts\jquery-ui\ui\jquery-ui.custom.js" />
+    <Content Include="Scripts\jquery-ui\ui\jquery.ui.accordion.js" />
+    <Content Include="Scripts\jquery-ui\ui\jquery.ui.autocomplete.js" />
+    <Content Include="Scripts\jquery-ui\ui\jquery.ui.button.js" />
+    <Content Include="Scripts\jquery-ui\ui\jquery.ui.core.js" />
+    <Content Include="Scripts\jquery-ui\ui\jquery.ui.datepicker.js" />
+    <Content Include="Scripts\jquery-ui\ui\jquery.ui.dialog.js" />
+    <Content Include="Scripts\jquery-ui\ui\jquery.ui.draggable.js" />
+    <Content Include="Scripts\jquery-ui\ui\jquery.ui.droppable.js" />
+    <Content Include="Scripts\jquery-ui\ui\jquery.ui.effect-blind.js" />
+    <Content Include="Scripts\jquery-ui\ui\jquery.ui.effect-bounce.js" />
+    <Content Include="Scripts\jquery-ui\ui\jquery.ui.effect-clip.js" />
+    <Content Include="Scripts\jquery-ui\ui\jquery.ui.effect-drop.js" />
+    <Content Include="Scripts\jquery-ui\ui\jquery.ui.effect-explode.js" />
+    <Content Include="Scripts\jquery-ui\ui\jquery.ui.effect-fade.js" />
+    <Content Include="Scripts\jquery-ui\ui\jquery.ui.effect-fold.js" />
+    <Content Include="Scripts\jquery-ui\ui\jquery.ui.effect-highlight.js" />
+    <Content Include="Scripts\jquery-ui\ui\jquery.ui.effect-pulsate.js" />
+    <Content Include="Scripts\jquery-ui\ui\jquery.ui.effect-scale.js" />
+    <Content Include="Scripts\jquery-ui\ui\jquery.ui.effect-shake.js" />
+    <Content Include="Scripts\jquery-ui\ui\jquery.ui.effect-slide.js" />
+    <Content Include="Scripts\jquery-ui\ui\jquery.ui.effect-transfer.js" />
+    <Content Include="Scripts\jquery-ui\ui\jquery.ui.effect.js" />
+    <Content Include="Scripts\jquery-ui\ui\jquery.ui.menu.js" />
+    <Content Include="Scripts\jquery-ui\ui\jquery.ui.mouse.js" />
+    <Content Include="Scripts\jquery-ui\ui\jquery.ui.position.js" />
+    <Content Include="Scripts\jquery-ui\ui\jquery.ui.progressbar.js" />
+    <Content Include="Scripts\jquery-ui\ui\jquery.ui.resizable.js" />
+    <Content Include="Scripts\jquery-ui\ui\jquery.ui.selectable.js" />
+    <Content Include="Scripts\jquery-ui\ui\jquery.ui.slider.js" />
+    <Content Include="Scripts\jquery-ui\ui\jquery.ui.sortable.js" />
+    <Content Include="Scripts\jquery-ui\ui\jquery.ui.spinner.js" />
+    <Content Include="Scripts\jquery-ui\ui\jquery.ui.tabs.js" />
+    <Content Include="Scripts\jquery-ui\ui\jquery.ui.tooltip.js" />
+    <Content Include="Scripts\jquery-ui\ui\jquery.ui.widget.js" />
+    <Content Include="Scripts\jquery-ui\ui\minified\i18n\jquery-ui-i18n.min.js" />
+    <Content Include="Scripts\jquery-ui\ui\minified\i18n\jquery.ui.datepicker-af.min.js" />
+    <Content Include="Scripts\jquery-ui\ui\minified\i18n\jquery.ui.datepicker-ar-DZ.min.js" />
+    <Content Include="Scripts\jquery-ui\ui\minified\i18n\jquery.ui.datepicker-ar.min.js" />
+    <Content Include="Scripts\jquery-ui\ui\minified\i18n\jquery.ui.datepicker-az.min.js" />
+    <Content Include="Scripts\jquery-ui\ui\minified\i18n\jquery.ui.datepicker-bg.min.js" />
+    <Content Include="Scripts\jquery-ui\ui\minified\i18n\jquery.ui.datepicker-bs.min.js" />
+    <Content Include="Scripts\jquery-ui\ui\minified\i18n\jquery.ui.datepicker-ca.min.js" />
+    <Content Include="Scripts\jquery-ui\ui\minified\i18n\jquery.ui.datepicker-cs.min.js" />
+    <Content Include="Scripts\jquery-ui\ui\minified\i18n\jquery.ui.datepicker-cy-GB.min.js" />
+    <Content Include="Scripts\jquery-ui\ui\minified\i18n\jquery.ui.datepicker-da.min.js" />
+    <Content Include="Scripts\jquery-ui\ui\minified\i18n\jquery.ui.datepicker-de.min.js" />
+    <Content Include="Scripts\jquery-ui\ui\minified\i18n\jquery.ui.datepicker-el.min.js" />
+    <Content Include="Scripts\jquery-ui\ui\minified\i18n\jquery.ui.datepicker-en-AU.min.js" />
+    <Content Include="Scripts\jquery-ui\ui\minified\i18n\jquery.ui.datepicker-en-GB.min.js" />
+    <Content Include="Scripts\jquery-ui\ui\minified\i18n\jquery.ui.datepicker-en-NZ.min.js" />
+    <Content Include="Scripts\jquery-ui\ui\minified\i18n\jquery.ui.datepicker-eo.min.js" />
+    <Content Include="Scripts\jquery-ui\ui\minified\i18n\jquery.ui.datepicker-es.min.js" />
+    <Content Include="Scripts\jquery-ui\ui\minified\i18n\jquery.ui.datepicker-et.min.js" />
+    <Content Include="Scripts\jquery-ui\ui\minified\i18n\jquery.ui.datepicker-eu.min.js" />
+    <Content Include="Scripts\jquery-ui\ui\minified\i18n\jquery.ui.datepicker-fa.min.js" />
+    <Content Include="Scripts\jquery-ui\ui\minified\i18n\jquery.ui.datepicker-fi.min.js" />
+    <Content Include="Scripts\jquery-ui\ui\minified\i18n\jquery.ui.datepicker-fo.min.js" />
+    <Content Include="Scripts\jquery-ui\ui\minified\i18n\jquery.ui.datepicker-fr-CH.min.js" />
+    <Content Include="Scripts\jquery-ui\ui\minified\i18n\jquery.ui.datepicker-fr.min.js" />
+    <Content Include="Scripts\jquery-ui\ui\minified\i18n\jquery.ui.datepicker-gl.min.js" />
+    <Content Include="Scripts\jquery-ui\ui\minified\i18n\jquery.ui.datepicker-he.min.js" />
+    <Content Include="Scripts\jquery-ui\ui\minified\i18n\jquery.ui.datepicker-hi.min.js" />
+    <Content Include="Scripts\jquery-ui\ui\minified\i18n\jquery.ui.datepicker-hr.min.js" />
+    <Content Include="Scripts\jquery-ui\ui\minified\i18n\jquery.ui.datepicker-hu.min.js" />
+    <Content Include="Scripts\jquery-ui\ui\minified\i18n\jquery.ui.datepicker-hy.min.js" />
+    <Content Include="Scripts\jquery-ui\ui\minified\i18n\jquery.ui.datepicker-id.min.js" />
+    <Content Include="Scripts\jquery-ui\ui\minified\i18n\jquery.ui.datepicker-is.min.js" />
+    <Content Include="Scripts\jquery-ui\ui\minified\i18n\jquery.ui.datepicker-it.min.js" />
+    <Content Include="Scripts\jquery-ui\ui\minified\i18n\jquery.ui.datepicker-ja.min.js" />
+    <Content Include="Scripts\jquery-ui\ui\minified\i18n\jquery.ui.datepicker-ka.min.js" />
+    <Content Include="Scripts\jquery-ui\ui\minified\i18n\jquery.ui.datepicker-kk.min.js" />
+    <Content Include="Scripts\jquery-ui\ui\minified\i18n\jquery.ui.datepicker-km.min.js" />
+    <Content Include="Scripts\jquery-ui\ui\minified\i18n\jquery.ui.datepicker-ko.min.js" />
+    <Content Include="Scripts\jquery-ui\ui\minified\i18n\jquery.ui.datepicker-lb.min.js" />
+    <Content Include="Scripts\jquery-ui\ui\minified\i18n\jquery.ui.datepicker-lt.min.js" />
+    <Content Include="Scripts\jquery-ui\ui\minified\i18n\jquery.ui.datepicker-lv.min.js" />
+    <Content Include="Scripts\jquery-ui\ui\minified\i18n\jquery.ui.datepicker-mk.min.js" />
+    <Content Include="Scripts\jquery-ui\ui\minified\i18n\jquery.ui.datepicker-ml.min.js" />
+    <Content Include="Scripts\jquery-ui\ui\minified\i18n\jquery.ui.datepicker-ms.min.js" />
+    <Content Include="Scripts\jquery-ui\ui\minified\i18n\jquery.ui.datepicker-nl-BE.min.js" />
+    <Content Include="Scripts\jquery-ui\ui\minified\i18n\jquery.ui.datepicker-nl.min.js" />
+    <Content Include="Scripts\jquery-ui\ui\minified\i18n\jquery.ui.datepicker-no.min.js" />
+    <Content Include="Scripts\jquery-ui\ui\minified\i18n\jquery.ui.datepicker-pl.min.js" />
+    <Content Include="Scripts\jquery-ui\ui\minified\i18n\jquery.ui.datepicker-pt-BR.min.js" />
+    <Content Include="Scripts\jquery-ui\ui\minified\i18n\jquery.ui.datepicker-pt.min.js" />
+    <Content Include="Scripts\jquery-ui\ui\minified\i18n\jquery.ui.datepicker-rm.min.js" />
+    <Content Include="Scripts\jquery-ui\ui\minified\i18n\jquery.ui.datepicker-ro.min.js" />
+    <Content Include="Scripts\jquery-ui\ui\minified\i18n\jquery.ui.datepicker-ru.min.js" />
+    <Content Include="Scripts\jquery-ui\ui\minified\i18n\jquery.ui.datepicker-sk.min.js" />
+    <Content Include="Scripts\jquery-ui\ui\minified\i18n\jquery.ui.datepicker-sl.min.js" />
+    <Content Include="Scripts\jquery-ui\ui\minified\i18n\jquery.ui.datepicker-sq.min.js" />
+    <Content Include="Scripts\jquery-ui\ui\minified\i18n\jquery.ui.datepicker-sr-SR.min.js" />
+    <Content Include="Scripts\jquery-ui\ui\minified\i18n\jquery.ui.datepicker-sr.min.js" />
+    <Content Include="Scripts\jquery-ui\ui\minified\i18n\jquery.ui.datepicker-sv.min.js" />
+    <Content Include="Scripts\jquery-ui\ui\minified\i18n\jquery.ui.datepicker-ta.min.js" />
+    <Content Include="Scripts\jquery-ui\ui\minified\i18n\jquery.ui.datepicker-th.min.js" />
+    <Content Include="Scripts\jquery-ui\ui\minified\i18n\jquery.ui.datepicker-tj.min.js" />
+    <Content Include="Scripts\jquery-ui\ui\minified\i18n\jquery.ui.datepicker-tr.min.js" />
+    <Content Include="Scripts\jquery-ui\ui\minified\i18n\jquery.ui.datepicker-uk.min.js" />
+    <Content Include="Scripts\jquery-ui\ui\minified\i18n\jquery.ui.datepicker-vi.min.js" />
+    <Content Include="Scripts\jquery-ui\ui\minified\i18n\jquery.ui.datepicker-zh-CN.min.js" />
+    <Content Include="Scripts\jquery-ui\ui\minified\i18n\jquery.ui.datepicker-zh-HK.min.js" />
+    <Content Include="Scripts\jquery-ui\ui\minified\i18n\jquery.ui.datepicker-zh-TW.min.js" />
+    <Content Include="Scripts\jquery-ui\ui\minified\jquery-ui.custom.min.js" />
+    <Content Include="Scripts\jquery-ui\ui\minified\jquery.ui.accordion.min.js" />
+    <Content Include="Scripts\jquery-ui\ui\minified\jquery.ui.autocomplete.min.js" />
+    <Content Include="Scripts\jquery-ui\ui\minified\jquery.ui.button.min.js" />
+    <Content Include="Scripts\jquery-ui\ui\minified\jquery.ui.core.min.js" />
+    <Content Include="Scripts\jquery-ui\ui\minified\jquery.ui.datepicker.min.js" />
+    <Content Include="Scripts\jquery-ui\ui\minified\jquery.ui.dialog.min.js" />
+    <Content Include="Scripts\jquery-ui\ui\minified\jquery.ui.draggable.min.js" />
+    <Content Include="Scripts\jquery-ui\ui\minified\jquery.ui.droppable.min.js" />
+    <Content Include="Scripts\jquery-ui\ui\minified\jquery.ui.effect-blind.min.js" />
+    <Content Include="Scripts\jquery-ui\ui\minified\jquery.ui.effect-bounce.min.js" />
+    <Content Include="Scripts\jquery-ui\ui\minified\jquery.ui.effect-clip.min.js" />
+    <Content Include="Scripts\jquery-ui\ui\minified\jquery.ui.effect-drop.min.js" />
+    <Content Include="Scripts\jquery-ui\ui\minified\jquery.ui.effect-explode.min.js" />
+    <Content Include="Scripts\jquery-ui\ui\minified\jquery.ui.effect-fade.min.js" />
+    <Content Include="Scripts\jquery-ui\ui\minified\jquery.ui.effect-fold.min.js" />
+    <Content Include="Scripts\jquery-ui\ui\minified\jquery.ui.effect-highlight.min.js" />
+    <Content Include="Scripts\jquery-ui\ui\minified\jquery.ui.effect-pulsate.min.js" />
+    <Content Include="Scripts\jquery-ui\ui\minified\jquery.ui.effect-scale.min.js" />
+    <Content Include="Scripts\jquery-ui\ui\minified\jquery.ui.effect-shake.min.js" />
+    <Content Include="Scripts\jquery-ui\ui\minified\jquery.ui.effect-slide.min.js" />
+    <Content Include="Scripts\jquery-ui\ui\minified\jquery.ui.effect-transfer.min.js" />
+    <Content Include="Scripts\jquery-ui\ui\minified\jquery.ui.effect.min.js" />
+    <Content Include="Scripts\jquery-ui\ui\minified\jquery.ui.menu.min.js" />
+    <Content Include="Scripts\jquery-ui\ui\minified\jquery.ui.mouse.min.js" />
+    <Content Include="Scripts\jquery-ui\ui\minified\jquery.ui.position.min.js" />
+    <Content Include="Scripts\jquery-ui\ui\minified\jquery.ui.progressbar.min.js" />
+    <Content Include="Scripts\jquery-ui\ui\minified\jquery.ui.resizable.min.js" />
+    <Content Include="Scripts\jquery-ui\ui\minified\jquery.ui.selectable.min.js" />
+    <Content Include="Scripts\jquery-ui\ui\minified\jquery.ui.slider.min.js" />
+    <Content Include="Scripts\jquery-ui\ui\minified\jquery.ui.sortable.min.js" />
+    <Content Include="Scripts\jquery-ui\ui\minified\jquery.ui.spinner.min.js" />
+    <Content Include="Scripts\jquery-ui\ui\minified\jquery.ui.tabs.min.js" />
+    <Content Include="Scripts\jquery-ui\ui\minified\jquery.ui.tooltip.min.js" />
+    <Content Include="Scripts\jquery-ui\ui\minified\jquery.ui.widget.min.js" />
+    <Content Include="Scripts\jquery.min.js" />
+    <Content Include="Scripts\make-a-booking.js" />
+    <Content Include="Scripts\zebra-dialog\confirmation.png" />
+    <Content Include="Scripts\zebra-dialog\error.png" />
+    <Content Include="Scripts\zebra-dialog\information.png" />
+    <Content Include="Scripts\zebra-dialog\question.png" />
+    <Content Include="Scripts\zebra-dialog\warning.png" />
+    <Content Include="Scripts\zebra-dialog\zebra_dialog.css" />
+    <Content Include="Scripts\zebra-dialog\zebra_dialog.js" />
+    <Content Include="Scripts\zebra-tooltips\zebra_tooltips.css" />
+    <Content Include="Scripts\zebra-tooltips\zebra_tooltips.js" />
+    <Content Include="srevices.html" />
+    <Content Include="style.css" />
+    <Content Include="t&amp;c.html" />
+    <Content Include="vehicles.html" />
+    <Content Include="Web.config">
+      <SubType>Designer</SubType>
+    </Content>
+    <Content Include="Web.Debug.config">
+      <DependentUpon>Web.config</DependentUpon>
+    </Content>
+    <Content Include="Web.Release.config">
+      <DependentUpon>Web.config</DependentUpon>
+    </Content>
+    <Content Include="Views\Web.config" />
+    <Content Include="Views\_ViewStart.cshtml" />
+    <Content Include="Views\Shared\Error.cshtml" />
+    <Content Include="Views\Shared\_Layout.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Models\PostCodes.dbml.layout">
+      <DependentUpon>PostCodes.dbml</DependentUpon>
+    </None>
+    <Content Include="Views\Technology\Telephone.cshtml" />
+    <Content Include="Views\Client\ExpandBooking.cshtml" />
+    <Content Include="Views\Feedback\View.cshtml" />
+    <None Include="obj\Release\DesignTimeResolveAssemblyReferencesInput.cache" />
+    <Content Include="Views\Main\_SelectTaxiCSS.cshtml" />
+    <Content Include="Views\Main\_SelectTaxiJS.cshtml" />
+    <Content Include="Views\Client\ChangePassword.cshtml" />
+    <Content Include="Views\Client\TempJobEdit.cshtml" />
+    <Content Include="Views\Client\_ChangePassword.cshtml" />
+    <Content Include="Views\Confirm\Confirm.cshtml" />
+    <Content Include="Views\Confirm\Preview.cshtml" />
+    <Content Include="Views\Payment\About.cshtml" />
+    <Content Include="Views\Payment\Index.cshtml" />
+    <Content Include="Views\Payment\Payment.cshtml" />
+    <Content Include="Views\Shared\_PaymentLayout.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Models\Cab.dbml">
+      <Generator>MSLinqToSQLGenerator</Generator>
+      <LastGenOutput>Cab.designer.cs</LastGenOutput>
+      <SubType>Designer</SubType>
+    </None>
+    <Content Include="Views\Home\Index.cshtml" />
+    <Content Include="Views\Client\Index.cshtml" />
+    <Content Include="Views\Job\Index.cshtml" />
+    <Content Include="Views\Main\Index.cshtml" />
+    <Content Include="Views\Main\SelectTaxi.cshtml" />
+    <Content Include="Views\Main\FinalizeBooking.cshtml" />
+    <Content Include="Views\Account\Login.cshtml" />
+    <Content Include="Views\Home\TermsAndConditions.cshtml" />
+    <Content Include="Views\Main\LastAction.cshtml" />
+    <Content Include="Views\Confirm\Index.cshtml" />
+    <Content Include="Views\Defaults\GetDialingCodes.cshtml" />
+    <Content Include="Views\Home\SafetyPolicy.cshtml" />
+    <Content Include="Views\Home\CancellationRefundPolicy.cshtml" />
+    <Content Include="Views\Home\DriverJob.cshtml" />
+    <Content Include="Views\Main\MakeABooking.cshtml" />
+    <Content Include="Views\Client\_ClientAccount.cshtml" />
+    <Content Include="Views\Client\Edit.cshtml" />
+    <Content Include="Views\Client\_ClientNotifications.cshtml" />
+    <Content Include="Views\Client\GetClientMessages.cshtml" />
+    <Content Include="Views\Client\GetClientNotifications.cshtml" />
+    <Content Include="Views\Client\GetLatestJob.cshtml" />
+    <Content Include="Views\Client\GetClientJobs.cshtml" />
+    <Content Include="Views\Client\GetNumberOf.cshtml" />
+    <Content Include="Views\Account\NewClientAccount.cshtml" />
+    <Content Include="Views\Main\_BonusOfferSection.cshtml" />
+    <Content Include="Views\Client\New.cshtml" />
+    <Content Include="Views\Client\Confirm.cshtml" />
+    <Content Include="Views\Home\AboutUs.cshtml" />
+    <Content Include="Views\Main\_DiversionsAndStops.cshtml" />
+    <Content Include="Views\Main\_PaymentType.cshtml" />
+    <Content Include="Views\Main\_Offers.cshtml" />
+    <Content Include="Views\Main\_FinalizeBookingCSS.cshtml" />
+    <Content Include="Views\Main\_FinalizeBookingScript.cshtml" />
+    <Content Include="Views\Feedback\GetForClient.cshtml" />
+    <Content Include="Views\Feedback\Index.cshtml" />
+    <Content Include="Views\Technology\Index.cshtml" />
+    <Content Include="Views\Technology\Online.cshtml" />
+    <Content Include="Views\Technology\Mobile.cshtml" />
+    <Content Include="Views\Home\ChauffeurCars.cshtml" />
+    <Content Include="Views\Home\Testimonials.cshtml" />
+    <Content Include="Views\Home\Services.cshtml" />
+    <Content Include="Views\AirportTransfers\Index.cshtml" />
+    <Content Include="Views\AirportTransfers\Heathrow.cshtml" />
+    <Content Include="Views\AirportTransfers\City.cshtml" />
+    <Content Include="Views\AirportTransfers\Gatwick.cshtml" />
+    <Content Include="Views\AirportTransfers\Stansted.cshtml" />
+    <Content Include="Views\AirportTransfers\Luton.cshtml" />
+    <Content Include="Views\Shared\_LeftMenu.cshtml" />
+    <None Include="Models\PostCodes.dbml">
+      <Generator>MSLinqToSQLGenerator</Generator>
+      <LastGenOutput>PostCodes.designer.cs</LastGenOutput>
+      <SubType>Designer</SubType>
+    </None>
+    <Content Include="Views\Address\Search.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Service Include="{3259AA49-8AA1-44D3-9025-A0B520596A8C}" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Models\Cab.dbml.layout">
+      <DependentUpon>Cab.dbml</DependentUpon>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="obj\Debug\TempPE\" />
+    <Folder Include="obj\Release\TempPE\" />
+  </ItemGroup>
+  <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
+  <Import Project="$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v10.0\WebApplications\Microsoft.WebApplication.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target> -->
+  <Target Name="MvcBuildViews" AfterTargets="AfterBuild" Condition="'$(MvcBuildViews)'=='true'">
+    <AspNetCompiler VirtualPath="temp" PhysicalPath="$(WebProjectOutputDir)" />
+  </Target>
+  <ProjectExtensions>
+    <VisualStudio>
+      <FlavorProperties GUID="{349c5851-65df-11da-9384-00065b846f21}">
+        <WebProjectProperties>
+          <UseIIS>False</UseIIS>
+          <AutoAssignPort>True</AutoAssignPort>
+          <DevelopmentServerPort>53928</DevelopmentServerPort>
+          <DevelopmentServerVPath>/</DevelopmentServerVPath>
+          <IISUrl>
+          </IISUrl>
+          <NTLMAuthentication>False</NTLMAuthentication>
+          <UseCustomServer>False</UseCustomServer>
+          <CustomServerUrl>
+          </CustomServerUrl>
+          <SaveServerSettingsInUserFile>False</SaveServerSettingsInUserFile>
+        </WebProjectProperties>
+      </FlavorProperties>
+    </VisualStudio>
+  </ProjectExtensions>
+</Project>

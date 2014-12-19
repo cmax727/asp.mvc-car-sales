@@ -1,0 +1,229 @@
+﻿
+<style>
+    .page-2 .vehicle {
+        margin: 10px 7px;
+        width: 258px;
+        display: inline-block;
+        border: 1px solid #F90;
+        vertical-align: top;
+        border-radius: 3px;
+        background: #251717;
+        color: white;
+        font-size:11px;
+    }
+
+   .page-2  .vehicle h2 {
+        text-shadow: none;
+        border: 0;
+        font-size: 20px;
+        padding-left: 11px;
+    }
+
+    .page-2 .vehicle h2, .page-2 .fares-container {
+        background-image: url(/content/img/h2-background.png);
+        color: #96530B;
+    }
+
+    .page-2 .vehicle-img-parent img {
+        width: 258px;
+        height: 110px;
+        border-bottom: 1px solid #F90;
+        border-left: 0;
+    }
+
+    .page-2 .vehicle-option {
+        width: 68px;
+        background-position: center top;
+        background-repeat: no-repeat;
+        padding-top: 65px;
+        text-align: center;
+        float: left;
+        margin-top: -5px;
+        border-right: 1px solid #E5E5E5;
+    }
+
+    .page-2 .vehicle-option:hover { background-color: #F3F3F3; }
+
+    .page-2 .vehicle .blue-button
+    {
+        font-variant: small-caps;
+        padding: 2px 5px;
+        margin: 4px 3px;
+        display: block;
+        text-align: center;
+        background: #1D1A1A;
+        color: white;
+        border: 1px solid gray;
+    }
+    .page-2 .vehicle .blue-button:hover {
+        background: #0C0C0C;
+    }
+
+   .page-2  .vehicle .blue-button:active {
+        border: 1px solid #4D4646;
+    }
+
+    .page-2 .maximum { padding-left: 78px; }
+
+    .page-2 .maximum img {
+        width: auto;
+        height: 20px;
+        margin: 0;
+    }
+
+   .page-2  .maximum span {
+        display: inline-block;
+        width: 40px;
+        vertical-align: middle;
+        font-size: 14px;
+    }
+
+    .page-2 label { width: 200px; }
+
+    .page-2 .bottom-line,.page-2  .inner-line {
+        background: #E9E9E9;
+        border-top: 1px solid #1B1A1A;
+        color: #0C0C0B;
+    }
+
+    .page-2 .bottom-line:hover
+    {
+        background: rgba(92, 0, 0, 0.86);
+    }
+    
+    .page-2 .inner-line
+    {
+        border-left: 1px solid black; 
+        padding: 0 5px;
+    }
+
+    .page-2 .cash-fares .inner-line,.page-2  .card-fares .inner-line
+    {
+        border-right: 1px solid black; 
+    }
+
+    .page-2 .bottom-line span {
+        display: inline-block;
+        padding: 5px;
+    }
+
+    .page-2 .cash-fares {
+        float: left;
+        width: 119px;
+        border-top: 1px solid white;
+    }
+
+    .page-2 .card-fares {
+        margin-left: 119px;
+        border-left: 1px solid white;
+        border-top: 1px solid white;
+    }
+
+    .page-2 .card-heading, .page-2 .cash-heading
+    {
+        text-align: center;
+        padding: 5px 10px;
+        font-size: 17px;
+        font-variant: small-caps;
+        background: #FFF5F5;
+        color: black;
+        border: 1px solid black;
+        border-bottom: 0;
+    }
+    
+    .page-2 .Executive
+    {
+        border: 1px solid #444!important;
+    }
+    .page-2 .Executive .bottom-line
+    {
+        border-top: 1px solid #444!important;
+    }
+    .page-2 .Executive .bottom-line .second-div
+    {
+        border-left: 1px solid #444!important;
+    }
+    .page-2 .Executive .vehicle-img-parent img
+    {
+        border-bottom: 1px solid #444!important;
+    }
+   .page-2  .Executive-color
+    {
+        background: #444!important;
+        color: white!important;
+    }
+   .page-2  .Executive .quick-info
+    {
+        padding: 8px;
+        margin-top: -4px;
+        margin-bottom: -7px;
+    }
+    
+    .page-2 .Gold-Vip
+    {
+        border: 1px solid red!important;
+    }
+    .page-2 .Gold-Vip .bottom-line
+    {
+        border-top: 1px solid red!important;
+    }
+   .page-2  .Gold-Vip .bottom-line .second-div
+    {
+        border-left: 1px solid red!important;
+    }
+    
+    .page-2 .Gold-Vip .vehicle-img-parent img
+    {
+        border-bottom: 1px solid red!important;
+    }
+    
+    .page-2 .Gold-Vip-color
+    {
+        background: #F51919!important;
+        color: white!important;
+    }
+   .page-2  .Gold-Vip .quick-info
+    {
+        padding: 8px;
+        margin-top: -4px;
+        margin-bottom: -7px;
+    }
+    .page-2 .roshan
+    {
+        border-radius:2px;
+        background:yellow;
+        color:Black;
+    }
+    
+    @if (LoginHelper.Client == null)
+    {
+     <text>
+    .page-2 .bonus-offer-div .roshan
+    {
+        background: #3A3838;
+        color: white;
+        border: 1px solid #424141;
+        box-shadow: inset 0 0 2px #969494, inset 0 0 2px #1B1818, inset 0 0 2px #534A4A, inset 0 0 2px #5A5757;
+        border-radius: 2px;
+        padding: 2px 4px;
+    }
+    .page-2 .offer-big-img
+    {
+        border: 1px solid #550C0C;
+        border-radius: 6px;
+        float: right;
+        width: 195px;
+        background-color: rgba(26, 9, 9, 0.44);
+        margin-top:-20px;
+    }
+    .page-2 .offer-big-img:hover
+    {
+        border: 1px solid black;
+    }
+    .page-2 .offer-big-img:active
+    {
+        margin-top:-18px;
+    }
+    </text>
+    }
+</style>

@@ -1,0 +1,92 @@
+﻿@model CabDataContext
+@{
+    ViewBag.Title = "Chauffeur Cars | Dracula Cars";
+    var vehicels = Model.Vehicles.OrderBy(o => o.Order);
+}
+
+@Html.Partial("_LeftMenu")
+<script>
+    $('a#our-cars').html('<span class="right-arrow"></span>' + $('a#our-cars').html()).addClass('selected').parent().removeClass('collapsed').addClass('expanded').find('.collapsed').removeClass('collapsed').addClass('expanded');
+</script>
+
+<div class="client-page">
+    <h2>
+        Home // <a href="/Home/ChauffeurCars">Chauffeur Cars</a>
+    </h2>
+   
+
+<style>
+.car
+{
+}
+
+.info
+{
+    position: absolute;
+    width: 300px;
+    margin-left: 370px;
+    background: rgba(0, 0, 0, 0.88);
+    text-shadow: 0 0 1px white, 0 0 1px white,0 0 1px white,0 0 1px white,0 0 1px white,0 0 1px white;
+    color: #252121;
+    border-bottom-left-radius: 18px;
+    box-shadow: inset 0 0 7px white, inset 0 0 7px white, inset 0 0 7px white, inset 0 0 7px white;
+    padding-bottom: 5px;
+}
+.car-image
+{
+    width:900px;
+}
+
+.maximum { padding: 0 12px; }
+
+    .maximum img {
+        width: auto;
+        height: 20px;
+        margin: 0;
+    }
+
+    .maximum span {
+        display: inline-block;
+        width: 40px;
+        vertical-align: middle;
+        font-size: 14px;
+    }
+</style>
+
+<h2>Chauffeur Cars</h2>
+
+<p>The definitive collection of chauffeur-driven cars</p>
+
+@foreach (var car in vehicels)
+{
+    <div class="car">
+        <div class="info">
+            <h2>@car.Name</h2>
+            
+            <div class="maximum">
+                <div>
+                    <span><img src="/content/img/passengers.png"></span>
+                    <span>x</span>
+                    <span class="max-passengers">@car.MaxPassengers</span>
+                </div>
+
+                <div>
+                    <span><img src="/content/img/luggages.png"></span>
+                    <span>x</span>
+                    <span class="max-luggages">@car.MaxLuggages</span>
+                </div>
+
+                <div>
+                    <span><img src="/content/img/HandLag.png"></span>
+                    <span>x</span>
+                    <span class="max-hand-lag">@car.MaxHandLag</span>
+                </div>
+            </div>
+
+
+        </div>
+        <img src="@car.Image" alt="@car.Name" class="car-image">
+    </div>
+}
+
+</div>

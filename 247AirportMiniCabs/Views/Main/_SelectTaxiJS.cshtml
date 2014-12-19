@@ -1,0 +1,311 @@
+﻿@{
+    string journeyType = ViewBag.JourneyType;
+
+    string bonusToken = ViewBag.BonusToken;
+    string bonus = ViewBag.BonusPercentage;
+
+    Fare fare = ViewBag.Predefined;
+
+    string stops = ViewBag.Stops;
+}
+
+@if (LoginHelper.Client == null)
+{
+    <script>
+        openAccountClickHandling();
+    </script>
+}
+
+<script>
+    $('#vehicles-nav').addClass('done');
+    $('.back-to-booking').fadeIn();
+</script>
+
+<script>
+    $('.page-2 .book-now').click(function () {
+        var element = this;
+
+        if ($(this).parent().is('.card-fares')) {
+            $.Zebra_Dialog('We are sorry but our payment gateway provider hasn\'t setup yet our 3D secure payment, therefore we can accept payment at this point. <br /><br />We want all your information to be protected and we ask you to allow 10 business day and we will fix this issue. Thank you for your understanding.', { 'type': 'information' });
+            return;
+        }
+
+        var fare = $(this).parent().parent().find('.total-to-pay').html().replace('£', '');
+        if (!fare || !fare.length || fare == 0 || fare == '0' || fare == 'NaN') {
+            $.Zebra_Dialog('It seems that you entered invalid address. That\'s why we are unable to count correct fare.<br /><br />Are you want to go back and correct addresses?<br /><br />Otherwise, our operator will send you an email in couple of minutes later containing your fares relevant information.', {
+                'type': 'error',
+                'buttons': ['Go Back', 'Continue'],
+                'onClose': function (caption) {
+                    if (caption == 'Go Back') location.reload();
+                    else if (caption == 'Continue') book(element, fare);
+                }
+            });
+        } else book(this, fare);
+    });
+
+    function book(element, fare) {        
+        loadSpinner('html');
+
+        var data = {
+            pickFrom: '@ViewBag.PickFrom',
+            dropTo: '@ViewBag.DropTo',
+            vehicleType: $(element).parent().parent().attr('id'),
+            selected: '@ViewBag.Selected',
+            journeyType: '@journeyType',
+            fare: fare,
+            distancePreview: $('.page-2 #distance-preview').html(),
+            stops: '@ViewBag.Stops',
+            bonusToken: '@bonusToken',
+            airportCharges: $('.page-2 #airport-charges').val()
+        };
+
+        $.post('/Main/FinalizeBooking', data, function (html) {
+            $('.spinner').fadeOut();
+            $('.Maincontant').html(html);
+
+        });
+    }
+
+</script>
+
+@if (fare == null || !stops.IsEmpty())
+{
+    <script>
+        var miles = 0.0,
+            googleServiceCalled = 0,
+            googleServiceResponded = 0;
+
+        function updateFare(from, to) {
+            if (typeof google == 'undefined') return;
+
+            var service = new google.maps.DistanceMatrixService();
+            service.getDistanceMatrix({
+                origins: [from],
+                destinations: [to],
+                travelMode: google.maps.TravelMode.DRIVING,
+                avoidHighways: false,
+                avoidTolls: false
+            },
+                function (response, status) {
+                    if (status == google.maps.DistanceMatrixStatus.OK) {
+
+                        var results = response.rows[0].elements;
+                        if (results.length && results[0].distance) {
+                            var value = results[0].distance.value;
+
+                            if ('@journeyType' == 'Return') window.oneWayMiles = miles;
+
+                            miles += parseFloat(value / 1609.344);
+
+                            googleServiceResponded++;
+                            if (googleServiceResponded == googleServiceCalled) trackFares();
+                        }
+                    }
+                });
+            }
+
+            function setFareValues(element, finalFare, preFare) {
+                var oneWay = finalFare;
+
+                if (preFare.length) oneWay = preFare[0];
+
+                $(element).find('.one-way').html('£' + removeDots(oneWay));
+
+                if ('@journeyType' == 'Return') {
+                    
+                    if (preFare.length) oneWay = preFare[1];
+                    
+                    $(element).find('.return').html('£' + removeDots(oneWay));
+
+                    if ('@stops' == '') finalFare *= 2;
+                }
+
+                //--------------------------------------------------------------------------------
+
+                var off = $(element).find('#off'), percent;
+                if ($(off).length) {
+                    percent = parseFloat($(off).val());
+                    percent = (percent / 100) * finalFare;
+                    finalFare = finalFare - percent;
+                }
+
+                var addFare = $(element).find('#add-fare');
+                if ($(addFare).val()) {
+                    addFare = $(addFare).val();
+                    finalFare = parseFloat(finalFare) + parseFloat(addFare);
+                }
+
+                var subTrackFare = $(element).find('#subtract-fare');
+                if ($(subTrackFare).val()) {
+                    subTrackFare = $(subTrackFare).val();
+                    finalFare = parseFloat(finalFare) - parseFloat(subTrackFare);
+                }
+
+                var bonus = '@bonus';
+                if (bonus) {
+                    percent = parseFloat(bonus);
+                    percent = (percent / 100) * finalFare;
+                    finalFare = finalFare - percent;
+                }
+
+                finalFare = removeDots(finalFare);
+
+                $(element).find('.total-to-pay').html('£' + finalFare);
+            }
+
+        function trackFares() {
+            $('.page-2 .vehicle').each(function (index, element) {
+                miles = parseFloat(miles);
+                $('#distance-preview').html(('@journeyType' == 'Return' && '@stops' == '' ? removeDots(miles * 2) : removeDots(miles)) + ' miles estimated distance').slideDown();
+
+                var pricePerMile = $(element).find('#price-per-mile').val();
+                var finalFare;
+
+                var milesIncluded = $(element).find('#MilesIncluded').val(),
+                    fareForMileIncluded = $(element).find('#FareForMilesIncluded').val();
+
+                var preFare = [];
+                if (window.oneWayMiles) {
+                    var oneWay = parseFloat(window.oneWayMiles),
+                        returnFare = miles - oneWay,
+                        fare1,
+                        fare2;
+
+                    if (oneWay < milesIncluded) fare1 = fareForMileIncluded;
+                    else fare1 = parseFloat(fareForMileIncluded) + ((oneWay - milesIncluded) * pricePerMile);
+
+                    if (returnFare < milesIncluded) fare2 = fareForMileIncluded;
+                    else fare2 = parseFloat(fareForMileIncluded) + ((returnFare - milesIncluded) * pricePerMile);
+
+                    preFare[0] = fare1;
+                    preFare[1] = fare2;
+
+                    finalFare = parseFloat(fare1) + parseFloat(fare2);
+                }
+                else {
+                    if (miles < milesIncluded) finalFare = fareForMileIncluded;
+                    else finalFare = parseFloat(fareForMileIncluded) + ((miles - milesIncluded) * pricePerMile);
+                }
+
+                setFareValues($(element).find('.cash-fares'), finalFare, preFare);
+                setFareValues($(element).find('.card-fares'), finalFare, preFare);
+            });
+        }
+    </script>
+
+    if (!stops.IsEmpty())
+    {
+
+        stops = stops.Replace(",", "=====").Replace("-----", ",");
+
+        <script>
+            var prevStop = '';
+
+            function countFareWithViaStops() {
+                var from = '@ViewBag.PickFrom',
+                    to = '@ViewBag.DropTo',
+                    stops = '@stops',
+                    journeyType = '@journeyType';
+
+                stops = stops.split(',');
+
+                googleServiceCalled = 1;
+                if (journeyType == 'Return') googleServiceCalled += 1;
+
+                if (stops.length) 
+                {
+                    googleServiceCalled += stops.length;
+
+                    for(var i = 0; i < stops.length;i++)
+                    {
+                        var stop = stops[i].replace('=====', ',');
+                        if(i == 0)
+                        {
+                            updateFare(from, stop);
+                            prevStop = stop;
+                        }
+                        else
+                        {
+                            updateFare(prevStop, stop);
+                            prevStop = stop;
+                        }
+
+                        if(i == stops.length - 1)
+                        {
+                            updateFare(stop, to);
+                        }                        
+                    }
+                }
+                else updateFare(from, to);
+
+                if (journeyType == 'Return') updateFare(to, from);
+            }
+
+            countFareWithViaStops();
+        </script>
+    }
+    else
+    {
+        <script>
+            var from = '@ViewBag.PickFrom',
+                to = '@ViewBag.DropTo',
+                journeyType = '@journeyType';
+
+            googleServiceCalled = 1;
+            updateFare(from, to);
+        </script>
+    }
+}
+else
+{
+    <script>
+        var fare, vehicle, vehicleDIV;
+
+        function setFare(element, _fare) {
+
+            $(element).find('.one-way').html('£' + parseFloat(_fare));
+            $(element).find('.return').html('£' + parseFloat(_fare));
+
+            if ('@journeyType' == 'Return') _fare = _fare * 2;
+
+            var off = $(element).find('#off'), percent;
+            if ($(off).length) {
+                percent = parseFloat($(off).val());
+                percent = (percent / 100) * _fare;
+                _fare = _fare - percent;
+            }
+
+            var addFare = $(element).find('#add-fare');
+            if ($(addFare).val()) {
+                addFare = $(addFare).val();
+                _fare = parseFloat(_fare) + parseFloat(addFare);
+            }
+
+            var subTrackFare = $(element).find('#subtract-fare');
+            if ($(subTrackFare).val()) {
+                subTrackFare = $(subTrackFare).val();
+                _fare = parseFloat(_fare) - parseFloat(subTrackFare);
+            }
+
+            var bonus = '@bonus';
+            if (bonus) {
+                percent = parseFloat(bonus);
+                percent = (percent / 100) * _fare;
+                _fare = _fare - percent;
+            }
+
+            _fare = parseFloat(_fare);
+
+            $(element).find('.total-to-pay').html('£' + parseFloat(_fare));
+        }
+
+        $('.page-2 .vehicle').each(function (index, element) {
+            
+            fare = $(element).find('.cash-fares #preset-fare').val();
+            setFare($(element).find('.cash-fares'), fare);
+
+            fare = $(element).find('.card-fares #preset-fare').val();
+            setFare($(element).find('.card-fares'), fare);
+        });
+    </script>
+}

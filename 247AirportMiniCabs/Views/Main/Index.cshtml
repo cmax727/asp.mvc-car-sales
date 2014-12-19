@@ -1,0 +1,121 @@
+﻿@{
+    var site = new CabDataContext().Site();
+    ViewBag.Title = site.Name;
+    ViewBag.Description = site.Description;
+}
+
+@section CSS {<link href="@Url.Content("~/Content/main-page.css")" rel="stylesheet">}
+
+<div class="left-panel">
+    
+    <div class="slider">
+        <div class="welcome-text">
+            <h2 style="padding: 0 0 12px 0;border: 0;">Welcome to Draculas Cars!</h2>
+            <div style="width: 412px;">We provide excellent service at competitive prices. The core of our business is to provide airport transfers to/from London and anywhere in the UK to Heathrow, Gatwick, Stansted, Luton and Londo City airport.</div>
+        </div>
+
+        <div class="make-a-booking">
+            <span class="make-a-booking-arrow"></span>
+            <span>Make a Booking</span>
+        </div>
+
+        <img id="slider-image" src="">
+    </div>
+
+    <div class="first-div">
+        <h2 style="color: rgb(36, 156, 185);margin: 5px 23px;">London's first chauffeur company at affordable price</h2>
+        <div class="left-side">
+            <div style="font-size: 12px;color: #4B4848;line-height: 1.5;border-left: 3px solid #09BBF5;padding-left: 6px;">We carefully vet our drivers–beyond the PCO requirments–to ensure they have good geographical knowledge, and that they understand the professionalism our clients expected as standard.</div>
+        </div>
+
+        <div class="right-side">
+            <div>
+                <a href="/Technology/Online"><img src="/content/img/homepage/online.jpg"></a>
+                <a href="/Technology/Mobile"><img src="/content/img/homepage/mobile.jpg"></a>
+                <a href="/Technology/Telephone"><img src="/content/img/homepage/telephone.jpg"></a>
+            </div>
+        </div>
+    </div>
+
+    <div style="text-align: center;margin-bottom: 6px;">
+        <h2 style="color: gray;margin-bottom: 6px;">With a great service and so many ways to book at Dracula Cars you can <span style="color:black;font-family:Andada;">expect for more..</span></h2>
+        <a href="/book"><img src="/content/img/dracula/book-journey.png"></a>
+    </div>
+
+    <div class="second-div">
+        <span class="read-to-expect-more">Ready to expect more?</span>
+        <span class="right-arrow"></span>
+        <span class="expect-more-links">
+            <a href="/Home/Services">Our Services</a> <a href="/Home/Testimonials">Our Testimonials</a> <a href="/Home/ChauffeurCars">Our Cars</a>
+        </span>
+    </div>
+
+    <div class="third-div">
+        <div class="left-side">
+            Have you still not found what are you looking for? ...
+            <hr />
+            You may have a look at ↓
+        </div>
+
+        <div class="right-side">
+            <img src="/content/img/homepage/discount.jpg">
+            <img src="/content/img/homepage/save-money.jpg">
+            <img src="/content/img/homepage/customer.jpg">
+        </div>
+    </div>
+
+</div>
+
+<div class="right-panel">
+    <div class="why-use-us">
+        <h2>Why use us?</h2>
+        <div>Special & unique offers</div>
+        <div>Meet & greet services</div>
+        <div>Flight monitoring</div>
+        <div>Competitive fixed prices</div>
+        <div>Quality vehicles</div>
+        <div>100% trusted customers</div>
+    </div>
+
+    <div class="booking-right-panel">
+        <h2>Book a chauffeur!</h2>
+        <div>Book best chauffeurs online</div>
+        <div>Get 5% discount!</div>
+        <a class="blue-button" href="/book">Book Now</a>
+    </div>
+
+    @Html.Action("View", "Feedback", new { isFullPage = false })
+</div>
+
+
+    
+<script>
+    var sliderImages = ['1.jpg', '2.jpg', '3.jpg'], counter = 0,
+        sliderImage = $('#slider-image'), src;
+    function slidingImages() {
+        counter++;
+        if (counter >= 4) counter = 0;
+
+        src = '/content/img/sliding/' + sliderImages[counter];
+
+        var image = new Image();
+        image.src = src;
+        image.onload = function () {
+
+            $(sliderImage).animate({
+                opacity: 'toggle'
+            }, 200, 'linear').fadeOut().attr('src', src).animate({
+                opacity: 'toggle'
+            }, 800, 'linear');
+
+            setTimeout(slidingImages, 10000);
+        };
+    }
+    slidingImages();
+
+    $('.make-a-booking').click(function () {
+        alertBox(null, function () {
+            window.location = '/book';
+        });
+    });
+</script>
